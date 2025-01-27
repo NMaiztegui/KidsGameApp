@@ -1,0 +1,7 @@
+{
+  "name": "Galdutako_dokumentuaren_bila",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
