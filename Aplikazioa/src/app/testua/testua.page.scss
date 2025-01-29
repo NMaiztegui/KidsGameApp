@@ -29,3 +29,22 @@ ion-content {
     font-size: 4vw;
     color: #FF8A00;
 }
+
+.speech-bubble {
+    position: fixed;
+    width: 70vw;
+    background-color: white;
+    border-radius: 20px;
+    box-shadow: 0 0 10px darkgreen;
+    font-size: 4vh;
+    color: #333;
+    top: 30vh;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+.speech-bubble p {
+    filter: blur(4px);
+    user-select: none;
+}
