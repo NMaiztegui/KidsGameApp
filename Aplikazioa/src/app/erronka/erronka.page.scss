@@ -35,7 +35,7 @@ body::before {
     position: fixed;
     width: 6vw;
     height: auto;
-    top: 25vh;
+    top: 27vh;
     left: 22vw;
 }
 
@@ -43,8 +43,8 @@ body::before {
     position: fixed;
     width: 10vw;
     height: auto;
-    top: 75vh;
-    left: 86vw;
+    top: 77vh;
+    left: 87vw;
 }
 
 .hasi {
@@ -74,7 +74,7 @@ body::before {
     box-shadow: 0 0 10px #669E50;
     font-size: 4vh;
     color: #333;
-    top: 56vh;
+    top: 60vh;
     left: 50%;
     transform: translate(-50%, -50%);
     text-align: center;
@@ -89,8 +89,12 @@ body::before {
     box-shadow: 0 0 10px #669E50;
     font-size: 4vh;
     color: #333;
-    top: 56vh;
+    top: 60vh;
     left: 50%;
     transform: translate(-50%, -50%);
     text-align: center;
+
+    p {
+        font-family: 'DynaPuff', sans-serif;
+    }
 }

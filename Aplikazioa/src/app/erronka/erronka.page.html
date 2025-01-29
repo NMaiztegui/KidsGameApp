@@ -26,11 +26,11 @@
       </div>
       <div class="erantzuna-bubble" *ngIf="erantzuna !== null">
         <ng-container *ngIf="erantzuna === true">
-          <p style="font-family: 'DynaPuff', sans-serif;">Zorionak! Mezuaren deszifratu duzu!</p>
+          <p style="color: green;">Zorionak! Mezuaren deszifratu duzu!</p>
           <img (click)="reiniciarAriketa()" class="hasi" src="assets/img/rehacer.png">
         </ng-container>
         <ng-container *ngIf="erantzuna === false">
-          <p style="font-family: 'DynaPuff', sans-serif;">Saiatu berriro, erantzuna ez da zuzena.</p>
+          <p style="color: red;">Saiatu berriro, erantzuna ez da zuzena.</p>
           <img (click)="reiniciarAriketa()" class="hasi" src="assets/img/rehacer.png">
         </ng-container>
       </div>
