@@ -4,9 +4,10 @@ CREATE TABLE IF NOT EXISTS Erronka(
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     azalpena TEXT NOT NULL,
     testu_izkutua TEXT,
-    mapa_irudia TEXT
+    mapa_irudia TEXT,
+    testu_izkutua_id INTEGER NOT NULL 
 );
-INSERT OR IGNORE INTO Erronka (id, azalpena, testu_izkutua, mapa_irudia) VALUES (1, 'Erronka1', 'Testu izkutua1', 'https://www.google.com');
+INSERT OR IGNORE INTO Erronka (id, azalpena, testu_izkutua, mapa_irudia, testu_izkutua_id) VALUES (1, 'Erronka1', 'Testu izkutua1', 'https://www.google.com', 1);
 
 CREATE TABLE IF NOT EXISTS Ariketa(
     id INTEGER PRIMARY KEY AUTOINCREMENT,
