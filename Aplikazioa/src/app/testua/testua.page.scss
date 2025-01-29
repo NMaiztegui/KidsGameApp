@@ -9,13 +9,15 @@ ion-content {
 }
 
 .logo {
-    width: 10vw;
-    left: -100vw;
+    position: fixed;
+    width: 9vw;
     height: auto;
+    left: 1.5vw;
+    top: 2vh;
 }
 
 .container {
-    position: fixed; 
+    position: fixed;
     top: 8vh;
     left: 50%;
     transform: translateX(-50%);
