@@ -14,6 +14,14 @@ const routes: Routes = [
     path: 'aurkezpena',
     loadChildren: () => import('./aurkezpena/aurkezpena.module').then( m => m.AurkezpenaPageModule)
   },
+  {
+    path: 'mapa',
+    loadChildren: () => import('./mapa/mapa.module').then( m => m.MapaPageModule)
+  },
+  {
+    path: 'testua',
+    loadChildren: () => import('./testua/testua.module').then( m => m.TestuaPageModule)
+  },
 
 ];
 

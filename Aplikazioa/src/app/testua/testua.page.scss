@@ -1,5 +1,5 @@
 ion-content {
-    --background: url('/assets/img/bck.png') no-repeat center / cover;
+    --background: white;
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
@@ -8,22 +8,15 @@ ion-content {
     position: relative;
 }
 
-.logo-container {
-    position: fixed; 
-    top: 50%;
-    left: 75%; 
-    transform: translate(-50%, -50%);
-    z-index: 1;
-}
-
 .logo {
-    width: 15vw;
+    width: 10vw;
+    left: -100vw;
     height: auto;
 }
 
 .container {
     position: fixed; 
-    bottom: 10vh;
+    top: 8vh;
     left: 50%;
     transform: translateX(-50%);
     text-align: center;
@@ -31,6 +24,6 @@ ion-content {
 }
 
 .title {
-    font-size: 4vw;
+    font-size: 3vw;
     color: #FF8A00;
 }

@@ -1,5 +1,5 @@
 ion-content {
-    --background: url('/assets/img/bck2.png') no-repeat center / cover;
+    --background: url('/assets/img/mapa.jpg') no-repeat center / cover;
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
@@ -17,32 +17,23 @@ ion-content {
 }
 
 .amona {
-    width: 25vw;
+    width: 10vw;
     height: auto;
 }
 
-.soinua {
+.text {
     position: fixed;
-    width: 6vw;
+    width: 40vw;
     height: auto;
-    top: 18vh;
-    left: 31vw;
-}
-
-.play {
-    position: fixed;
-    width: 14vw;
-    height: auto;
-    top: 40vh;
-    left: 70vw;
+    bottom: 54vh;
+    right: 14vw;
 }
 
 .speech-bubble {
     position: fixed;
-    top: 5vh;
-    left: 30vw;
-    width: 50vw;
-    padding: 2vh;
+    bottom: 60vh;
+    right: -1vw;
+    width: 14vw;
     background-color: white;
     border-radius: 20px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
