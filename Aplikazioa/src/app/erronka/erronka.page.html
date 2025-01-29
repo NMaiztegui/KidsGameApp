@@ -12,14 +12,31 @@
       </div>
       <img class="soinua" src="assets/img/soinua.png">
       <div class="text-bubble">
-        <p>Tx_kit_tik Tr_p_ga_anek_ m_ateg_etat_k mu_itu i_an na_z. Ni_e
-          ha_rtzaro_ren zati_ik han_ien_ ing_ru hauet_n eman dut, f_mi_ia eta sen_rrare_in ego_eko. Horre_aiti_, her_i
-          eta
-          ingu_uko se_retu gehi_nak dakizkit. Ib_lbid_an zehar desku_ritzek_  pre_t  zaud_te?</p>
+        <p>
+          <span *ngFor="let letra of letras; let i = index">
+            <ng-container *ngIf="letra === ''">
+              <input [(ngModel)]="letras[i]" type="text" maxlength="1" class="input-letter"
+                style="width: 20px; text-align: center;" />
+            </ng-container>
+            <ng-container *ngIf="letra !== ''">
+              <span>{{ letra }}</span>
+            </ng-container>
+          </span>
+        </p>
       </div>
-      <a routerLink="/mapa">
+      <div class="erantzuna-bubble" *ngIf="erantzuna !== null">
+        <ng-container *ngIf="erantzuna === true">
+          <p style="font-family: 'DynaPuff', sans-serif;">Zorionak! Mezuaren deszifratu duzu!</p>
+          <img (click)="reiniciarAriketa()" class="hasi" src="assets/img/rehacer.png">
+        </ng-container>
+        <ng-container *ngIf="erantzuna === false">
+          <p style="font-family: 'DynaPuff', sans-serif;">Saiatu berriro, erantzuna ez da zuzena.</p>
+          <img (click)="reiniciarAriketa()" class="hasi" src="assets/img/rehacer.png">
+        </ng-container>
+      </div>
+      <button (click)="erantzunaEgiaztatu()">
         <img class="tik" src="assets/img/tik.png">
-      </a>
+      </button>
     </div>
   </body>
 </ion-content>

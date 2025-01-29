@@ -10,9 +10,9 @@ ion-content {
 body {
     position: relative;
     background: white;
-  }
-  
-  body::before {
+}
+
+body::before {
     content: '';
     position: absolute;
     top: 0;
@@ -21,8 +21,8 @@ body {
     height: 25%;
     background: #bce3ad;
     z-index: -1;
-  }
-  
+}
+
 .amona {
     position: fixed;
     width: 12vw;
@@ -47,6 +47,10 @@ body {
     left: 86vw;
 }
 
+.hasi {
+    width: 6vw;
+}
+
 .speech-bubble {
     position: fixed;
     top: 8vh;
@@ -62,6 +66,21 @@ body {
 }
 
 .text-bubble {
+    position: fixed;
+    width: 80vw;
+    background-color: white;
+    border-radius: 20px;
+    border: 5px solid #669E50;
+    box-shadow: 0 0 10px #669E50;
+    font-size: 4vh;
+    color: #333;
+    top: 56vh;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+.erantzuna-bubble {
     position: fixed;
     width: 80vw;
     background-color: white;
