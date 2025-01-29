@@ -27,4 +27,8 @@ class erronka extends Model
     public function erantzunak(){
         return $this-> hasMany(erantzunak::class, 'id_erronka', 'id');
     }
+
+    public function lokalizazioa(){
+        return $this->hasMany(lokalizazioa::class, 'id_erronka', 'id');
+    }
 }

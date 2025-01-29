@@ -7,4 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 class esaldia_bete extends Model
 {
     //
+    protected $fillable=[
+        'hitza',
+        'poizioa',
+    ];
 }

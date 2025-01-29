@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('erantzunaks', function (Blueprint $table) {
             $table->id();
             $table->string(column: 'emandako_erantzuna');
-            $table->bollean (column: 'zuzena')->default('false');
+            $table->boolean (column: 'zuzena')->default('0');
             $table->unsignedBigInteger('id_erronka');
             $table->foreign('id_erronka')->references('id')->on('erronkas');
             $table->unsignedBigInteger('id_ariketa');

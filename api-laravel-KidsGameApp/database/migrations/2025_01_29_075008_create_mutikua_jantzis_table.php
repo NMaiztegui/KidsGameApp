@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('url');
             $table->string('objetua');
-            $table->boolean('zuzena')->default('false');
+            $table->boolean('zuzena')->default('0');
             $table->timestamps();
         });
     }

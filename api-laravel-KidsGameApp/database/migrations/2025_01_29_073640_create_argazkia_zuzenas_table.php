@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('argazkia_zuzenas', function (Blueprint $table) {
             $table->id();
             $table->string('url');
-            $table->boolean('zuzena')->default('false');
+            $table->boolean('zuzena')->default('0');
             $table->timestamps();
         });
     }

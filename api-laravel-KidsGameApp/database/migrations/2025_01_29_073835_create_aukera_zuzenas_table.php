@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('aukera_zuzenas', function (Blueprint $table) {
             $table->id();
             $table->string('esaldia');
-            $table->boolean('zuzena')->default('false');
+            $table->boolean(column: 'zuzena')->default('0');
 
             $table->timestamps();
         });

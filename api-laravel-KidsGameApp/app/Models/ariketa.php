@@ -24,4 +24,8 @@ class ariketa extends Model
     public function erantzunak(){
         return $this->hasMany(erantzunak::class, 'id_ariketa', 'id');
     }
+
+    public function ordenatu(){
+        return $this->hasMany(ordenatu::class, 'id_ariketa', 'id');
+    }
 }
