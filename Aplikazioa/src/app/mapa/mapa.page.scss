@@ -29,15 +29,29 @@ ion-content {
     right: 14vw;
 }
 
-.speech-bubble {
+.text-bubble {
     position: fixed;
-    bottom: 60vh;
+    bottom: 59vh;
     right: -8vw;
     width: 20vw;
     background-color: white;
     border-radius: 20px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     font-size: 4vh;
+    color: #333;
+    text-align: center;
+}
+
+.play-bubble {
+    position: fixed;
+    width: 10vw;
+    bottom: 20vh;
+    background-color: white;
+    border-radius: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    font-size: 4vh;
+    left: 50%;
+    transform: translate(-50%, -50%);
     color: #333;
     text-align: center;
 }

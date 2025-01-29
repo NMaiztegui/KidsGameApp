@@ -22,6 +22,10 @@ const routes: Routes = [
     path: 'testua',
     loadChildren: () => import('./testua/testua.module').then( m => m.TestuaPageModule)
   },
+  {
+    path: 'erronka',
+    loadChildren: () => import('./erronka/erronka.module').then( m => m.ErronkaPageModule)
+  },
 
 ];
 
