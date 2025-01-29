@@ -13,6 +13,7 @@ class erronka extends Model
         'azalpena',
         'testu_izkutua',
         'mapa_irudia',
+        'testu_izkutua_id'
     ];
 
     public function ariketa()
