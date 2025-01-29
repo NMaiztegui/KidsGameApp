@@ -7,7 +7,13 @@ use App\Http\Controllers\aukera_zuzenaController;
 use App\Http\Controllers\erantzunakController;
 use App\Http\Controllers\erronkaController;
 use App\Http\Controllers\esaldia_beteController;
+use App\Http\Controllers\funikularraController;
+use App\Http\Controllers\hizkiak_beteController;
+use App\Http\Controllers\lokalizazioaController;
+use App\Http\Controllers\mutikua_jantziController;
+use App\Http\Controllers\ordenatuController;
 use App\Models\erantzunak;
+use App\Models\parekatzeko_galdera;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -36,3 +42,22 @@ Route::get('/erronkak/{id}', [erronkaController::class, 'show']);
 
 Route::get('/esaldia-bete', [esaldia_beteController::class, 'showAll']);
 Route::get('/esaldia-bete/{id}', [esaldia_beteController::class, 'show']);
+
+Route::get('/funikularra', [funikularraController::class, 'showAll']);
+Route::get('/funikularra/{id}', [funikularraController::class, 'show']);
+
+Route::get('/hizkiak-bete',[hizkiak_beteController::class,'showAll']);
+Route::get('/hizkiak-bete/{id}',[hizkiak_beteController::class,'show']);
+
+Route::get('/lokalizazioa', [lokalizazioaController::class, 'showAll']);
+Route::get('/lokalizazioa/{id}', [lokalizazioaController::class, 'show']);
+
+Route::get('/mutikua-jantzi',[mutikua_jantziController::class,'showAll']);
+Route::get('/mutikua-jantzi/{id}',[mutikua_jantziController::class,'show']);
+
+Route::get('/ordenatu',[ordenatuController::class,'showAll']);
+Route::get('/ordenatu/{id}',[ordenatuController::class,'show']);
+
+
+Route::get('/parekatzeko-galdera',[parekatzeko_galdera::class,'showAll']);
+Route::get('/parekatzeko-galdera/{id}',[parekatzeko_galdera::class,'show']);
