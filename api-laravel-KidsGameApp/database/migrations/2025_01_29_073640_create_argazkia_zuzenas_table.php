@@ -11,10 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('esaldia_ordenatus', function (Blueprint $table) {
+        Schema::create('argazkia_zuzenas', function (Blueprint $table) {
             $table->id();
-            $table->string('hizkia');
-            $table->unsignedBigInteger('posizioa');
+            $table->string('url');
+            $table->boolean('zuzena')->default('false');
             $table->timestamps();
         });
     }
@@ -24,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('esaldia_ordenatus');
+        Schema::dropIfExists('argazkia_zuzenas');
     }
 };

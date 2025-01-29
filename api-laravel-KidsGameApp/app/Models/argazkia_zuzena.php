@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class esaldia_ordenatu extends Model
+class argazkia_zuzena extends Model
 {
     //
 }

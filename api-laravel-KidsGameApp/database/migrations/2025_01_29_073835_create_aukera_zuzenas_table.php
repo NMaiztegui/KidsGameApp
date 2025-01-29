@@ -11,10 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('harri_zulatzaileak_irudias', function (Blueprint $table) {
+        Schema::create('aukera_zuzenas', function (Blueprint $table) {
             $table->id();
-            $table->string(column: 'url');
-            $table->boolean(column: 'zuzena');
+            $table->string('esaldia');
+            $table->boolean('zuzena')->default('false');
+
             $table->timestamps();
         });
     }
@@ -24,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('harri_zulatzaileak_irudias');
+        Schema::dropIfExists('aukera_zuzenas');
     }
 };
