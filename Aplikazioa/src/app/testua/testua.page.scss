@@ -35,6 +35,7 @@ ion-content {
     width: 70vw;
     background-color: white;
     border-radius: 20px;
+    border: 5px solid darkgreen;
     box-shadow: 0 0 10px darkgreen;
     font-size: 4vh;
     color: #333;
@@ -45,6 +46,6 @@ ion-content {
 }
 
 .speech-bubble p {
-    filter: blur(4px);
+    filter: blur(10px);
     user-select: none;
 }
