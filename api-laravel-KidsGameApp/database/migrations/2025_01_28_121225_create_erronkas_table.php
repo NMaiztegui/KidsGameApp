@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->longText('azalpena');
             $table->longText('testu_izkutua');
-            $table->string('mapa_irudia_ruta');
+            $table->string('mapa_irudia');
             $table->timestamps();
         });
     }

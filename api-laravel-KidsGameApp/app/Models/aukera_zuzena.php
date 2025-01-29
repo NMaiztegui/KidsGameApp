@@ -6,5 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class aukera_zuzena extends Model
 {
-    //
+    protected $fillable=[
+        'esaldia',
+        'zuzena',
+    ];
 }
