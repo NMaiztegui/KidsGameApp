@@ -25,7 +25,7 @@ ion-content {
     position: fixed;
     width: 6vw;
     height: auto;
-    top: 18vh;
+    top: 25vh;
     left: 31vw;
 }
 
@@ -39,14 +39,14 @@ ion-content {
 
 .speech-bubble {
     position: fixed;
-    top: 5vh;
+    top: -8vh;
     left: 30vw;
     width: 50vw;
     padding: 2vh;
     background-color: white;
     border-radius: 20px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    font-size: 2vh;
+    font-size: 4vh;
     color: #333;
     text-align: center;
 }
