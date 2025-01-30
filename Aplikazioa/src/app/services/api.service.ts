@@ -13,6 +13,10 @@ import { Erantzunak } from '../classes/erantzunak';
 import { EsaldiaBete } from '../classes/esaldia-bete';
 import { Funikularra } from '../classes/funikularra';
 import { HizkiakBete } from '../classes/hizkiak-bete';
+import { Lokalizazioa } from '../classes/lokalizazioa';
+import { MutikoaJantzi } from '../classes/mutikoa-jantzi';
+import { Ordenatu } from '../classes/ordenatu';
+import { ParekatzekoGaldera } from '../classes/parekatzeko-galdera';
 
 @Injectable({
   providedIn: 'root'
@@ -61,5 +65,21 @@ export class ApiService {
 
   getHizkiakBete():Observable<HizkiakBete[]>{
     return this.httpClient.get<HizkiakBete[]>(`${this.urlbase}/hizkiak-bete`);
+  }
+
+  getLokalizazioak():Observable<Lokalizazioa[]>{
+    return this.httpClient.get<Lokalizazioa[]>(`${this.urlbase}/lokalizazioa`);
+  }
+
+  getMutikoaJantzi():Observable<MutikoaJantzi[]>{
+    return this.httpClient.get<MutikoaJantzi[]>(`${this.urlbase}/mutikua-jantzi`);
+  }
+
+  getOrdenatu():Observable<Ordenatu[]>{
+    return this.httpClient.get<Ordenatu[]>(`${this.urlbase}/ordenatu`);
+  }
+
+  getParekatzekoGalderak():Observable<ParekatzekoGaldera[]>{
+    return this.httpClient.get<ParekatzekoGaldera[]>(`${this.urlbase}/parekatzeko-galdera`);
   }
 }
