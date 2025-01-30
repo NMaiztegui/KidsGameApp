@@ -11,9 +11,11 @@
     </div>
   </div>
   <div class="play-bubble">
-    <p style="font-family: 'DynaPuff', sans-serif;">Jolastu</p>
-    <a routerLink="/erronka">
-      <img src="assets/img/play.png">
-    </a>
+    <p style="font-family: 'DynaPuff', sans-serif;">
+      Joan zaitez Dolores Ibarruri kalera Dolores Ibarruriren erronka desblokeatzeko.
+    </p>
+    <ng-container *ngIf="lekuanBadago()">
+      <img (click)="erronkaHasi()" class="play" src="assets/img/play.png">
+    </ng-container>
   </div>
 </ion-content>

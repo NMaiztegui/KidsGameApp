@@ -10,7 +10,8 @@ const routes: Routes = [
     path: '',
     redirectTo: 'home',
     pathMatch: 'full'
-  },  {
+  },
+  {
     path: 'aurkezpena',
     loadChildren: () => import('./aurkezpena/aurkezpena.module').then( m => m.AurkezpenaPageModule)
   },
@@ -23,8 +24,8 @@ const routes: Routes = [
     loadChildren: () => import('./testua/testua.module').then( m => m.TestuaPageModule)
   },
   {
-    path: 'erronka',
-    loadChildren: () => import('./erronka/erronka.module').then( m => m.ErronkaPageModule)
+    path: 'erronka1',
+    loadChildren: () => import('./erronka1/erronka1.module').then( m => m.ErronkaPageModule)
   },
 
 ];
