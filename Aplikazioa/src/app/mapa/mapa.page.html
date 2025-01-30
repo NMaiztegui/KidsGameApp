@@ -1,20 +1,29 @@
 <link href="https://fonts.googleapis.com/css2?family=DynaPuff:wght@400;700&display=swap" rel="stylesheet">
 
 <ion-content [fullscreen]="true">
-  <div class="container">
+  <div class="container" [ngClass]="{'erronka2': erronkaId === 2}">
     <img class="amona" src="assets/img/amona.png">
+    
     <a routerLink="/testua">
       <img class="text" src="assets/img/testuizkutupanela.png">
     </a>
+
     <div class="text-bubble">
-      <p style="font-family: 'DynaPuff', sans-serif;">Testu ezkutuak</p>
+      <p class="dynapuff-font">Testu ezkutuak</p>
     </div>
   </div>
+
   <div class="play-bubble">
-    <p style="font-family: 'DynaPuff', sans-serif;">
-      Joan zaitez Dolores Ibarruri kalera Dolores Ibarruriren erronka desblokeatzeko.
+    <p class="dynapuff-font">
+      <ng-container *ngIf="erronkaId === 1">
+        Joan zaitez Dolores Ibarruri kalera Dolores Ibarruriren erronka desblokeatzeko.
+      </ng-container>
+      <ng-container *ngIf="erronkaId === 2">
+        Erronka 2 aktibatuta! Joan zaitez hurrengo puntura.
+      </ng-container>
     </p>
-    <ng-container *ngIf="lekuanBadago()">
+
+    <ng-container *ngIf="lekuanBadago() === erronkaId">
       <img (click)="erronkaHasi()" class="play" src="assets/img/play.png">
     </ng-container>
   </div>
