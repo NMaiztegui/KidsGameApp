@@ -3,13 +3,19 @@ import { BehaviorSubject, Observable, of } from 'rxjs';
 import { SQLitePorter } from '@awesome-cordova-plugins/sqlite-porter/ngx';
 import { SQLite, SQLiteObject } from '@awesome-cordova-plugins/sqlite/ngx';
 import { Platform } from '@ionic/angular';
+import { HttpClient } from '@angular/common/http';
 @Injectable({
   providedIn: 'root'
 })
 export class SqliteService {
   private storage!: SQLiteObject;
   private isDbReady: BehaviorSubject<boolean> = new BehaviorSubject(false);
-  constructor(private sqlite: SQLite, private platform: Platform) { 
+  constructor(
+    private platform: Platform, 
+    private sqlite: SQLite, 
+    private httpClient: HttpClient,
+    private sqlPorter: SQLitePorter,
+  ) { 
 
     this.platform.ready().then(() => {
       this.sqlite.create({
@@ -17,10 +23,29 @@ export class SqliteService {
         location: 'default'
       }).then((db: SQLiteObject) => {
         this.storage = db;
-        this.isDbReady.next(true);
+        this.prepareTables();
       });
     });
   }
+
+
+  prepareTables() {
+    //Lehen aldia bada, taula sortuko du datu batzuekin (sqlPorter erabiltzen du sql-tik datubasera pasatzeko). Gero konexioa badago sinkronizatu eta amaieran getKlubak() exekutatuko da.
+    this.httpClient.get(
+      'assets/dump.sql', 
+      {responseType: 'text'}
+    ).subscribe(data => {
+      this.sqlPorter.importSqlToDb(this.storage, data)
+        .then(_ => {
+         
+          this.isDbReady.next(true);
+        })
+        .catch(error => console.error(error));
+    });
+  }
+
+
+
 //inser api data to sqlite
   public insertData(tableName: string, data: any[]) {
     let columns = Object.keys(data[0]).join(', ');
