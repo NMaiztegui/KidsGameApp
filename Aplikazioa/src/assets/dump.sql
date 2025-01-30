@@ -20,9 +20,9 @@ INSERT OR IGNORE INTO Ariketa (id, azalpena, id_erronka) VALUES (1, 'Ariketa1', 
 CREATE TABLE IF NOT EXISTS ArgazkiaZuzena(
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     url TEXT NOT NULL,
-    privatea INTEGER DEFAULT 0 
+    zuzena BOOLEAN NOT NULL
 );
-INSERT OR IGNORE INTO ArgazkiaZuzena (id, url, privatea) VALUES (1, 'https://www.google.com', 0);
+INSERT OR IGNORE INTO ArgazkiaZuzena (id, url, zuzena) VALUES (1, 'https://www.google.com', 0);
 
 CREATE TABLE IF NOT EXISTS Audioa(
     id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -37,14 +37,14 @@ INSERT OR IGNORE INTO Audioa (id, audioa, id_erronka, id_ariketa) VALUES (1, 'ht
 CREATE TABLE IF NOT EXISTS AukeraZuzena(
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     esaldia TEXT NOT NULL,
-    zuzena INTEGER NOT NULL
+    zuzena BOOLEAN NOT NULL
 );
 INSERT OR IGNORE INTO AukeraZuzena (id, esaldia, zuzena) VALUES (1, 'Aukera1', 1);
 
 CREATE TABLE IF NOT EXISTS Erantzunak(
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     erantzuna TEXT NOT NULL,
-    zuzena INTEGER NOT NULL,
+    zuzena BOOLEAN NOT NULL,
     id_ariketa INTEGER NOT NULL,
     id_erronka INTEGER NOT NULL,
     FOREIGN KEY (id_ariketa) REFERENCES Ariketa(id) ON DELETE CASCADE,
@@ -72,7 +72,7 @@ CREATE TABLE IF NOT EXISTS Funikularra(
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     url TEXT NOT NULL,
     objetua INTEGER NOT NULL,
-    zuzena INTEGER NOT NULL 
+    zuzena BOOLEAN NOT NULL 
 );
 INSERT OR IGNORE INTO Funikularra (id, url, objetua, zuzena) VALUES (1, 'https://www.google.com', 1, 1);
 
@@ -104,6 +104,6 @@ CREATE TABLE IF NOT EXISTS MutikoaJantzi(
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     url TEXT NOT NULL,
     objetua TEXT NOT NULL,
-    zuzena INTEGER NOT NULL 
+    zuzena BOOLEAN NOT NULL
 );
 INSERT OR IGNORE INTO MutikoaJantzi (id, url, objetua, zuzena) VALUES (1, 'https://www.google.com', 'Objetua1', 1);
