@@ -37,4 +37,19 @@ export class SqliteService {
   public getDbState() {
     return this.isDbReady.asObservable();
   }
+
+  public async getData(tableName: string) {
+    const query = `SELECT * FROM ?`; 
+    try {
+      const result = await this.storage.executeSql(query, [tableName]);
+      let data = [];
+      for (let i = 0; i < result.rows.length; i++) {
+        data.push(result.rows.item(i));
+      }
+      return data;
+    } catch (error) {
+      console.error("Error al obtener datos:", error);
+      throw error;
+    }
+  }
 }
