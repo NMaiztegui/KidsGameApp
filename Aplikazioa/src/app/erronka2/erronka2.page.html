@@ -1,0 +1,31 @@
+<link href="https://fonts.googleapis.com/css2?family=DynaPuff:wght@400;700&display=swap" rel="stylesheet">
+
+<ion-content [fullscreen]="true">
+
+  <body>
+    <div>
+      <img class="amona" src="assets/img/amona.png">
+      <div class="speech-bubble">
+        <p style="font-family: 'DynaPuff', sans-serif;">{{ testua }}</p>
+        <img *ngIf="playErakutsi" (click)="erronkaHasi()" class="hasi" src="assets/img/play.png">
+      </div>
+      <img class="soinua" src="assets/img/soinua.png">
+      <div class="argazkiak">
+        <img *ngIf="argazkiakErakutsi===false" class="sm" [class.seleccionada]="imagenSeleccionada === 1" (click)="seleccionarImagen(1)" src="assets/img/arrastre.png">
+        <img *ngIf="argazkiakErakutsi===false" class="sm" [class.seleccionada]="imagenSeleccionada === 2" (click)="seleccionarImagen(2)" src="assets/img/harri_j.png">
+        <img *ngIf="argazkiakErakutsi===false" [class.seleccionada]="imagenSeleccionada === 3" (click)="seleccionarImagen(3)" src="assets/img/harri_z.png">
+      </div>      
+      <div class="erantzuna-bubble" *ngIf="erantzuna !== null">
+        <ng-container *ngIf="erantzuna === true">
+          <p style="color: green;">Zorionak! Hurrengo galdera!</p>
+          <img (click)="ariketaSubmit()" class="zuzen" src="assets/img/tik.png">
+        </ng-container>
+        <ng-container *ngIf="erantzuna === false">
+          <p style="color: red;">Saiatu berriro, erantzuna ez da zuzena.</p>
+          <img (click)="ariketaBerregin()" class="oker" src="assets/img/rehacer.png">
+        </ng-container>
+      </div>
+      <img *ngIf="finishErakutsi" (click)="erantzunaEgiaztatu()" class="tik" src="assets/img/tik.png">
+    </div>
+  </body>
+</ion-content>
