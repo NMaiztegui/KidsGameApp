@@ -29,6 +29,7 @@
     "@capacitor/app": "^6.0.2",
     "@capacitor/core": "^6.2.0",
     "@capacitor/ios": "^6.2.0",
+    "@capacitor/network": "^6.0.3",
     "@ionic/angular": "^8.0.0",
     "cordova-sqlite-storage": "^6.1.0",
     "ionicons": "^7.0.0",
