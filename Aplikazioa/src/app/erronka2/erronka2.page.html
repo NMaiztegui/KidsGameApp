@@ -11,23 +11,21 @@
       </div>
       <img class="soinua" src="assets/img/soinua.png">
       <div class="argazkiak" *ngIf="argazkiakErakutsi">
-        <img class="sm" [class.seleccionada]="imagenSeleccionada === 1" (click)="argazkiaAukeratu(1)"
+        <img class="sm" [class.aukeratuta]="argazkiAukeratua === 1" (click)="argazkiaAukeratu(1)"
           src="assets/img/arrastre.png">
-        <img class="sm" [class.seleccionada]="imagenSeleccionada === 2" (click)="argazkiaAukeratu(2)"
+        <img class="sm" [class.aukeratuta]="argazkiAukeratua === 2" (click)="argazkiaAukeratu(2)"
           src="assets/img/harri_j.png">
-        <img [class.seleccionada]="imagenSeleccionada === 3" (click)="argazkiaAukeratu(3)" src="assets/img/harri_z.png">
+        <img [class.aukeratuta]="argazkiAukeratua === 3" (click)="argazkiaAukeratu(3)" src="assets/img/harri_z.png">
       </div>
       <div *ngIf="hitzakErakutsi">
         <p class="hitza"
            *ngFor="let item of hitzakPosizioa"
-           (click)="hitzaAukeratu(item.hitza)"
-           [ngStyle]="{'top': item.top, 'left': item.left, 'position': 'absolute'}">
-          {{ item.hitza }}
+           (click)="hitzaAukeratu(item)"
+           [ngStyle]="{'top': item.top, 'left': item.left, 'position': 'absolute'}"
+           [ngClass]="{'aukeratuta': item.aukeratuta}">
+          {{ item.numero ? item.numero + '.' : '' }} {{ item.hitza }}
         </p>
-        <p class="hitzAukeratua" *ngFor="let hitza of hitzakAukeratu">
-          {{ hitza }}
-        </p>
-      </div>      
+      </div>                    
       <div class="erantzuna-bubble" *ngIf="erantzuna !== null">
         <ng-container *ngIf="erantzuna && !hitzakErakutsi">
           <p style="color: green;">Zorionak! Hurrengo galdera!</p>

@@ -13,13 +13,27 @@ export class Erronka2Page implements OnInit {
   hitzakErakutsi: boolean | null = false;
   playErakutsi: boolean | null = true;
   finishErakutsi: boolean | null = false;
-  imagenSeleccionada: number | null = null;
+  argazkiAukeratua: number | null = null;
   erantzuna: boolean | null = null;
-  hitzakOrdenatzeko: string[] = ['harkaitzetan', 'harriak', 'egiten', 'zituzten', 'Barrenak', 'lehergailuak', 'jarriz', '.', 'erabiltzen', 'zuloak', 'puskatzeko', 'eta'];
-  hitzakAukeratu: string[] = [];
-  hitzakPosizioa: { hitza: string; top: string; left: string }[] = [];
-  esaldiZuzena: string[] = ['Barrenak', 'harkaitzetan', 'zuloak', 'egiten', 'eta', 'lehergailuak', 'jarriz', 'harriak', 'puskatzeko', 'erabiltzen', 'zituzten', '.'];
+  esaldiZuzena: string[] = ['1. Barrenak', '2. harkaitzetan', '3. zuloak', '4. egiten', '5. eta', '6. lehergailuak', '7. jarriz', '8. harriak', '9. puskatzeko', '10. erabiltzen', '11. zituzten', '12. .'];
   esaldiOndo: boolean | null = null;
+
+  hitzakPosizioa = [
+    { hitza: 'harkaitzetan', top: '70vh', left: '5vw', numero: null, aukeratuta: false },
+    { hitza: 'harriak', top: '50vh', left: '6vw', numero: null, aukeratuta: false },
+    { hitza: 'egiten', top: '70vh', left: '30vw', numero: null, aukeratuta: false },
+    { hitza: 'zituzten', top: '40vh', left: '60vw', numero: null, aukeratuta: false },
+    { hitza: 'Barrenak', top: '50vh', left: '25vw', numero: null, aukeratuta: false },
+    { hitza: 'lehergailuak', top: '82vh', left: '24vw', numero: null, aukeratuta: false },
+    { hitza: 'jarriz', top: '80vh', left: '58vw', numero: null, aukeratuta: false },
+    { hitza: '.', top: '53vh', left: '47vw', numero: null, aukeratuta: false },
+    { hitza: 'erabiltzen', top: '65vh', left: '53vw', numero: null, aukeratuta: false },
+    { hitza: 'zuloak', top: '33vh', left: '40vw', numero: null, aukeratuta: false },
+    { hitza: 'puskatzeko', top: '48vh', left: '79vw', numero: null, aukeratuta: false },
+    { hitza: 'eta', top: '62vh', left: '75vw', numero: null, aukeratuta: false }
+  ];
+
+  hitzakAukeratu: { hitza: string; numero: number | null }[] = [];
 
   constructor(private router: Router) { }
 
@@ -30,25 +44,36 @@ export class Erronka2Page implements OnInit {
     this.finishErakutsi = true;
   }
 
-  argazkiaAukeratu(imagenId: number) {
-    this.imagenSeleccionada = imagenId;
+  argazkiaAukeratu(argazkiId: number) {
+    this.argazkiAukeratua = argazkiId;
   }
 
-  hitzaAukeratu(hitza: string) {
-    if (!this.hitzakAukeratu.includes(hitza)) {
-      this.hitzakAukeratu.push(hitza);
+  hitzOrdena = 0;
+
+  hitzaAukeratu(item: any) {
+    if (item.numero === null) {
+      this.hitzOrdena++;
+      item.numero = this.hitzOrdena;
+      item.aukeratuta = true;
+      this.hitzakAukeratu.push({ hitza: item.hitza, numero: item.numero });
     }
   }
 
   erantzunaEgiaztatu() {
     if (this.argazkiakErakutsi === true) {
-      if (this.imagenSeleccionada === 3) {
+      if (this.argazkiAukeratua === 3) {
         this.erantzuna = true;
       } else {
         this.erantzuna = false;
       }
     } else {
-      if (JSON.stringify(this.hitzakAukeratu) === JSON.stringify(this.esaldiZuzena)) {
+      const hitzakOrdenatuta = this.hitzakAukeratu
+        .sort((a, b) => (a.numero || 0) - (b.numero || 0))
+        .map(item => item.hitza);
+  
+      const esaldiZuzenaHitzak = this.esaldiZuzena.map(item => item.split('. ')[1]);
+  
+      if (JSON.stringify(hitzakOrdenatuta) === JSON.stringify(esaldiZuzenaHitzak)) {
         this.erantzuna = true;
       } else {
         this.erantzuna = false;
@@ -66,7 +91,12 @@ export class Erronka2Page implements OnInit {
   ariketaBerregin() {
     this.erantzuna = null;
     this.hitzakAukeratu = [];
-    this.desordenatuHitzak();
+    this.hitzOrdena = 0;
+  
+    this.hitzakPosizioa.forEach((item) => {
+      item.numero = null;
+      item.aukeratuta = false;
+    });
   }
 
   erronkaSubmit() {
@@ -74,14 +104,5 @@ export class Erronka2Page implements OnInit {
   }
 
   ngOnInit() {
-    this.desordenatuHitzak();
-  }
-  
-  desordenatuHitzak() {
-    this.hitzakPosizioa = this.hitzakOrdenatzeko.map((hitza) => ({
-      hitza,
-      top: `${Math.floor(Math.random() * 70) + 10}%`,
-      left: `${Math.floor(Math.random() * 80) + 10}%`,
-    }));
   }
 }

@@ -69,15 +69,6 @@ body::before {
     padding: 2vh;
 }
 
-.hitzAukeratua {
-    color: #333;
-    background-color: #669E50;
-    border-radius: 20px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-    width: 7vw;
-    padding: 2vh;
-}
-
 .zuzen,
 .oker {
     width: 6vw;
@@ -133,7 +124,7 @@ body::before {
     }
 }
 
-.seleccionada {
-    border: 5px solid orange;
+.aukeratuta {
+    background-color: orange;
     border-radius: 25px;
 }
