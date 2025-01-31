@@ -21,7 +21,7 @@ export class Erronka2Page implements OnInit {
   hitzakPosizioa = [
     { hitza: 'harkaitzetan', top: '70vh', left: '5vw', numero: null, aukeratuta: false },
     { hitza: 'harriak', top: '50vh', left: '6vw', numero: null, aukeratuta: false },
-    { hitza: 'egiten', top: '70vh', left: '30vw', numero: null, aukeratuta: false },
+    { hitza: 'egiten', top: '65vh', left: '30vw', numero: null, aukeratuta: false },
     { hitza: 'zituzten', top: '40vh', left: '60vw', numero: null, aukeratuta: false },
     { hitza: 'Barrenak', top: '50vh', left: '25vw', numero: null, aukeratuta: false },
     { hitza: 'lehergailuak', top: '82vh', left: '24vw', numero: null, aukeratuta: false },
