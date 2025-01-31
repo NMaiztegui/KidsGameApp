@@ -11,19 +11,18 @@ import { Router } from '@angular/router';
 export class MapaPage implements OnInit {
   erronkaId: number | null = 1;
 
-  private erronkas = [
-    { id: 1, latitud: 40.1794257, longitud: -2.491341 },
-    { id: 2, latitud: 43.1800000, longitud: -2.492000 },
-    { id: 3, latitud: 43.1810000, longitud: -2.493000 },
-    { id: 4, latitud: 43.1820000, longitud: -2.494000 },
-    { id: 5, latitud: 43.1830000, longitud: -2.495000 },
-    { id: 6, latitud: 43.1840000, longitud: -2.496000 },
-    { id: 7, latitud: 43.1850000, longitud: -2.497000 },
-    { id: 8, latitud: 43.1860000, longitud: -2.498000 }
+  private erronkak = [
+    { id: 1, latitud: 43.3027548237599, longitud: -3.0336377921477373 },
+    { id: 2, latitud: 43.3056657009205, longitud: -3.0382160860316530 },
+    { id: 3, latitud: 43.3025794652629, longitud: -3.0379269306284584 },
+    { id: 4, latitud: 43.3127509757964, longitud: -3.0703448218122120 },
+    { id: 5, latitud: 43.2936099918257, longitud: -3.0488334363648195 },
+    { id: 6, latitud: 43.2854881155322, longitud: -3.0526958172215270 },
+    { id: 7, latitud: 43.2856130756894, longitud: -3.0553565684783703 },
   ];
 
-  private coordenadasUsuario = { latitud: 0, longitud: 0 };
-  private margenError = 0.01;
+  private koordenadak = { latitud: 0, longitud: 0 };
+  private margenError = 0.1;
 
   constructor(private route: ActivatedRoute, private router: Router) { }
 
@@ -33,30 +32,31 @@ export class MapaPage implements OnInit {
         this.erronkaId = +params['erronka'];
       }
     });
-    this.obtenerCoordenadasUsuario();
+    this.getKoordenadak();
   }
 
-  obtenerCoordenadasUsuario() {
+  getKoordenadak() {
     if (navigator.geolocation) {
       navigator.geolocation.watchPosition(
         (position) => {
-          this.coordenadasUsuario.latitud = position.coords.latitude;
-          this.coordenadasUsuario.longitud = position.coords.longitude;
+          this.koordenadak.latitud = position.coords.latitude;
+          this.koordenadak.longitud = position.coords.longitude;
         },
       );
     }
   }
 
   lekuanBadago(): number | null {
-    for (const erronka of this.erronkas) {
-      if (
-        Math.abs(this.coordenadasUsuario.latitud - erronka.latitud) < this.margenError &&
-        Math.abs(this.coordenadasUsuario.longitud - erronka.longitud) < this.margenError
-      ) {
-        return erronka.id;
-      }
-    }
-    return null;
+    return this.erronkaId;
+    // for (const erronka of this.erronkak) {
+    //   if (
+    //     Math.abs(this.koordenadak.latitud - erronka.latitud) < this.margenError &&
+    //     Math.abs(this.koordenadak.longitud - erronka.longitud) < this.margenError
+    //   ) {
+    //     return erronka.id;
+    //   }
+    // }
+    // return null;
   }
 
   testuaIkusi() {
