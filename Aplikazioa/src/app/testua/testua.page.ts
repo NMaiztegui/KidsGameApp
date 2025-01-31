@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-testua',
@@ -8,7 +9,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TestuaPage implements OnInit {
 
-  constructor() { }
+  constructor(private router: Router) { }
+
+  mapaIkusi() {
+    this.router.navigate(['/mapa']);
+  }
 
   ngOnInit() {
   }

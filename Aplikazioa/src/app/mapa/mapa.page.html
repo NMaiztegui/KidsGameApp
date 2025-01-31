@@ -1,20 +1,17 @@
 <link href="https://fonts.googleapis.com/css2?family=DynaPuff:wght@400;700&display=swap" rel="stylesheet">
 
 <ion-content [fullscreen]="true">
-  <div class="container" [ngClass]="{'erronka2': erronkaId === 2}">
+  <div>
     <img class="amona" src="assets/img/amona.png">
-    
-    <a routerLink="/testua">
-      <img class="text" src="assets/img/testuizkutupanela.png">
-    </a>
+    <img (click)="testuaIkusi()" class="text" src="assets/img/testuizkutupanela.png">
 
     <div class="text-bubble">
-      <p class="dynapuff-font">Testu ezkutuak</p>
+      <p>Testu ezkutuak</p>
     </div>
   </div>
 
   <div class="play-bubble">
-    <p class="dynapuff-font">
+    <p>
       <ng-container *ngIf="erronkaId === 1">
         Joan zaitez Dolores Ibarruri kalera Dolores Ibarruriren erronka desblokeatzeko.
       </ng-container>
@@ -28,3 +25,5 @@
     </ng-container>
   </div>
 </ion-content>
+
+<!-- *ngIf="lekuanBadago() === erronkaId" -->

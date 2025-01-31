@@ -6,19 +6,36 @@
     <div>
       <img class="amona" src="assets/img/amona.png">
       <div class="speech-bubble">
-        <p style="font-family: 'DynaPuff', sans-serif;">{{ testua }}</p>
+        <p>{{ testua }}</p>
         <img *ngIf="playErakutsi" (click)="erronkaHasi()" class="hasi" src="assets/img/play.png">
       </div>
       <img class="soinua" src="assets/img/soinua.png">
-      <div class="argazkiak">
-        <img *ngIf="argazkiakErakutsi===false" class="sm" [class.seleccionada]="imagenSeleccionada === 1" (click)="seleccionarImagen(1)" src="assets/img/arrastre.png">
-        <img *ngIf="argazkiakErakutsi===false" class="sm" [class.seleccionada]="imagenSeleccionada === 2" (click)="seleccionarImagen(2)" src="assets/img/harri_j.png">
-        <img *ngIf="argazkiakErakutsi===false" [class.seleccionada]="imagenSeleccionada === 3" (click)="seleccionarImagen(3)" src="assets/img/harri_z.png">
+      <div class="argazkiak" *ngIf="argazkiakErakutsi">
+        <img class="sm" [class.seleccionada]="imagenSeleccionada === 1" (click)="argazkiaAukeratu(1)"
+          src="assets/img/arrastre.png">
+        <img class="sm" [class.seleccionada]="imagenSeleccionada === 2" (click)="argazkiaAukeratu(2)"
+          src="assets/img/harri_j.png">
+        <img [class.seleccionada]="imagenSeleccionada === 3" (click)="argazkiaAukeratu(3)" src="assets/img/harri_z.png">
+      </div>
+      <div *ngIf="hitzakErakutsi">
+        <p class="hitza"
+           *ngFor="let item of hitzakPosizioa"
+           (click)="hitzaAukeratu(item.hitza)"
+           [ngStyle]="{'top': item.top, 'left': item.left, 'position': 'absolute'}">
+          {{ item.hitza }}
+        </p>
+        <p class="hitzAukeratua" *ngFor="let hitza of hitzakAukeratu">
+          {{ hitza }}
+        </p>
       </div>      
       <div class="erantzuna-bubble" *ngIf="erantzuna !== null">
-        <ng-container *ngIf="erantzuna === true">
+        <ng-container *ngIf="erantzuna && !hitzakErakutsi">
           <p style="color: green;">Zorionak! Hurrengo galdera!</p>
           <img (click)="ariketaSubmit()" class="zuzen" src="assets/img/tik.png">
+        </ng-container>
+        <ng-container *ngIf="erantzuna && hitzakErakutsi">
+          <p style="color: green;">Zorionak! Mezuaren zati bar deszifratu duzu!</p>
+          <img (click)="erronkaSubmit()" class="zuzen" src="assets/img/tik.png">
         </ng-container>
         <ng-container *ngIf="erantzuna === false">
           <p style="color: red;">Saiatu berriro, erantzuna ez da zuzena.</p>

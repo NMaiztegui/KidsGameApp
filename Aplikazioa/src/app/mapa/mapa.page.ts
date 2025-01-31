@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-mapa',
@@ -24,7 +25,7 @@ export class MapaPage implements OnInit {
   private coordenadasUsuario = { latitud: 0, longitud: 0 };
   private margenError = 0.01;
 
-  constructor(private route: ActivatedRoute) { }
+  constructor(private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit() {
     this.route.queryParams.subscribe(params => {
@@ -56,6 +57,10 @@ export class MapaPage implements OnInit {
       }
     }
     return null;
+  }
+
+  testuaIkusi() {
+    this.router.navigate(['/testua']);
   }
 
   erronkaHasi() {
