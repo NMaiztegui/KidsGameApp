@@ -22,7 +22,7 @@ export class MapaPage implements OnInit {
   ];
 
   private koordenadak = { latitud: 0, longitud: 0 };
-  private margenError = 0.1;
+  private margenError = 0.001;
 
   constructor(private route: ActivatedRoute, private router: Router) { }
 
