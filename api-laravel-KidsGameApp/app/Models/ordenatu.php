@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class ordenatu extends Model
+class Ordenatu extends Model
 {
     //
 

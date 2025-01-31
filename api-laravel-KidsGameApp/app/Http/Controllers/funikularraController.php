@@ -9,12 +9,12 @@ class funikularraController extends Controller
 {
     //
     public function showAll(){
-        $ariketak = funikularra::All();
+        $ariketak = Funikularra::All();
         return response()->json($ariketak, 200);
      }
  
      public function show($id){
-         if ($ariketa=funikularra::find($id)){
+         if ($ariketa=Funikularra::find($id)){
              return response()->json($ariketa, 200);
          }
      }

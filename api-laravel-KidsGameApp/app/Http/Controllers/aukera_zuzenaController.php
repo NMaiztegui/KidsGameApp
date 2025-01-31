@@ -9,12 +9,12 @@ class aukera_zuzenaController extends Controller
 {
     //
     public function showAll(){
-        $ariketak = aukera_zuzena::All();
+        $ariketak = Aukera_zuzena::All();
         return response()->json($ariketak, 200);
      }
  
      public function show($id){
-         if ($ariketa=aukera_zuzena::find($id)){
+         if ($ariketa=Aukera_zuzena::find($id)){
              return response()->json($ariketa, 200);
          }
      }

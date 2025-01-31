@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class aukera_zuzena extends Model
+class Aukera_zuzena extends Model
 {
     protected $fillable=[
         'esaldia',
