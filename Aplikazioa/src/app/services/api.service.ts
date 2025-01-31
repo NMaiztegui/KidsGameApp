@@ -20,6 +20,7 @@ import { ParekatzekoGaldera } from '../classes/parekatzeko-galdera';
 import { SqliteService } from './sqlite.service';
 
 import { NetworkService } from './network.service';
+import { from } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -36,449 +37,79 @@ export class ApiService {
 
    ) { }
 
-  // obtener datos del API => guardar en SQLite => devuelve datos para manejar 
+   // Función genérica para obtener y guardar datos
+  private async fetchDataAndSave<T>(endpoint: string, tableName: string): Promise<T[]> {
+    const data = this.networkService.getStatus() 
+      ? await this.httpClient.get<T[]>(`${this.urlbase}/${endpoint}`).toPromise()
+      : await this.sqliteService.getData(tableName);
 
-  getErronkak(): Observable<Erronka[]>{
-    return new Observable(observer => {
-
-      if(this.networkService.getStatus()){
-        this.httpClient.get<Erronka[]>(`${this.urlbase}/erronkak`).subscribe(async data => {
-          try {
-            // Verificar si ya existen datos en SQLite antes de insertar
-            const existingData = await this.sqliteService.getData('erronka');  
-            if (existingData.length === 0) {
-              await this.sqliteService.insertData('Erronka', data);
-            } else {
-              console.log("Los datos ya existen en SQLite, no se insertan nuevamente.");
-            }
-            observer.next(data);
-            observer.complete();
-          } catch (error) {
-            observer.error(error);
-          }
-        }, error => {
-          observer.error(error);
-        });
-      }else{
-        this.sqliteService.getData('Erronka').then(offlineData => {
-          if (offlineData.length > 0) {
-            observer.next(offlineData);
-            observer.complete();
-          }
-        }).catch(error => {
-          observer.error(error);
-        });
+    if (data && this.networkService.getStatus()) {
+      const existingData = await this.sqliteService.getData(tableName);
+      if (existingData.length === 0) {
+        await this.sqliteService.insertData(tableName, data);
+      } else {
+        console.log(`Los datos de ${tableName} ya existen en SQLite.`);
       }
-    
-    });
+    }
+
+    return data || [];
   }
 
-  getArgazkiZuzenak():Observable<ArgazkiaZuzena[]>{
-    return new Observable(observer =>{
-      if(this.networkService.getStatus()){
-        this.httpClient.get<ArgazkiaZuzena[]>(`${this.urlbase}/argazki-zuzena`).subscribe( async data => {
-          try {
-            const existingData = await this.sqliteService.getData('ArgazkiaZuzena');
-            if (existingData.length === 0) {
-              await this.sqliteService.insertData('ArgazkiaZuzena', data);
-            } else {
-              console.log("Los datos ya existen en SQLite, no se insertan nuevamente.");
-            }
-            observer.next(data);
-            observer.complete();
-          } catch (error) {
-            observer.error(error);
-          }
-        
-        }, error => {
-          observer.error(error);
-        });
-      }else{
-        this.sqliteService.getData('ArgazkiaZuzena').then(offlineData => {
-          if (offlineData.length > 0) {
-            observer.next(offlineData);
-            observer.complete();
-          }
-        }).catch(error => {
-          observer.error(error);
-        });
-      }
-      
-    });
-    
+  // Métodos específicos para cada entidad
+  getErronkak(): Observable<Erronka[]> {
+    return from(this.fetchDataAndSave<Erronka>('erronkak', 'Erronka'));
   }
-  getArikteak():Observable<Ariketa[]>{
-    return new Observable(observer =>{
-      if(this.networkService.getStatus()){
-        this.httpClient.get<Ariketa[]>(`${this.urlbase}/ariketak`).subscribe( async data => {
-          try {
-            const existingData = await this.sqliteService.getData('Ariketa');
-            if (existingData.length === 0) {
-              await this.sqliteService.insertData('Ariketa', data);
-            } else {
-              console.log("Los datos ya existen en SQLite, no se insertan nuevamente.");
-            }
-            observer.next(data);
-            observer.complete();
-          } catch (error) {
-            observer.error(error);
-          }
-        
-        }, error => {
-          observer.error(error);
-        });
-      }else{
-        this.sqliteService.getData('Ariketa').then(offlineData => {
-          if (offlineData.length > 0) {
-            observer.next(offlineData);
-            observer.complete();
-          }
-        }).catch(error => {
-          observer.error(error);
-        });
-      }
-      
-   });
-  }
-  gertAudioak():Observable<Audioa[]>{
-    return new Observable(observer =>{
-      if(this.networkService.getStatus()){
-        this.httpClient.get<Audioa[]>(`${this.urlbase}/audioak`).subscribe( async data => {
-          try {
-            const existingData = await this.sqliteService.getData('Audioa');
-            if (existingData.length === 0) {
-              await this.sqliteService.insertData('Audioa', data);
-            } else {
-              console.log("Los datos ya existen en SQLite, no se insertan nuevamente.");
-            }
-            observer.next(data);
-            observer.complete();
-          } catch (error) {
-            observer.error(error);
-          }
-        
-        }, error => {
-          observer.error(error);
-        });
-      }else{
-        this.sqliteService.getData('Audioa').then(offlineData => {
-          if (offlineData.length > 0) {
-            observer.next(offlineData);
-            observer.complete();
-          }
-        }).catch(error => {
-          observer.error(error);
-        });
-      }
-     
-   });
+//convertir promesa en observable con from
+  getArgazkiZuzenak(): Observable<ArgazkiaZuzena[]> {
+    return from(this.fetchDataAndSave<ArgazkiaZuzena>('argazki-zuzena', 'ArgazkiaZuzena'));
   }
 
-  getAukeraZuzenak():Observable<AukeraZuzena[]>{
-    return new Observable(observer =>{
-      if(this.networkService.getStatus()){
-        this.httpClient.get<AukeraZuzena[]>(`${this.urlbase}/aukera-zuzena`).subscribe( async data => {
-          try {
-            const existingData = await this.sqliteService.getData('AukeraZuzena');
-            if (existingData.length === 0) {
-              await this.sqliteService.insertData('AukeraZuzena', data);
-            } else {
-              console.log("Los datos ya existen en SQLite, no se insertan nuevamente.");
-            }
-            observer.next(data);
-            observer.complete();
-          } catch (error) {
-            observer.error(error);
-          }
-        
-        }, error => {
-          observer.error(error);
-        });
-      }else{
-        this.sqliteService.getData('AukeraZuzena').then(offlineData => {
-          if (offlineData.length > 0) {
-            observer.next(offlineData);
-            observer.complete();
-          }
-        }).catch(error => {
-          observer.error(error);
-        });
-      }
-      
-   });
+  getArikteak(): Observable<Ariketa[]> {
+    return from(this.fetchDataAndSave<Ariketa>('ariketak', 'Ariketa'));
   }
 
-  gertErantzunak():Observable<Erantzunak[]>{
-    return new Observable(observer =>{
-      if(this.networkService.getStatus()){
-        this.httpClient.get<Erantzunak[]>(`${this.urlbase}/erantzunak`).subscribe( async data => {
-          try {
-            const existingData = await this.sqliteService.getData('Erantzunak');
-            if (existingData.length === 0) {
-              await this.sqliteService.insertData('Erantzunak', data);
-            } else {
-              console.log("Los datos ya existen en SQLite, no se insertan nuevamente.");
-            }
-            observer.next(data);
-            observer.complete();
-          } catch (error) {
-            observer.error(error);
-          }
-        
-        }, error => {
-          observer.error(error);
-        });
-      }else{
-        this.sqliteService.getData('Erantzunak').then(offlineData => {
-          if (offlineData.length > 0) {
-            observer.next(offlineData);
-            observer.complete();
-          }
-        }).catch(error => {
-          observer.error(error);
-        });
-      }
-      
-   });
+  gertAudioak(): Observable<Audioa[]> {
+    return from(this.fetchDataAndSave<Audioa>('audioak', 'Audioa'));
   }
 
-  getEsaldiaBete():Observable<EsaldiaBete[]>{
-    return new Observable(observer =>{
-      if(this.networkService.getStatus()){
-        this.httpClient.get<EsaldiaBete[]>(`${this.urlbase}/esaldia-bete`).subscribe( async data => {
-          try {
-            const existingData = await this.sqliteService.getData('EsaldiaBete');
-            if (existingData.length === 0) {
-              await this.sqliteService.insertData('EsaldiaBete', data);
-            } else {
-              console.log("Los datos ya existen en SQLite, no se insertan nuevamente.");
-            }
-            observer.next(data);
-            observer.complete();
-          } catch (error) {
-            observer.error(error);
-          }
-        
-        }, error => {
-          observer.error(error);
-        });
-      }else{
-        this.sqliteService.getData('EsaldiaBete').then(offlineData => {
-          if (offlineData.length > 0) {
-            observer.next(offlineData);
-            observer.complete();
-          }
-        }).catch(error => {
-          observer.error(error);
-        });
-      }
-      
-   });
+  getAukeraZuzenak(): Observable<AukeraZuzena[]> {
+    return from(this.fetchDataAndSave<AukeraZuzena>('aukera-zuzena', 'AukeraZuzena'));
   }
 
-  getFunikularrak():Observable<Funikularra[]>{
-    return new Observable(observer =>{
-      if(this.networkService.getStatus()){
-        this.httpClient.get<Funikularra[]>(`${this.urlbase}/funikularra`).subscribe( async data => {
-          try {
-            const existingData = await this.sqliteService.getData('Funikularra');
-            if (existingData.length === 0) {
-              await this.sqliteService.insertData('Funikularra', data);
-            } else {
-              console.log("Los datos ya existen en SQLite, no se insertan nuevamente.");
-            }
-            observer.next(data);
-            observer.complete();
-          } catch (error) {
-            observer.error(error);
-          }
-        
-        }, error => {
-          observer.error(error);
-        });
-      }else{
-        this.sqliteService.getData('Funikularra').then(offlineData => {
-          if (offlineData.length > 0) {
-            observer.next(offlineData);
-            observer.complete();
-          }
-        }).catch(error => {
-          observer.error(error);
-        });
-      }
-     
-   });
+  gertErantzunak(): Observable<Erantzunak[]> {
+    return from(this.fetchDataAndSave<Erantzunak>('erantzunak', 'Erantzunak'));
   }
 
-  getHizkiakBete():Observable<HizkiakBete[]>{
-    return new Observable(observer =>{
-      if(this.networkService.getStatus()){
-        this.httpClient.get<HizkiakBete[]>(`${this.urlbase}/hizkiak-bete`).subscribe( async data => {
-          try {
-            const existingData = await this.sqliteService.getData('HizkiakBete');
-            if (existingData.length === 0) {
-              await this.sqliteService.insertData('HizkiakBete', data);
-            } else {
-              console.log("Los datos ya existen en SQLite, no se insertan nuevamente.");
-            }
-            observer.next(data);
-            observer.complete();
-          } catch (error) {
-            observer.error(error);
-          }
-        
-        }, error => {
-          observer.error(error);
-        });
-      }else{
-        this.sqliteService.getData('HizkiakBete').then(offlineData => {
-          if (offlineData.length > 0) {
-            observer.next(offlineData);
-            observer.complete();
-          }
-        }).catch(error => {
-          observer.error(error);
-        });
-      }
-     
-   });
+  getEsaldiaBete(): Observable<EsaldiaBete[]> {
+    return from(this.fetchDataAndSave<EsaldiaBete>('esaldia-bete', 'EsaldiaBete'));
   }
 
-  getLokalizazioak():Observable<Lokalizazioa[]>{
-    return new Observable(observer =>{
-      if(this.networkService.getStatus()){
-        this.httpClient.get<Lokalizazioa[]>(`${this.urlbase}/lokalizazioa`).subscribe( async data => {
-          try {
-            const existingData = await this.sqliteService.getData('Lokalizazioa');
-            if (existingData.length === 0) {
-              await this.sqliteService.insertData('Lokalizazioa', data);
-            } else {
-              console.log("Los datos ya existen en SQLite, no se insertan nuevamente.");
-            }
-            observer.next(data);
-            observer.complete();
-          } catch (error) {
-            observer.error(error);
-          }
-        
-        }, error => {
-          observer.error(error);
-        });
-      }else{
-        this.sqliteService.getData('Lokalizazioa').then(offlineData => {
-          if (offlineData.length > 0) {
-            observer.next(offlineData);
-            observer.complete();
-          }
-        }).catch(error => {
-          observer.error(error);
-        });
-      }
-     
-   });
+  getFunikularrak(): Observable<Funikularra[]> {
+    return from(this.fetchDataAndSave<Funikularra>('funikularra', 'Funikularra'));
   }
 
-  
-  getMutikoaJantzi():Observable<MutikoaJantzi[]>{
-    return new Observable(observer =>{
-      if(this.networkService.getStatus()){
-        this.httpClient.get<MutikoaJantzi[]>(`${this.urlbase}/mutikua-jantzi`).subscribe( async data => {
-          try {
-            const existingData = await this.sqliteService.getData('MutikoaJantzi');
-            if (existingData.length === 0) {
-              await this.sqliteService.insertData('MutikoaJantzi', data);
-            } else {
-              console.log("Los datos ya existen en SQLite, no se insertan nuevamente.");
-            }
-            observer.next(data);
-            observer.complete();
-          } catch (error) {
-            observer.error(error);
-          }
-        
-        }, error => {
-          observer.error(error);
-        });
-      }else{
-        this.sqliteService.getData('MutikoaJantzi').then(offlineData => {
-          if (offlineData.length > 0) {
-            observer.next(offlineData);
-            observer.complete();
-          }
-        }).catch(error => {
-          observer.error(error);
-        });
-      }
-     
-   });
+  getHizkiakBete(): Observable<HizkiakBete[]> {
+    return from(this.fetchDataAndSave<HizkiakBete>('hizkiak-bete', 'HizkiakBete'));
   }
-  
-  getOrdenatu():Observable<Ordenatu[]>{
-    return new Observable(observer =>{
-      if(this.networkService.getStatus()){
-        this.httpClient.get<Ordenatu[]>(`${this.urlbase}/ordenatu`).subscribe( async data => {
-          try {
-            const existingData = await this.sqliteService.getData('Ordenatu');
-            if (existingData.length === 0) {
-              await this.sqliteService.insertData('Ordenatu', data);
-            } else {
-              console.log("Los datos ya existen en SQLite, no se insertan nuevamente.");
-            }
-            observer.next(data);
-            observer.complete();
-          } catch (error) {
-            observer.error(error);
-          }
-        
-        }, error => {
-          observer.error(error);
-        });
-      }else{
-        this.sqliteService.getData('Ordenatu').then(offlineData => {
-          if (offlineData.length > 0) {
-            observer.next(offlineData);
-            observer.complete();
-          }
-        }).catch(error => {
-          observer.error(error);
-        });
-      }
-     
-   });
+
+  getLokalizazioak(): Observable<Lokalizazioa[]> {
+    return from(this.fetchDataAndSave<Lokalizazioa>('lokalizazioa', 'Lokalizazioa'));
   }
- 
-  getParekatzekoGalderak():Observable<ParekatzekoGaldera[]>{
-    return new Observable(observer =>{
-      if(this.networkService.getStatus()){
-        this.httpClient.get<ParekatzekoGaldera[]>(`${this.urlbase}/parekatzeko-galdera`).subscribe( async data => {
-          try {
-            const existingData = await this.sqliteService.getData('ParekatzekoGaldera');
-         if (existingData.length === 0) {
-              await this.sqliteService.insertData('ParekatzekoGaldera', data);
-            } else {
-              console.log("Los datos ya existen en SQLite, no se insertan nuevamente.");
-            }
-            observer.next(data);
-            observer.complete();
-          } catch (error) {
-            observer.error(error);
-          }
-        
-        }, error => {
-          observer.error(error);
-        });
-      }else{
-        this.sqliteService.getData('ParekatzekoGaldera').then(offlineData => {
-          if (offlineData.length > 0) {
-            observer.next(offlineData);
-            observer.complete();
-          }
-        }).catch(error => {
-          observer.error(error);
-        });
-      }
-     
-   });
+
+  getMutikoaJantzi(): Observable<MutikoaJantzi[]> {
+    return from(this.fetchDataAndSave<MutikoaJantzi>('mutikua-jantzi', 'MutikoaJantzi'));
+  }
+
+  getOrdenatu(): Observable<Ordenatu[]> {
+    return from(this.fetchDataAndSave<Ordenatu>('ordenatu', 'Ordenatu'));
+  }
+
+  getParekatzekoGalderak(): Observable<ParekatzekoGaldera[]> {
+    return from(this.fetchDataAndSave<ParekatzekoGaldera>('parekatzeko-galdera', 'ParekatzekoGaldera'));
   }
 
 }
+
+
+
+
