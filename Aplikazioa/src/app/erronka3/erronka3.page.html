@@ -10,22 +10,23 @@
         <img *ngIf="playErakutsi" (click)="erronkaHasi()" class="hasi" src="assets/img/play.png">
       </div>
       <img class="soinua" src="assets/img/soinua.png">
-      <div class="argazkiak" *ngIf="argazkiakErakutsi">
-        <img class="sm" [class.aukeratuta]="argazkiAukeratua === 1" (click)="argazkiaAukeratu(1)"
-          src="assets/img/arrastre.png">
-        <img class="sm" [class.aukeratuta]="argazkiAukeratua === 2" (click)="argazkiaAukeratu(2)"
-          src="assets/img/harri_j.png">
-        <img [class.aukeratuta]="argazkiAukeratua === 3" (click)="argazkiaAukeratu(3)" src="assets/img/harri_z.png">
+      <div class="aukerak" *ngIf="erantzunakErakutsi">
+        <p class="text-bubble" *ngFor="let item of aukerak; let i = index"
+          [class.aukeratuta]="erantzunAukeratua === (i + 1)" (click)="erantzunaAukeratu(i + 1)"
+          [ngStyle]="{'top': (45 + i * 12) + 'vh'}">
+          {{ item }}
+        </p>
       </div>
       <div *ngIf="hitzakErakutsi">
-        <p class="hitza"
-           *ngFor="let item of hitzakPosizioa"
-           (click)="hitzaAukeratu(item)"
-           [ngStyle]="{'top': item.top, 'left': item.left, 'position': 'absolute'}"
-           [ngClass]="{'aukeratuta': item.aukeratuta}">
-          {{ item.numero ? item.numero + '.' : '' }} {{ item.hitza }}
+        <p class="left-column" *ngFor="let item of leftItems; let i = index"
+          [ngStyle]="{'top': (45 + i * 12) + 'vh'}">
+          {{ item.name }}
         </p>
-      </div>                    
+        <p class="right-column" *ngFor="let item of rightItems; let i = index"
+          [ngStyle]="{'top': (45 + i * 12) + 'vh'}">
+          {{ item.name }}
+        </p>
+      </div>      
       <div class="erantzuna-bubble" *ngIf="erantzuna !== null">
         <ng-container *ngIf="erantzuna && !hitzakErakutsi">
           <p style="color: green;">Zorionak! Hurrengo galdera!</p>

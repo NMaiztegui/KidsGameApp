@@ -56,19 +56,6 @@ body::before {
     left: 87vw;
 }
 
-.hitza {
-    position: fixed;
-    cursor: pointer;
-    color: #333;
-    background-color: white;
-    border-radius: 20px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-    width: 16vw;
-    font-size: 3vh;
-    text-align: center;
-    padding: 2vh;
-}
-
 .zuzen,
 .oker {
     width: 6vw;
@@ -83,6 +70,51 @@ body::before {
     background-color: white;
     border-radius: 20px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    font-size: 4vh;
+    color: #333;
+    text-align: center;
+}
+
+.text-bubble {
+    position: fixed;
+    left: 50%;
+    width: 50vw;
+    padding: 2vh;
+    background-color: white;
+    border-radius: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    transform: translate(-50%, -50%);
+    text-align: center;
+    font-size: 4vh;
+    color: #333;
+    text-align: center;
+}
+
+.left-column {
+    position: fixed;
+    left: 20%;
+    width: 25vw;
+    padding: 2vh;
+    background-color: magenta;
+    border-radius: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    transform: translate(-50%, -50%);
+    text-align: center;
+    font-size: 4vh;
+    color: white;
+    text-align: center;
+}
+
+.right-column {
+    position: fixed;
+    left: 65%;
+    width: 50vw;
+    padding: 2vh;
+    background-color: white;
+    border-radius: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    transform: translate(-50%, -50%);
+    text-align: center;
     font-size: 4vh;
     color: #333;
     text-align: center;
@@ -104,23 +136,7 @@ body::before {
 
     p {
         font-family: 'DynaPuff', sans-serif;
-    }
-}
-
-.argazkiak {
-    position: fixed;
-    height: auto;
-    top: 40vh;
-    left: 5vw;
-
-    img {
-        justify-content: center;
-        width: 15vw;
-        margin: 20px;
-    }
-
-    .sm {
-        width: 25vw;
+        white-space: pre-line;
     }
 }
 
@@ -128,3 +144,4 @@ body::before {
     background-color: orange;
     border-radius: 25px;
 }
+

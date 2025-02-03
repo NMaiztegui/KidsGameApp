@@ -6,27 +6,21 @@ ion-content {
     align-items: center;
     height: 100vh;
     position: relative;
+    font-family: 'DynaPuff', sans-serif;
 }
 
-.logo {
+.home {
     position: fixed;
-    width: 9vw;
+    width: 12vw;
     height: auto;
-    left: 1.5vw;
-    top: 2vh;
-}
-
-.container {
-    position: fixed;
-    top: 5vh;
-    left: 50%;
-    transform: translateX(-50%);
-    text-align: center;
-    z-index: 1; 
 }
 
 .title {
+    position: fixed;
     font-size: 4vw;
+    left: 50%;
+    top: 2vh;
+    transform: translateX(-50%);
     color: #FF8A00;
 }
 
