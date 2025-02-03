@@ -26,17 +26,21 @@ const routes: Routes = [
   {
     path: 'erronka1',
     loadChildren: () => import('./erronka1/erronka1.module').then( m => m.ErronkaPageModule)
-  },  {
+  },
+  {
     path: 'erronka2',
     loadChildren: () => import('./erronka2/erronka2.module').then( m => m.Erronka2PageModule)
   },
   {
-    path: 'erronka3',
+   path: 'erronka3',
     loadChildren: () => import('./erronka3/erronka3.module').then( m => m.Erronka3PageModule)
   },
-
-
+  {
+    path: 'erronka7',
+    loadChildren: () => import('./erronka7/erronka7.module').then( m => m.Erronka7PageModule)
+  },
 ];
+   
 
 @NgModule({
   imports: [
