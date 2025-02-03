@@ -1,6 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { Router } from '@angular/router';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-mapa',
@@ -8,9 +7,8 @@ import { Router } from '@angular/router';
   styleUrls: ['./mapa.page.scss'],
   standalone: false,
 })
-export class MapaPage implements OnInit {
+export class MapaPage implements OnInit, OnDestroy {
   erronkaId: number | null = 1;
-
   private erronkak = [
     { id: 1, latitud: 43.3027548237599, longitud: -3.0336377921477373 },
     { id: 2, latitud: 43.3056657009205, longitud: -3.0382160860316530 },
@@ -20,11 +18,11 @@ export class MapaPage implements OnInit {
     { id: 6, latitud: 43.2854881155322, longitud: -3.0526958172215270 },
     { id: 7, latitud: 43.2856130756894, longitud: -3.0553565684783703 },
   ];
-
   private koordenadak = { latitud: 0, longitud: 0 };
   private margenError = 0.001;
+  private intervalId: any;
 
-  constructor(private route: ActivatedRoute, private router: Router) { }
+  constructor(private route: ActivatedRoute, private router: Router) {}
 
   ngOnInit() {
     this.route.queryParams.subscribe(params => {
@@ -32,31 +30,28 @@ export class MapaPage implements OnInit {
         this.erronkaId = +params['erronka'];
       }
     });
+
     this.getKoordenadak();
   }
 
   getKoordenadak() {
     if (navigator.geolocation) {
-      navigator.geolocation.watchPosition(
-        (position) => {
-          this.koordenadak.latitud = position.coords.latitude;
-          this.koordenadak.longitud = position.coords.longitude;
-        },
-      );
+      this.intervalId = setInterval(() => {
+        navigator.geolocation.getCurrentPosition(
+          (position) => {
+            this.koordenadak.latitud = position.coords.latitude;
+            this.koordenadak.longitud = position.coords.longitude;
+            console.log('Koordenadak:', this.koordenadak);
+          },
+          (error) => console.error('Errorrea koordenadak lortzen', error),
+          { enableHighAccuracy: true }
+        );
+      }, 10000); // Koordenadak lortu 10 segunduro
     }
   }
 
   lekuanBadago(): number | null {
     return this.erronkaId;
-    // for (const erronka of this.erronkak) {
-    //   if (
-    //     Math.abs(this.koordenadak.latitud - erronka.latitud) < this.margenError &&
-    //     Math.abs(this.koordenadak.longitud - erronka.longitud) < this.margenError
-    //   ) {
-    //     return erronka.id;
-    //   }
-    // }
-    // return null;
   }
 
   testuaIkusi() {
@@ -67,6 +62,12 @@ export class MapaPage implements OnInit {
     const erronkaIdLocalizado = this.lekuanBadago();
     if (erronkaIdLocalizado === this.erronkaId) {
       window.location.href = `/erronka${erronkaIdLocalizado}`;
+    }
+  }
+
+  ngOnDestroy() {
+    if (this.intervalId) {
+      clearInterval(this.intervalId);
     }
   }
 }

@@ -30,6 +30,10 @@ const routes: Routes = [
     path: 'erronka2',
     loadChildren: () => import('./erronka2/erronka2.module').then( m => m.Erronka2PageModule)
   },
+  {
+    path: 'erronka3',
+    loadChildren: () => import('./erronka3/erronka3.module').then( m => m.Erronka3PageModule)
+  },
 
 
 ];
