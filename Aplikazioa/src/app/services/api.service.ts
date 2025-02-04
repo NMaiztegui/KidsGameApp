@@ -38,21 +38,31 @@ export class ApiService {
    ) { }
 
    // Función genérica para obtener y guardar datos
-  private async fetchDataAndSave<T>(endpoint: string, tableName: string): Promise<T[]> {
-    const data = this.networkService.getStatus() 
-      ? await this.httpClient.get<T[]>(`${this.urlbase}/${endpoint}`).toPromise()
-      : await this.sqliteService.getData(tableName);
+private async fetchDataAndSave<T>(endpoint: string, tableName: string): Promise<T[]> {
+    try {
+      let data: T[] = [];
 
-    if (data && this.networkService.getStatus()) {
-      const existingData = await this.sqliteService.getData(tableName);
-      if (existingData.length === 0) {
-        await this.sqliteService.insertData(tableName, data);
+      if (this.networkService.getStatus()) {
+        // Si hay conexión a la red
+          data = await this.httpClient.get<T[]>(`${this.urlbase}/${endpoint}`).toPromise() || [];
+          
+          // Guardar los datos en SQLite si la base de datos está vacía
+          const existingData = await this.sqliteService.getData(tableName);
+          if (existingData.length === 0) {
+            await this.sqliteService.insertData(tableName, data);
+          } else {
+            console.log(`Los datos de ${tableName} ya existen en SQLite.`);
+          }
       } else {
-        console.log(`Los datos de ${tableName} ya existen en SQLite.`);
+        // Si no hay conexión a la red, obtener los datos desde SQLite
+        data = await this.sqliteService.getData(tableName);
       }
-    }
 
-    return data || [];
+      return data;
+    } catch (error) {
+      console.error(`Error al obtener o guardar los datos de ${endpoint}:`, error);
+      return [];
+    }
   }
 
   // Métodos específicos para cada entidad

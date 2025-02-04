@@ -64,9 +64,9 @@ export class SqliteService {
   }
 
   public async getData(tableName: string) {
-    const query = `SELECT * FROM ?`; 
+    const query = `SELECT * FROM ${tableName}`; 
     try {
-      const result = await this.storage.executeSql(query, [tableName]);
+      const result = await this.storage.executeSql(query, []);
       let data = [];
       for (let i = 0; i < result.rows.length; i++) {
         data.push(result.rows.item(i));
