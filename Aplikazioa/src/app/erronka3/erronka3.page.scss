@@ -95,7 +95,7 @@ body::before {
     left: 20%;
     width: 25vw;
     padding: 2vh;
-    background-color: magenta;
+    background-color: #A467EA;
     border-radius: 20px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
     transform: translate(-50%, -50%);
@@ -145,3 +145,61 @@ body::before {
     border-radius: 25px;
 }
 
+.argazkia {
+    position: fixed;
+    height: auto;
+}
+
+.argazkia:nth-child(1) {
+    top: 40vh;
+    left: -2vw;
+    width: 30vw;
+}
+
+.argazkia:nth-child(2) {
+    top: 35vh;
+    left: 35vw;
+    width: 10vw;
+}
+
+.argazkia:nth-child(3) {
+    top: 35vh;
+    left: 47vw;
+    width: 10vw;
+}
+
+.argazkia:nth-child(4) {
+    top: 35vh;
+    left: 59vw;
+    width: 8vw;
+}
+
+.argazkia:nth-child(5) {
+    top: 35vh;
+    left: 71vw;
+    width: 10vw;
+}
+
+.argazkia:nth-child(6) {
+    top: 65vh;
+    left: 35vw;
+    width: 10vw;
+}
+
+.argazkia:nth-child(7) {
+    top: 65vh;
+    left: 47vw;
+    width: 10vw;
+}
+
+.argazkia:nth-child(8) {
+    top: 65vh;
+    left: 59vw;
+    width: 8vw;
+}
+
+.argazkia:nth-child(9) {
+    top: 65vh;
+    left: 71vw;
+    width: 10vw;
+}

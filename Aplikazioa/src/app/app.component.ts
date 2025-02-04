@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Platform } from '@ionic/angular';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-root',
@@ -7,5 +9,18 @@ import { Component } from '@angular/core';
   standalone: false,
 })
 export class AppComponent {
-  constructor() {}
+  constructor(
+    private platform: Platform,
+    private location: Location
+  ) {
+    this.initializeApp();
+  }
+
+  initializeApp() {
+    this.platform.ready().then(() => {
+      // Bloquea el botón de retroceso en Android
+      this.platform.backButton.subscribeWithPriority(10, () => {
+      });
+    });
+  }
 }
