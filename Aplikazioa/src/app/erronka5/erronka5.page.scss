@@ -56,19 +56,6 @@ body::before {
     left: 87vw;
 }
 
-.hitza {
-    position: fixed;
-    cursor: pointer;
-    color: #333;
-    background-color: white;
-    border-radius: 2vh;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-    width: 16vw;
-    font-size: 3vh;
-    text-align: center;
-    padding: 2vh;
-}
-
 .zuzen,
 .oker {
     width: 6vw;
@@ -83,6 +70,51 @@ body::before {
     background-color: white;
     border-radius: 2vh;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    font-size: 4vh;
+    color: #333;
+    text-align: center;
+}
+
+.text-bubble {
+    position: fixed;
+    left: 50%;
+    width: 50vw;
+    padding: 2vh;
+    background-color: white;
+    border-radius: 2vh;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    transform: translate(-50%, -50%);
+    text-align: center;
+    font-size: 4vh;
+    color: #333;
+    text-align: center;
+}
+
+.left-column {
+    position: fixed;
+    left: 20%;
+    width: 25vw;
+    padding: 2vh;
+    background-color: #A467EA;
+    border-radius: 2vh;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    transform: translate(-50%, -50%);
+    text-align: center;
+    font-size: 4vh;
+    color: white;
+    text-align: center;
+}
+
+.right-column {
+    position: fixed;
+    left: 65%;
+    width: 50vw;
+    padding: 2vh;
+    background-color: white;
+    border-radius: 2vh;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    transform: translate(-50%, -50%);
+    text-align: center;
     font-size: 4vh;
     color: #333;
     text-align: center;
@@ -104,27 +136,64 @@ body::before {
 
     p {
         font-family: 'DynaPuff', sans-serif;
-    }
-}
-
-.argazkiak {
-    position: fixed;
-    height: auto;
-    top: 40vh;
-    left: 5vw;
-
-    img {
-        justify-content: center;
-        width: 15vw;
-        margin: 20px;
-    }
-
-    .sm {
-        width: 25vw;
+        white-space: pre-line;
     }
 }
 
 .aukeratuta {
     background-color: orange;
     border-radius: 25px;
+}
+
+.argazkia {
+    position: fixed;
+    height: auto;
+}
+
+.argazkia:nth-child(1) {
+    top: 50vh;
+    left: -2vw;
+    width: 30vw;
+}
+
+.argazkia:nth-child(2) {
+    top: 45vh;
+    left: 35vw;
+    width: 10vw;
+}
+
+.argazkia:nth-child(3) {
+    top: 45vh;
+    left: 47vw;
+    width: 10vw;
+}
+
+.argazkia:nth-child(4) {
+    top: 45vh;
+    left: 59vw;
+    width: 8vw;
+}
+
+.argazkia:nth-child(5) {
+    top: 45vh;
+    left: 71vw;
+    width: 10vw;
+}
+
+.argazkia:nth-child(6) {
+    top: 65vh;
+    left: 40vw;
+    width: 10vw;
+}
+
+.argazkia:nth-child(7) {
+    top: 65vh;
+    left: 55vw;
+    width: 10vw;
+}
+
+.argazkia:nth-child(8) {
+    top: 65vh;
+    left: 70vw;
+    width: 8vw;
 }

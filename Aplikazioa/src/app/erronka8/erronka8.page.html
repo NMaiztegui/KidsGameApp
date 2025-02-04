@@ -1,0 +1,31 @@
+<link href="https://fonts.googleapis.com/css2?family=DynaPuff:wght@400;700&display=swap" rel="stylesheet">
+
+<ion-content [fullscreen]="true" style="touch-action: none">
+
+  <body>
+    <div class="container">
+      <img class="amona" src="assets/img/amona.png" alt="Amona">
+      <div class="speech-bubble">
+        <p>{{ testua }}</p>
+      </div>
+      <img class="soinua" src="assets/img/soinua.png" alt="Soinua">
+      <div class="letter-grid">
+        <div *ngFor="let letter of grid; let i = index" class="letter" [attr.data-index]="i"
+          [class.selected]="selectedLetters.includes(i) || confirmedLetters.has(i)">
+          {{ letter }}
+        </div>
+      </div>
+      <div class="erantzuna-bubble" *ngIf="erantzuna !== null">
+        <ng-container *ngIf="erantzuna">
+          <p style="color: green;">Zorionak! Mezuaren azken zatia deszifratu duzu!</p>
+          <img (click)="erronkaSubmit()" class="zuzen" src="assets/img/tik.png" alt="Zuzen">
+        </ng-container>
+        <ng-container *ngIf="!erantzuna">
+          <p style="color: red;">Jarraitu jolasten, hitzak falta dira.</p>
+          <img (click)="ariketaBerregin()" class="oker" src="assets/img/rehacer.png" alt="Oker">
+        </ng-container>
+      </div>
+      <img (click)="erantzunaEgiaztatu()" class="tik" src="assets/img/tik.png" alt="Tik">
+    </div>
+  </body>
+</ion-content>

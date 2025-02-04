@@ -28,7 +28,7 @@ ion-content {
     position: fixed;
     width: 70vw;
     background-color: white;
-    border-radius: 20px;
+    border-radius: 2vh;
     border: 5px solid darkgreen;
     box-shadow: 0 0 10px darkgreen;
     font-size: 4vh;
@@ -42,4 +42,16 @@ ion-content {
 .speech-bubble p {
     filter: blur(10px);
     user-select: none;
+}
+
+.lock {
+    position: fixed;
+    width: 5vw;
+    border-radius: 2vh;
+    font-size: 4vh;
+    color: #333;
+    top: 30vh;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
 }

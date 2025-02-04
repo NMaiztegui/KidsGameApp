@@ -5,6 +5,7 @@ ion-content {
     align-items: center;
     height: 100vh;
     position: relative;
+    font-family: 'DynaPuff', sans-serif;
 }
 
 body {
@@ -47,7 +48,8 @@ body::before {
     left: 87vw;
 }
 
-.hasi {
+.zuzen,
+.oker {
     width: 6vw;
 }
 
@@ -62,21 +64,6 @@ body::before {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
     font-size: 4vh;
     color: #333;
-    text-align: center;
-}
-
-.text-bubble {
-    position: fixed;
-    width: 80vw;
-    background-color: white;
-    border-radius: 2vh;
-    border: 5px solid #669E50;
-    box-shadow: 0 0 10px #669E50;
-    font-size: 4vh;
-    color: #333;
-    top: 60vh;
-    left: 50%;
-    transform: translate(-50%, -50%);
     text-align: center;
 }
 
@@ -96,5 +83,70 @@ body::before {
 
     p {
         font-family: 'DynaPuff', sans-serif;
+        white-space: pre-line;
     }
+}
+
+.aukeratuta {
+    background-color: orange;
+    border-radius: 25px;
+}
+
+.argazkia {
+    position: fixed;
+    height: auto;
+}
+
+.argazkia:nth-child(1) {
+    top: 40vh;
+    left: -2vw;
+    width: 30vw;
+}
+
+.argazkia:nth-child(2) {
+    top: 35vh;
+    left: 35vw;
+    width: 10vw;
+}
+
+.argazkia:nth-child(3) {
+    top: 35vh;
+    left: 47vw;
+    width: 10vw;
+}
+
+.argazkia:nth-child(4) {
+    top: 35vh;
+    left: 59vw;
+    width: 8vw;
+}
+
+.argazkia:nth-child(5) {
+    top: 35vh;
+    left: 71vw;
+    width: 10vw;
+}
+
+.argazkia:nth-child(6) {
+    top: 65vh;
+    left: 35vw;
+    width: 10vw;
+}
+
+.argazkia:nth-child(7) {
+    top: 65vh;
+    left: 47vw;
+    width: 10vw;
+}
+
+.argazkia:nth-child(8) {
+    top: 65vh;
+    left: 59vw;
+    width: 8vw;
+}
+
+.argazkia:nth-child(9) {
+    top: 65vh;
+    left: 71vw;
+    width: 10vw;
 }

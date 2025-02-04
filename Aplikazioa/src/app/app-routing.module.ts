@@ -1,3 +1,4 @@
+
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
@@ -36,12 +37,28 @@ const routes: Routes = [
     loadChildren: () => import('./erronka3/erronka3.module').then( m => m.Erronka3PageModule)
   },
   {
-    path: 'erronka6',
-     loadChildren: () => import('./erronka6/erronka6.module').then( m => m.Erronka6PageModule)
-  },
-  {
     path: 'erronka7',
     loadChildren: () => import('./erronka7/erronka7.module').then( m => m.Erronka7PageModule)
+  },
+  {
+    path: 'erronka4',
+    loadChildren: () => import('./erronka4/erronka4.module').then( m => m.Erronka4PageModule)
+  },
+  {
+    path: 'erronka5',
+    loadChildren: () => import('./erronka5/erronka5.module').then( m => m.Erronka5PageModule)
+  },
+  {
+    path: 'erronka6',
+    loadChildren: () => import('./erronka5/erronka5.module').then( m => m.Erronka5PageModule)
+  },
+    {
+    path: 'erronka7',
+    loadChildren: () => import('./erronka5/erronka5.module').then( m => m.Erronka5PageModule)
+  },
+  {
+    path: 'erronka8',
+    loadChildren: () => import('./erronka8/erronka8.module').then( m => m.Erronka8PageModule)
   },
 ];
    

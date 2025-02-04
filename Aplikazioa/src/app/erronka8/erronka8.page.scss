@@ -5,6 +5,7 @@ ion-content {
     align-items: center;
     height: 100vh;
     position: relative;
+    font-family: 'DynaPuff', sans-serif;
 }
 
 body {
@@ -47,8 +48,42 @@ body::before {
     left: 87vw;
 }
 
-.hasi {
+.zuzen,
+.oker {
     width: 6vw;
+}
+
+.letter-grid {
+    display: grid;
+    position: fixed;
+    top: 65vh;
+    left: 50%;
+    color: #333;
+    border-radius: 2vh;
+    grid-template-columns: repeat(12, 1fr);
+    transform: translate(-50%, -50%);
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+}
+
+.letter {
+    width: 2.4vw;
+    height: 2.4vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2vw;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    user-select: none;
+    touch-action: none;
+}
+
+
+.letter.selected {
+    background-color: #ff6f00;
+    color: white;
 }
 
 .speech-bubble {
@@ -65,7 +100,7 @@ body::before {
     text-align: center;
 }
 
-.text-bubble {
+.erantzuna-bubble {
     position: fixed;
     width: 80vw;
     background-color: white;
@@ -80,21 +115,8 @@ body::before {
     text-align: center;
 }
 
-.erantzuna-bubble {
-    position: fixed;
-    width: 80vw;
-    background-color: white;
+.aukeratuta {
+    background-color: orange;
     border-radius: 2vh;
-    border: 5px solid #669E50;
-    box-shadow: 0 0 10px #669E50;
-    font-size: 4vh;
-    color: #333;
-    top: 60vh;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    text-align: center;
-
-    p {
-        font-family: 'DynaPuff', sans-serif;
-    }
+    transition: background-color 0.3s;
 }
