@@ -1,0 +1,35 @@
+<link href="https://fonts.googleapis.com/css2?family=DynaPuff:wght@400;700&display=swap" rel="stylesheet">
+
+<ion-content [fullscreen]="true">
+
+  <body>
+    <div>
+      <img class="amona" src="assets/img/amona.png">
+      <div class="speech-bubble">
+        <p>{{ testua }}</p>
+      </div>
+      <img class="soinua" src="assets/img/soinua.png">   
+      <div class="argazkiak">
+        <img class="argazkia" src="assets/img/funikular.jpg">
+        <img class="argazkia" [class.aukeratuta]="argazkiAukeratuak.includes(1)" (click)="argazkiaAukeratu(1)" src="assets/img/autoa.png">
+        <img class="argazkia" [class.aukeratuta]="argazkiAukeratuak.includes(2)" (click)="argazkiaAukeratu(2)" src="assets/img/balea.jpg">
+        <img class="argazkia" [class.aukeratuta]="argazkiAukeratuak.includes(3)" (click)="argazkiaAukeratu(3)" src="assets/img/hegazkina.jpg">
+        <img class="argazkia" [class.aukeratuta]="argazkiAukeratuak.includes(4)" (click)="argazkiaAukeratu(4)" src="assets/img/itsasontzia.png">
+        <img class="argazkia" [class.aukeratuta]="argazkiAukeratuak.includes(5)" (click)="argazkiaAukeratu(5)" src="assets/img/janaria.jpg">
+        <img class="argazkia" [class.aukeratuta]="argazkiAukeratuak.includes(6)" (click)="argazkiaAukeratu(6)" src="assets/img/meatzaria.jpg">
+        <img class="argazkia" [class.aukeratuta]="argazkiAukeratuak.includes(7)" (click)="argazkiaAukeratu(7)" src="assets/img/mineralak.jpg">
+      </div>     
+      <div class="erantzuna-bubble" *ngIf="erantzuna !== null">
+        <ng-container *ngIf="erantzuna">
+          <p style="color: green;">Zorionak! Mezuaren zati bar deszifratu duzu!</p>
+          <img (click)="erronkaSubmit()" class="zuzen" src="assets/img/tik.png">
+        </ng-container>
+        <ng-container *ngIf="erantzuna === false">
+          <p style="color: red;">Saiatu berriro, erantzuna ez da zuzena.</p>
+          <img (click)="ariketaBerregin()" class="oker" src="assets/img/rehacer.png">
+        </ng-container>
+      </div>
+      <img (click)="erantzunaEgiaztatu()" class="tik" src="assets/img/tik.png">
+    </div>
+  </body>
+</ion-content>

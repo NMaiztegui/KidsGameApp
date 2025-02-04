@@ -144,3 +144,56 @@ body::before {
     background-color: orange;
     border-radius: 25px;
 }
+
+.argazkia {
+    position: fixed;
+    height: auto;
+}
+
+.argazkia:nth-child(1) {
+    top: 50vh;
+    left: -2vw;
+    width: 30vw;
+}
+
+.argazkia:nth-child(2) {
+    top: 45vh;
+    left: 35vw;
+    width: 10vw;
+}
+
+.argazkia:nth-child(3) {
+    top: 45vh;
+    left: 47vw;
+    width: 10vw;
+}
+
+.argazkia:nth-child(4) {
+    top: 45vh;
+    left: 59vw;
+    width: 8vw;
+}
+
+.argazkia:nth-child(5) {
+    top: 45vh;
+    left: 71vw;
+    width: 10vw;
+}
+
+.argazkia:nth-child(6) {
+    top: 65vh;
+    left: 40vw;
+    width: 10vw;
+}
+
+.argazkia:nth-child(7) {
+    top: 65vh;
+    left: 55vw;
+    width: 10vw;
+}
+
+.argazkia:nth-child(8) {
+    top: 65vh;
+    left: 70vw;
+    width: 8vw;
+}
