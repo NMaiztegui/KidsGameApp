@@ -53,19 +53,37 @@ body::before {
     width: 6vw;
 }
 
-.letra-zopa {
+.letter-grid {
+    display: grid;
     position: fixed;
     top: 65vh;
     left: 50%;
-    width: 24.7vw;
-    padding: 2vh;
-    background-color: white;
-    border-radius: 2vh;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-    transform: translate(-50%, -50%);
-    font-size: 4vh;
     color: #333;
-    text-align: center;
+    border-radius: 2vh;
+    grid-template-columns: repeat(12, 1fr);
+    transform: translate(-50%, -50%);
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+}
+
+.letter {
+    width: 2.4vw;
+    height: 2.4vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2vw;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    user-select: none;
+    touch-action: none;
+}
+
+
+.letter.selected {
+    background-color: #ff6f00;
+    color: white;
 }
 
 .speech-bubble {

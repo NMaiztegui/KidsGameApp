@@ -1,34 +1,31 @@
 <link href="https://fonts.googleapis.com/css2?family=DynaPuff:wght@400;700&display=swap" rel="stylesheet">
 
-<ion-content [fullscreen]="true">
+<ion-content [fullscreen]="true" style="touch-action: none">
 
   <body>
-    <div>
-      <img class="amona" src="assets/img/amona.png">
+    <div class="container">
+      <img class="amona" src="assets/img/amona.png" alt="Amona">
       <div class="speech-bubble">
         <p>{{ testua }}</p>
       </div>
-      <img class="soinua" src="assets/img/soinua.png">
-      <div class="letra-zopa">
-        <table>
-          <tr *ngFor="let row of letraSopa; let i = index">
-            <td *ngFor="let letter of row; let j = index" (click)="selectLetter(i, j)" [class.selected]="selected[i][j]" style="padding-right: 1vh; padding-left: 1vh;">
-              {{ letter }}
-            </td>
-          </tr>
-        </table>
-      </div>   
+      <img class="soinua" src="assets/img/soinua.png" alt="Soinua">
+      <div class="letter-grid">
+        <div *ngFor="let letter of grid; let i = index" class="letter" [attr.data-index]="i"
+          [class.selected]="selectedLetters.includes(i) || confirmedLetters.has(i)">
+          {{ letter }}
+        </div>
+      </div>
       <div class="erantzuna-bubble" *ngIf="erantzuna !== null">
         <ng-container *ngIf="erantzuna">
           <p style="color: green;">Zorionak! Mezuaren azken zatia deszifratu duzu!</p>
-          <img (click)="erronkaSubmit()" class="zuzen" src="assets/img/tik.png">
+          <img (click)="erronkaSubmit()" class="zuzen" src="assets/img/tik.png" alt="Zuzen">
         </ng-container>
-        <ng-container *ngIf="erantzuna === false">
-          <p style="color: red;">Saiatu berriro, erantzuna ez da zuzena.</p>
-          <img (click)="ariketaBerregin()" class="oker" src="assets/img/rehacer.png">
+        <ng-container *ngIf="!erantzuna">
+          <p style="color: red;">Jarraitu jolasten, hitzak falta dira.</p>
+          <img (click)="ariketaBerregin()" class="oker" src="assets/img/rehacer.png" alt="Oker">
         </ng-container>
       </div>
-      <img (click)="erantzunaEgiaztatu()" class="tik" src="assets/img/tik.png">
+      <img (click)="erantzunaEgiaztatu()" class="tik" src="assets/img/tik.png" alt="Tik">
     </div>
   </body>
 </ion-content>
