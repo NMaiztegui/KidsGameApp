@@ -55,7 +55,7 @@ export class MapaPage implements OnInit, OnDestroy {
   }
 
   testuaIkusi() {
-    this.router.navigate(['/testua']);
+    this.router.navigate(['/testua'], { queryParams: { erronka: this.erronkaId } });
   }
 
   erronkaHasi() {

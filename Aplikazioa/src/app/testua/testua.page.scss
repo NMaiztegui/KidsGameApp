@@ -43,3 +43,15 @@ ion-content {
     filter: blur(10px);
     user-select: none;
 }
+
+.lock {
+    position: fixed;
+    width: 5vw;
+    border-radius: 2vh;
+    font-size: 4vh;
+    color: #333;
+    top: 30vh;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}

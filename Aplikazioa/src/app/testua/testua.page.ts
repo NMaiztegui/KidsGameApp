@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-testua',
@@ -9,13 +9,19 @@ import { Router } from '@angular/router';
 })
 export class TestuaPage implements OnInit {
 
-  constructor(private router: Router) { }
+  erronka: number = 0;
 
-  mapaIkusi() {
-    this.router.navigate(['/mapa']);
-  }
+  constructor(private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit() {
+    this.route.queryParams.subscribe(params => {
+      if (params['erronka']) {
+        this.erronka = +params['erronka'];
+      }
+    });
   }
 
+  mapaIkusi() {
+    this.router.navigate(['/mapa'], { queryParams: { erronka: this.erronka } });
+  }
 }
