@@ -61,7 +61,7 @@ export class MapaPage implements OnInit, OnDestroy {
   erronkaHasi() {
     const erronkaIdLocalizado = this.lekuanBadago();
     if (erronkaIdLocalizado === this.erronkaId) {
-      window.location.href = `/erronka${erronkaIdLocalizado}`;
+      this.router.navigate(['/aurkezpena', erronkaIdLocalizado]);
     }
   }
 
