@@ -1,0 +1,34 @@
+<link href="https://fonts.googleapis.com/css2?family=DynaPuff:wght@400;700&display=swap" rel="stylesheet">
+
+<ion-content [fullscreen]="true">
+
+  <body>
+    <div>
+      <img class="amona" src="assets/img/amona.png">
+      <div class="speech-bubble">
+        <p>{{ testua }}</p>
+      </div>
+      <img class="soinua" src="assets/img/soinua.png">
+      <div class="letra-zopa">
+        <table>
+          <tr *ngFor="let row of letraSopa; let i = index">
+            <td *ngFor="let letter of row; let j = index" (click)="selectLetter(i, j)" [class.selected]="selected[i][j]" style="padding-right: 1vh; padding-left: 1vh;">
+              {{ letter }}
+            </td>
+          </tr>
+        </table>
+      </div>   
+      <div class="erantzuna-bubble" *ngIf="erantzuna !== null">
+        <ng-container *ngIf="erantzuna">
+          <p style="color: green;">Zorionak! Mezuaren azken zatia deszifratu duzu!</p>
+          <img (click)="erronkaSubmit()" class="zuzen" src="assets/img/tik.png">
+        </ng-container>
+        <ng-container *ngIf="erantzuna === false">
+          <p style="color: red;">Saiatu berriro, erantzuna ez da zuzena.</p>
+          <img (click)="ariketaBerregin()" class="oker" src="assets/img/rehacer.png">
+        </ng-container>
+      </div>
+      <img (click)="erantzunaEgiaztatu()" class="tik" src="assets/img/tik.png">
+    </div>
+  </body>
+</ion-content>

@@ -5,6 +5,7 @@ ion-content {
     align-items: center;
     height: 100vh;
     position: relative;
+    font-family: 'DynaPuff', sans-serif;
 }
 
 body {
@@ -47,8 +48,24 @@ body::before {
     left: 87vw;
 }
 
-.hasi {
+.zuzen,
+.oker {
     width: 6vw;
+}
+
+.letra-zopa {
+    position: fixed;
+    top: 65vh;
+    left: 50%;
+    width: 24.7vw;
+    padding: 2vh;
+    background-color: white;
+    border-radius: 2vh;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    transform: translate(-50%, -50%);
+    font-size: 4vh;
+    color: #333;
+    text-align: center;
 }
 
 .speech-bubble {
@@ -65,7 +82,7 @@ body::before {
     text-align: center;
 }
 
-.text-bubble {
+.erantzuna-bubble {
     position: fixed;
     width: 80vw;
     background-color: white;
@@ -80,21 +97,8 @@ body::before {
     text-align: center;
 }
 
-.erantzuna-bubble {
-    position: fixed;
-    width: 80vw;
-    background-color: white;
+.aukeratuta {
+    background-color: orange;
     border-radius: 2vh;
-    border: 5px solid #669E50;
-    box-shadow: 0 0 10px #669E50;
-    font-size: 4vh;
-    color: #333;
-    top: 60vh;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    text-align: center;
-
-    p {
-        font-family: 'DynaPuff', sans-serif;
-    }
+    transition: background-color 0.3s;
 }
