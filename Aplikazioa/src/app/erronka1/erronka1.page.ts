@@ -21,10 +21,12 @@ export class ErronkaPage implements OnInit {
   testuaIkusi: boolean = false;
   playErakutsi: boolean | null = true;
   ariketaErakutsi: boolean | null = false;
+  finishErakutsi: boolean | null = false;
 
   erronkaHasi() {
     this.playErakutsi = false;
     this.ariketaErakutsi = true;
+    this.finishErakutsi = true;
   }
 
   erantzunaEgiaztatu() {

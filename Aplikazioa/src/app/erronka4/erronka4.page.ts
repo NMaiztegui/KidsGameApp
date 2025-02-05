@@ -15,12 +15,14 @@ export class Erronka4Page implements OnInit {
   testuaIkusi: boolean = false;
   playErakutsi: boolean | null = true;
   ariketaErakutsi: boolean | null = false;
+  finishErakutsi: boolean | null = false;
 
   constructor(private router: Router) { }
 
   erronkaHasi() {
     this.playErakutsi = false;
     this.ariketaErakutsi = true;
+    this.finishErakutsi = true;
   }
 
   argazkiaAukeratu(argazkiId: number) {

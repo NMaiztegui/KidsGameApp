@@ -45,7 +45,7 @@
           hain zuzen, herriari bizia ematen zioten mineral distiratsuak.”
         </p>
       </div>
-      <img (click)="erantzunaEgiaztatu()" class="tik" src="assets/img/tik.png">
+      <img *ngIf="finishErakutsi" (click)="erantzunaEgiaztatu()" class="tik" src="assets/img/tik.png">
     </div>
   </body>
 </ion-content>

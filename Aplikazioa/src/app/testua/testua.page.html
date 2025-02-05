@@ -4,18 +4,20 @@
   <img (click)="mapaIkusi()" class="home" src="assets/img/home.png">
   <div>
     <strong class="title">Trapagarango Kondaira</strong>
-    <div *ngIf="erronka >= 1" class="speech-bubble" id="1">
-      <p [ngClass]="{'no-blur': erronka >= 1}">
-        Handik ez oso urrun, Gallartan, meatzariek lehia zirraragarria
-        ospatzen zuten: altzairuzko barra izugarriekin zuloak egiten zituzten harkaitzetan! Nork azkarrago egiten zuen
-        ikustea benetako ikuskizuna zen.
-      </p>
-    </div>
-    <div *ngIf="erronka >= 2" class="speech-bubble" id="2">
-      <p [ngClass]="{'no-blur': erronka >= 2}">Handik ez oso urrun, Gallartan, meatzariek lehia zirraragarria
-        ospatzen zuten: altzairuzko barra izugarriekin zuloak egiten zituzten harkaitzetan! Nork azkarrago egiten zuen
-        ikustea benetako ikuskizuna zen.</p>
-    </div>
-    <img class="lock" src="assets/img/lock.png">
+
+    <ng-container *ngFor="let i of [0,1,2]">
+      <div *ngIf="orria * 3 + i < testuak.length" class="speech-bubble">
+        <p [ngClass]="{'no-blur': erronka >= (orria * 3 + i) + 2}">
+          {{ testuak[orria * 3 + i] }}
+        </p>
+      </div>
+    </ng-container>
+    <div class="pagination">
+      <span *ngFor="let i of orriakGuztira; let index = index" 
+            [class.active]="index === orria">
+      </span>
+    </div>    
+    <button class="nav-button left" (click)="retrocederPagina()"><</button>
+    <button class="nav-button right" (click)="avanzarPagina()">></button>
   </div>
 </ion-content>
