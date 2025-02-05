@@ -3,7 +3,9 @@
         'name' => 'laravel/laravel',
         'pretty_version' => 'dev-develop',
         'version' => 'dev-develop',
+
         'reference' => 'a98bf1533e590c7ef278f63617c6f5634ba2624f',
+
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -388,7 +390,9 @@
         'laravel/laravel' => array(
             'pretty_version' => 'dev-develop',
             'version' => 'dev-develop',
+
             'reference' => 'a98bf1533e590c7ef278f63617c6f5634ba2624f',
+
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
@@ -553,15 +557,6 @@
             'aliases' => array(),
             'dev_requirement' => true,
         ),
-        'nesbot/carbon' => array(
-            'pretty_version' => '3.8.4',
-            'version' => '3.8.4.0',
-            'reference' => '129700ed449b1f02d70272d2ac802357c8c30c58',
-            'type' => 'library',
-            'install_path' => __DIR__ . '/../nesbot/carbon',
-            'aliases' => array(),
-            'dev_requirement' => false,
-        ),
         'nette/schema' => array(
             'pretty_version' => 'v1.3.2',
             'version' => '1.3.2.0',
@@ -679,6 +674,7 @@
             'aliases' => array(),
             'dev_requirement' => true,
         ),
+
         'phpunit/phpunit' => array(
             'pretty_version' => '11.5.6',
             'version' => '11.5.6.0',
@@ -688,6 +684,7 @@
             'aliases' => array(),
             'dev_requirement' => true,
         ),
+
         'psr/clock' => array(
             'pretty_version' => '1.0.0',
             'version' => '1.0.0.0',
