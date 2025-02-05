@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class ariketa extends Model
+class Ariketa extends Model
 {
     //
     protected $fillable=[

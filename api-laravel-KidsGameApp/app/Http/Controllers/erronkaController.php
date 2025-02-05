@@ -9,12 +9,12 @@ class erronkaController extends Controller
 {
     //
     public function showAll(){
-        $ariketak = erronka::All();
+        $ariketak = Erronka::All();
         return response()->json($ariketak, 200);
      }
  
      public function show($id){
-         if ($ariketa=erronka::find($id)){
+         if ($ariketa=Erronka::find($id)){
              return response()->json($ariketa, 200);
          }
      }
