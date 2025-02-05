@@ -9,12 +9,12 @@ class mutikua_jantziController extends Controller
 {
     //
     public function showAll(){
-        $ariketak = mutikua_jantzi::All();
+        $ariketak = Mutikua_jantzi::All();
         return response()->json($ariketak, 200);
      }
  
      public function show($id){
-         if ($ariketa=mutikua_jantzi::find($id)){
+         if ($ariketa=Mutikua_jantzi::find($id)){
              return response()->json($ariketa, 200);
          }
      }

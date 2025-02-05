@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class esaldia_bete extends Model
+class Esaldia_bete extends Model
 {
     //
     protected $fillable=[

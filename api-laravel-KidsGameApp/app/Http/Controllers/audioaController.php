@@ -5,16 +5,16 @@ namespace App\Http\Controllers;
 use App\Models\audioa;
 use Illuminate\Http\Request;
 
-class audioaController extends Controller
+class AudioaController extends Controller
 {
     //
     public function showAll(){
-        $ariketak = audioa::All();
+        $ariketak = Audioa::All();
         return response()->json($ariketak, 200);
      }
  
      public function show($id){
-         if ($ariketa=audioa::find($id)){
+         if ($ariketa=Audioa::find($id)){
              return response()->json($ariketa, 200);
          }
      }
