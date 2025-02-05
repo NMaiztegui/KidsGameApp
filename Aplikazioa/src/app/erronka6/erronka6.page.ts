@@ -14,6 +14,7 @@ export class Erronka6Page implements OnInit {
   finishErakutsi: boolean | null = false;
   erantzuna: boolean | null = null;
   hitzAukeratua: string | null = null;
+  testuaIkusi: boolean = false;
 
   hitzak = [
     { hitza: 'Eskulturak', aukeratuta: false, hitzErabilia: false },
@@ -88,6 +89,17 @@ export class Erronka6Page implements OnInit {
     });
   }
 
+  audioaEntzun() {
+    const audio = new Audio();
+    audio.src = 'assets/audio/erronka6.m4a';
+    audio.load();
+    audio.play();
+  }
+
+  testuaErakutsi() {
+    this.testuaIkusi = true;
+  }
+  
   erronkaSubmit() {
     this.router.navigate(['/mapa'], { queryParams: { erronka: 7 } });
   }

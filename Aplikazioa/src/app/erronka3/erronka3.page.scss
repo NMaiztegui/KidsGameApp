@@ -42,7 +42,7 @@ body::before {
 
 .hasi {
     position: fixed;
-    width: 6vw;
+    width: 6.7vw;
     height: auto;
     top: 27vh;
     left: 82vw;
@@ -143,4 +143,44 @@ body::before {
 .aukeratuta {
     background-color: orange;
     border-radius: 25px;
+}
+
+.testu-izkutua {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+
+    .img {
+        max-width: 90%;
+        max-height: 70vh;
+        position: fixed;
+    }
+
+    .itxi {
+        position: fixed;
+        top: 12vh;
+        right: 65vh;
+        font-size: 6vh;
+        color: #333;
+        height: auto;
+        font-weight: bold;
+    }
+
+    .text {
+        position: fixed;
+        top: 42%;
+        left: 50%;
+        font-size: 4.5vh;
+        font-weight: bold;
+        transform: translate(-50%, -50%);
+        color: #333;
+        text-align: center;
+        padding-left: 15vh;
+        padding-right: 15vh;
+    }
 }

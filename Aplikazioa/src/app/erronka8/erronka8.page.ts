@@ -23,13 +23,18 @@ export class Erronka8Page implements OnInit, OnDestroy {
   isMouseDown: boolean = false;
   startIndex: number = -1;
   erantzuna: boolean | null = null;
+  testuaIkusi: boolean = false;
+  playErakutsi: boolean | null = true;
+  ariketaErakutsi: boolean | null = false;
 
   gesture!: Gesture;
 
-  constructor(
-    private router: Router,
-    private gestureCtrl: GestureController
-  ) {}
+  constructor(private router: Router,private gestureCtrl: GestureController) {}
+
+  erronkaHasi() {
+    this.playErakutsi = false;
+    this.ariketaErakutsi = true;
+  }
 
   ngOnInit() {
     this.generateGrid();
@@ -214,6 +219,17 @@ export class Erronka8Page implements OnInit, OnDestroy {
     }
   }
 
+  audioaEntzun() {
+    const audio = new Audio();
+    audio.src = 'assets/audio/erronka8.m4a';
+    audio.load();
+    audio.play();
+  }
+
+  testuaErakutsi() {
+    this.testuaIkusi = true;
+  }
+  
   erronkaSubmit() {
     this.router.navigate(['/mapa'], { queryParams: { erronka: 9 } });
   }

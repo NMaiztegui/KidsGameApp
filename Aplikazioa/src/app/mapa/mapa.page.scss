@@ -19,14 +19,16 @@ ion-content {
   
 .text {
     position: fixed;
-    width: 12vw;
+    width: 10vw;
+    top: 1vh;
+    left: 1vw;
     height: auto;
 }
 
 .text-bubble {
     position: fixed;
     width: 20vw;
-    top: 4.5vh;
+    top: 5.8vh;
     left: 12vw;
     background-color: white;
     border-radius: 2vh;
@@ -37,13 +39,16 @@ ion-content {
 }
 
 .play {
-    width: 7vw;
+    position: fixed;
+    width: 10vw;
+    top: 76vh;
+    left: 88vw;
 }
 
-.play-bubble {
+.erronka-bubble {
     position: fixed;
     width: 60vw;
-    bottom: 20vh;
+    top: 60%;
     background-color: white;
     border-radius: 2vh;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -52,4 +57,9 @@ ion-content {
     transform: translate(-50%, -50%);
     color: #333;
     text-align: center;
+
+    .erronka-text {
+        padding-left: 1vw;
+        padding-right: 1vw;
+    }
 }

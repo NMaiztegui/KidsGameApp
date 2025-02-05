@@ -13,8 +13,16 @@ testua: string = 'Erronka honetan zuen aurrean La Reinetako funikularra duzue et
   erantzuna: boolean | null = null;
   argazkiAukeratua: number | null = null;
   argazkiAukeratuak: number[] = [];
+  testuaIkusi: boolean = false;
+  playErakutsi: boolean | null = true;
+  ariketaErakutsi: boolean | null = false;
 
   constructor(private router: Router) { }
+
+  erronkaHasi() {
+    this.playErakutsi = false;
+    this.ariketaErakutsi = true;
+  }
 
   argazkiaAukeratu(argazkiId: number) {
     const index = this.argazkiAukeratuak.indexOf(argazkiId);
@@ -41,6 +49,17 @@ testua: string = 'Erronka honetan zuen aurrean La Reinetako funikularra duzue et
     this.argazkiAukeratuak = [];
   }
 
+  audioaEntzun() {
+    const audio = new Audio();
+    audio.src = 'assets/audio/erronka5.m4a';
+    audio.load();
+    audio.play();
+  }
+
+  testuaErakutsi() {
+    this.testuaIkusi = true;
+  }
+  
   erronkaSubmit() {
     this.router.navigate(['/mapa'], { queryParams: { erronka: 6 } });
   }

@@ -17,6 +17,7 @@ export class Erronka2Page implements OnInit {
   erantzuna: boolean | null = null;
   esaldiZuzena: string[] = ['1. Barrenak', '2. harkaitzetan', '3. zuloak', '4. egiten', '5. eta', '6. lehergailuak', '7. jarriz', '8. harriak', '9. puskatzeko', '10. erabiltzen', '11. zituzten', '12. .'];
   esaldiOndo: boolean | null = null;
+  testuaIkusi: boolean = false;
 
   hitzakPosizioa = [
     { hitza: 'harkaitzetan', top: '70vh', left: '5vw', numero: null, aukeratuta: false },
@@ -79,6 +80,17 @@ export class Erronka2Page implements OnInit {
         this.erantzuna = false;
       }
     }
+  }
+
+  audioaEntzun() {
+    const audio = new Audio();
+    audio.src = 'assets/audio/erronka2.m4a';
+    audio.load();
+    audio.play();
+  }
+
+  testuaErakutsi() {
+    this.testuaIkusi = true;
   }
 
   ariketaSubmit() {
