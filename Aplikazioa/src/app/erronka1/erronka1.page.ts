@@ -31,6 +31,13 @@ export class ErronkaPage implements OnInit {
     }
   }
 
+  audioaEntzun() {
+    const audio = new Audio();
+    audio.src = 'assets/audio/erronka1.mp3';
+    audio.load();
+    audio.play();
+  }
+
   testuaErakutsi() {
     this.testuaIkusi = true;
   }

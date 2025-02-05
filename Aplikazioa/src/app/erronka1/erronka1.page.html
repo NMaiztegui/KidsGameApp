@@ -9,7 +9,7 @@
         <p style="font-family: 'DynaPuff', sans-serif;">Kaixo! Erronka honetan Ibarrurik utzitako mezua deszifratu
           beharko duzue, hutsune bakoitzean letra bat jarriz bere esanahia osatzeko.</p>
       </div>
-      <img class="soinua" src="assets/img/soinua.png">
+      <img (click)="audioaEntzun()" class="soinua" src="assets/img/soinua.png">
       <div class="text-bubble">
         <p>
           <span *ngFor="let letra of letras; let i = index">
@@ -40,7 +40,6 @@
           “Aspaldian, Trapagaran misteriotsuan, meatzari ausartak mendietan sartzen ziren altxor ezkutuak ateratzeko;
           hain zuzen, herriari bizia ematen zioten mineral distiratsuak.”
         </p>
-        <img class="soinua" src="assets/img/soinua.png">
       </div>
       <img (click)="erantzunaEgiaztatu()" class="tik" src="assets/img/tik.png">
     </div>
