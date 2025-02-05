@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class hizkiak_bete extends Model
+class Hizkiak_bete extends Model
 {
     //
     protected $fillable=[

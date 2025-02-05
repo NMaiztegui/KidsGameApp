@@ -1283,17 +1283,17 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v11.41.0",
-            "version_normalized": "11.41.0.0",
+            "version": "v11.41.3",
+            "version_normalized": "11.41.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "42d6ae000c868c2abfa946da46702f2358493482"
+                "reference": "3ef433d5865f30a19b6b1be247586068399b59cc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/42d6ae000c868c2abfa946da46702f2358493482",
-                "reference": "42d6ae000c868c2abfa946da46702f2358493482",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/3ef433d5865f30a19b6b1be247586068399b59cc",
+                "reference": "3ef433d5865f30a19b6b1be247586068399b59cc",
                 "shasum": ""
             },
             "require": {
@@ -1449,7 +1449,7 @@
                 "symfony/postmark-mailer": "Required to enable support for the Postmark mail transport (^7.0).",
                 "symfony/psr-http-message-bridge": "Required to use PSR-7 bridging features (^7.0)."
             },
-            "time": "2025-01-28T15:22:55+00:00",
+            "time": "2025-01-30T13:25:22+00:00",
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -3751,6 +3751,112 @@
             "install-path": "../phpunit/php-timer"
         },
         {
+
+            "name": "phpunit/phpunit",
+            "version": "11.5.6",
+            "version_normalized": "11.5.6.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/sebastianbergmann/phpunit.git",
+                "reference": "3c3ae14c90f244cdda95028c3e469028e8d1c02c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/3c3ae14c90f244cdda95028c3e469028e8d1c02c",
+                "reference": "3c3ae14c90f244cdda95028c3e469028e8d1c02c",
+                "shasum": ""
+            },
+            "require": {
+                "ext-dom": "*",
+                "ext-json": "*",
+                "ext-libxml": "*",
+                "ext-mbstring": "*",
+                "ext-xml": "*",
+                "ext-xmlwriter": "*",
+                "myclabs/deep-copy": "^1.12.1",
+                "phar-io/manifest": "^2.0.4",
+                "phar-io/version": "^3.2.1",
+                "php": ">=8.2",
+                "phpunit/php-code-coverage": "^11.0.8",
+                "phpunit/php-file-iterator": "^5.1.0",
+                "phpunit/php-invoker": "^5.0.1",
+                "phpunit/php-text-template": "^4.0.1",
+                "phpunit/php-timer": "^7.0.1",
+                "sebastian/cli-parser": "^3.0.2",
+                "sebastian/code-unit": "^3.0.2",
+                "sebastian/comparator": "^6.3.0",
+                "sebastian/diff": "^6.0.2",
+                "sebastian/environment": "^7.2.0",
+                "sebastian/exporter": "^6.3.0",
+                "sebastian/global-state": "^7.0.2",
+                "sebastian/object-enumerator": "^6.0.1",
+                "sebastian/type": "^5.1.0",
+                "sebastian/version": "^5.0.2",
+                "staabm/side-effects-detector": "^1.0.5"
+            },
+            "suggest": {
+                "ext-soap": "To be able to generate mocks based on WSDL files"
+            },
+            "time": "2025-01-31T07:03:30+00:00",
+            "bin": [
+                "phpunit"
+            ],
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-main": "11.5-dev"
+                }
+            },
+            "installation-source": "source",
+            "autoload": {
+                "files": [
+                    "src/Framework/Assert/Functions.php"
+                ],
+                "classmap": [
+                    "src/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Sebastian Bergmann",
+                    "email": "sebastian@phpunit.de",
+                    "role": "lead"
+                }
+            ],
+            "description": "The PHP Unit Testing framework.",
+            "homepage": "https://phpunit.de/",
+            "keywords": [
+                "phpunit",
+                "testing",
+                "xunit"
+            ],
+            "support": {
+                "issues": "https://github.com/sebastianbergmann/phpunit/issues",
+                "security": "https://github.com/sebastianbergmann/phpunit/security/policy",
+                "source": "https://github.com/sebastianbergmann/phpunit/tree/11.5.6"
+            },
+            "funding": [
+                {
+                    "url": "https://phpunit.de/sponsors.html",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/sebastianbergmann",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/phpunit/phpunit",
+                    "type": "tidelift"
+                }
+            ],
+            "install-path": "../phpunit/phpunit"
+        },
+        {
+
             "name": "psr/clock",
             "version": "1.0.0",
             "version_normalized": "1.0.0.0",

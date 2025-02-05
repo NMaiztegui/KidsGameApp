@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class funikularra extends Model
+class Funikularra extends Model
 {
     //
     protected $fillable=[
