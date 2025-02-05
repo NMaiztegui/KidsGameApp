@@ -17,6 +17,7 @@ export class ErronkaPage implements OnInit {
   letras = this.testua.split('').map((char) => (char === '_' ? '' : char));
 
   erantzuna: boolean | null = null;
+  testuaIkusi: boolean = false;
 
   erantzunaEgiaztatu() {
     const respuesta = this.letras.join('');
@@ -30,7 +31,11 @@ export class ErronkaPage implements OnInit {
     }
   }
 
-  ariketaSubmit() {
+  testuaErakutsi() {
+    this.testuaIkusi = true;
+  }
+
+  erronkaSubmit() {
     this.router.navigate(['/mapa'], { queryParams: { erronka: 2 } });
   }  
   

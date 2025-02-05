@@ -15,6 +15,7 @@ export class Erronka7Page implements OnInit {
   finishErakutsi: boolean | null = false;
   erantzuna: boolean | null = null;
   hitzOrdena: number = 0;
+  testuaIkusi: boolean = false;
 
   hitzakPosizioa = [
     { hitza: 'Prest jateko!', top: '70vh', left: '5vw', numero: null, aukeratuta: false },
@@ -81,6 +82,10 @@ export class Erronka7Page implements OnInit {
     });
   }
 
+  testuaErakutsi() {
+    this.testuaIkusi = true;
+  }
+  
   erronkaSubmit() {
     this.router.navigate(['/mapa'], { queryParams: { erronka: 8 } });
   }

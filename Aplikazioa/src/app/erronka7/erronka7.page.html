@@ -21,12 +21,21 @@
       <div class="erantzuna-bubble" *ngIf="erantzuna !== null">
         <ng-container *ngIf="erantzuna">
           <p style="color: green;">Zorionak! Errezeta ondo ordenatu duzu!</p>
-          <img (click)="erronkaSubmit()" class="zuzen" src="assets/img/tik.png">
+          <img (click)="testuaErakutsi()" class="zuzen" src="assets/img/tik.png">
         </ng-container>
         <ng-container *ngIf="!erantzuna">
           <p style="color: red;">Saiatu berriro, errezeta ez dago ondo ordenatuta.</p>
           <img (click)="ariketaBerregin()" class="oker" src="assets/img/rehacer.png">
         </ng-container>
+      </div>
+      <div class="testu-izkutua" *ngIf="testuaIkusi">
+        <img class="img" src="assets/img/testuizkutua2.png">
+        <p class="itxi" (click)="erronkaSubmit()">X</p>
+        <p class="text">
+          “Aspaldian, Trapagaran misteriotsuan, meatzari ausartak mendietan sartzen ziren altxor ezkutuak ateratzeko;
+          hain zuzen, herriari bizia ematen zioten mineral distiratsuak.”
+        </p>
+        <img class="soinua" src="assets/img/soinua.png">
       </div>
       <img *ngIf="finishErakutsi" (click)="erantzunaEgiaztatu()" class="tik" src="assets/img/tik.png">
     </div>

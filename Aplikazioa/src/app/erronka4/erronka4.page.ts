@@ -12,6 +12,7 @@ export class Erronka4Page implements OnInit {
   erantzuna: boolean | null = null;
   argazkiAukeratua: number | null = null;
   argazkiAukeratuak: number[] = [];
+  testuaIkusi: boolean = false;
 
   constructor(private router: Router) { }
 
@@ -40,6 +41,10 @@ export class Erronka4Page implements OnInit {
     this.argazkiAukeratuak = [];
   }
 
+  testuaErakutsi() {
+    this.testuaIkusi = true;
+  }
+  
   erronkaSubmit() {
     this.router.navigate(['/mapa'], { queryParams: { erronka: 5 } });
   }

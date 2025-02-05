@@ -13,6 +13,7 @@ testua: string = 'Erronka honetan zuen aurrean La Reinetako funikularra duzue et
   erantzuna: boolean | null = null;
   argazkiAukeratua: number | null = null;
   argazkiAukeratuak: number[] = [];
+  testuaIkusi: boolean = false;
 
   constructor(private router: Router) { }
 
@@ -41,6 +42,10 @@ testua: string = 'Erronka honetan zuen aurrean La Reinetako funikularra duzue et
     this.argazkiAukeratuak = [];
   }
 
+  testuaErakutsi() {
+    this.testuaIkusi = true;
+  }
+  
   erronkaSubmit() {
     this.router.navigate(['/mapa'], { queryParams: { erronka: 6 } });
   }

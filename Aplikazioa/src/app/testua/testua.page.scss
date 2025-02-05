@@ -44,6 +44,10 @@ ion-content {
     user-select: none;
 }
 
+.speech-bubble p.no-blur {
+    filter: none;
+}
+
 .lock {
     position: fixed;
     width: 5vw;

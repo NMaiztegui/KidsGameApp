@@ -1,11 +1,18 @@
 <link href="https://fonts.googleapis.com/css2?family=DynaPuff:wght@400;700&display=swap" rel="stylesheet">
 
 <ion-content [fullscreen]="true">
-  <img (click)="mapaIkusi()" class="home" src="assets/img/home.png" >
+  <img (click)="mapaIkusi()" class="home" src="assets/img/home.png">
   <div>
     <strong class="title">Trapagarango Kondaira</strong>
-    <div class="speech-bubble">
-      <p>Handik ez oso urrun, Gallartan, meatzariek lehia zirraragarria
+    <div *ngIf="erronka >= 1" class="speech-bubble" id="1">
+      <p [ngClass]="{'no-blur': erronka >= 1}">
+        Handik ez oso urrun, Gallartan, meatzariek lehia zirraragarria
+        ospatzen zuten: altzairuzko barra izugarriekin zuloak egiten zituzten harkaitzetan! Nork azkarrago egiten zuen
+        ikustea benetako ikuskizuna zen.
+      </p>
+    </div>
+    <div *ngIf="erronka >= 2" class="speech-bubble" id="2">
+      <p [ngClass]="{'no-blur': erronka >= 2}">Handik ez oso urrun, Gallartan, meatzariek lehia zirraragarria
         ospatzen zuten: altzairuzko barra izugarriekin zuloak egiten zituzten harkaitzetan! Nork azkarrago egiten zuen
         ikustea benetako ikuskizuna zen.</p>
     </div>

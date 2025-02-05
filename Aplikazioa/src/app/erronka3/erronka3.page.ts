@@ -20,6 +20,7 @@ export class Erronka3Page implements OnInit {
   leftSelected: number | null = null;
   pairs: { id: number, left: number, right: number }[] = [];
   pairCounter: number = 1;
+  testuaIkusi: boolean = false;
 
   aukerak = [
     "Lan egiteari uztea protestan.",
@@ -113,6 +114,10 @@ export class Erronka3Page implements OnInit {
     this.pairCounter = 1;
   }
 
+  testuaErakutsi() {
+    this.testuaIkusi = true;
+  }
+  
   erronkaSubmit() {
     this.router.navigate(['/mapa'], { queryParams: { erronka: 4 } });
   }

@@ -15,9 +15,7 @@ export class TestuaPage implements OnInit {
 
   ngOnInit() {
     this.route.queryParams.subscribe(params => {
-      if (params['erronka']) {
-        this.erronka = +params['erronka'];
-      }
+      this.erronka = +params['erronka'] || 0;
     });
   }
 

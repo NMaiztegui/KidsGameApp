@@ -10,8 +10,8 @@
     </div>
   </div>
 
-  <div class="play-bubble">
-    <p>
+  <div class="erronka-bubble">
+    <p class="erronka-text">
       <ng-container *ngIf="erronkaId === 1">
         Joan zaitez 'Dolores Ibarruri' kalera Dolores Ibarruriren erronka desblokeatzeko.
       </ng-container>
@@ -22,9 +22,9 @@
         Joan zaitez '' kalera '' erronka desblokeatzeko.
       </ng-container>
     </p>
+  </div>
 
-    <ng-container *ngIf="lekuanBadago() === erronkaId">
-      <img (click)="erronkaHasi()" class="play" src="assets/img/play.png">
-    </ng-container>
+  <div class="play" *ngIf="lekuanBadago() === erronkaId">
+    <img (click)="erronkaHasi()" src="assets/img/play.png">
   </div>
 </ion-content>
