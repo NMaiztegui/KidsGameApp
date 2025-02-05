@@ -7,9 +7,10 @@
       <img class="amona" src="assets/img/amona.png">
       <div class="speech-bubble">
         <p>{{ testua }}</p>
+        <img *ngIf="playErakutsi" (click)="erronkaHasi()" class="hasi" src="assets/img/play.png">
       </div>
-      <img class="soinua" src="assets/img/soinua.png">   
-      <div class="argazkiak">
+      <img (click)="audioaEntzun()" class="soinua" src="assets/img/soinua.png">>   
+      <div class="argazkiak" *ngIf="ariketaErakutsi">
         <img class="argazkia" src="assets/img/funikular.jpg">
         <img class="argazkia" [class.aukeratuta]="argazkiAukeratuak.includes(1)" (click)="argazkiaAukeratu(1)" src="assets/img/autoa.png">
         <img class="argazkia" [class.aukeratuta]="argazkiAukeratuak.includes(2)" (click)="argazkiaAukeratu(2)" src="assets/img/balea.jpg">

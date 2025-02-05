@@ -82,6 +82,13 @@ export class Erronka7Page implements OnInit {
     });
   }
 
+  audioaEntzun() {
+    const audio = new Audio();
+    audio.src = 'assets/audio/erronka7.m4a';
+    audio.load();
+    audio.play();
+  }
+
   testuaErakutsi() {
     this.testuaIkusi = true;
   }

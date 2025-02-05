@@ -9,7 +9,7 @@
         <p style="font-family: 'DynaPuff', sans-serif;">{{ testua }}</p>
         <img *ngIf="playErakutsi" (click)="erronkaHasi()" class="hasi" src="assets/img/play.png">
       </div>
-      <img class="soinua" src="assets/img/soinua.png">
+      <img (click)="audioaEntzun()" class="soinua" src="assets/img/soinua.png">>
       <div *ngIf="hitzakErakutsi">
         <div class="hitzak-container">
           <ng-container *ngFor="let item of hitzak">

@@ -9,7 +9,7 @@
         <p>{{ testua }}</p>
         <img *ngIf="playErakutsi" (click)="erronkaHasi()" class="hasi" src="assets/img/play.png">
       </div>
-      <img class="soinua" src="assets/img/soinua.png">
+      <img (click)="audioaEntzun()" class="soinua" src="assets/img/soinua.png">>
       <div class="aukerak" *ngIf="erantzunakErakutsi">
         <p class="text-bubble" *ngFor="let item of aukerak; let i = index"
           [class.aukeratuta]="erantzunAukeratua === (i + 1)" (click)="erantzunaAukeratu(i + 1)"

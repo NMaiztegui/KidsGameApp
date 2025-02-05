@@ -5,10 +5,11 @@
   <body>
     <div class="container">
       <img class="amona" src="assets/img/amona.png" alt="Amona">
-      <div class="speech-bubble">
+      <!-- <div class="speech-bubble">
         <p>{{ testua }}</p>
+        <img *ngIf="playErakutsi" (click)="erronkaHasi()" class="hasi" src="assets/img/play.png">
       </div>
-      <img class="soinua" src="assets/img/soinua.png" alt="Soinua">
+      <img (click)="audioaEntzun()" class="soinua" src="assets/img/soinua.png"> -->
       <div class="letter-grid">
         <div *ngFor="let letter of grid; let i = index" class="letter" [attr.data-index]="i"
           [class.selected]="selectedLetters.includes(i) || confirmedLetters.has(i)">

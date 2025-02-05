@@ -9,7 +9,7 @@
         <p>{{ testua }}</p>
         <img *ngIf="playErakutsi" (click)="erronkaHasi()" class="hasi" src="assets/img/play.png">
       </div>
-      <img class="soinua" src="assets/img/soinua.png">
+      <img (click)="audioaEntzun()" class="soinua" src="assets/img/soinua.png">>
       <div class="argazkiak" *ngIf="argazkiakErakutsi">
         <img class="sm" [class.aukeratuta]="argazkiAukeratua === 1" (click)="argazkiaAukeratu(1)"
           src="assets/img/arrastre.png">

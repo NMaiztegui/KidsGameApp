@@ -114,6 +114,13 @@ export class Erronka3Page implements OnInit {
     this.pairCounter = 1;
   }
 
+  audioaEntzun() {
+    const audio = new Audio();
+    audio.src = 'assets/audio/erronka3.m4a';
+    audio.load();
+    audio.play();
+  }
+
   testuaErakutsi() {
     this.testuaIkusi = true;
   }
