@@ -7,10 +7,10 @@
       <p class="testu-luzeak">{{ displayedText }}</p>
     </div>
 
-    <img class="soinua" src="assets/img/soinua.png">
+    <img (click)="audioaEntzun()" class="soinua" src="assets/img/soinua.png">
     <a [routerLink]="'/erronka' + erronkaId">
 
-      <img class="play" src="assets/img/play.png">
+      <img *ngIf="playErakutsi" class="play" src="assets/img/play.png">
     </a>
   </div>
 </ion-content>

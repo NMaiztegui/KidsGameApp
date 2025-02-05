@@ -1,5 +1,5 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-aurkezpena',
@@ -8,37 +8,58 @@ import { ActivatedRoute, Router } from '@angular/router';
   standalone: false,
 })
 export class AurkezpenaPage implements OnInit {
+  
+  textMap: { [key: number]: string } = {
+    1: 'Dolores herri honen historia eta garrantzia oso ondo ezagutzen dituen andre bat da...',
+    2: 'testu 2...',
+    3: 'testu 3...',
+    4: 'testu 4...',
+    5: 'testu 5...',
+    6: 'testu 6...',
+    7: 'testu 7...',
+    8: 'testu 8...',
+  };
 
-  fullText: string = 'Dolores herri honen historia eta garrantzia oso ondo ezagutzen  dituen andre bat da. Politikari espainiarra izan zelako da ezaguna batez ere, baina hori alde batera utzita ondo ezagutzen zuen La Arboledako eta inguruko meatzaritzaren historia osoa...';
-  displayedText: string = ''; // Texto que se mostrará progresivamente
+  fullText: string = '';
+  displayedText: string = '';
   index: number = 0;
-  speed: number = 55; // Velocidad en ms
+  speed: number = 55;
 
-  erronkaId: number | null = null;  // Se inicializa como null
+  erronkaId: number | null = null;
+  playErakutsi: boolean | null = false;
 
   constructor(private route: ActivatedRoute) {}
 
   ngOnInit() {
-    // Obtener el parámetro 'id' de la URL
     this.route.paramMap.subscribe(params => {
-      this.erronkaId = +params.get('id')!;  // 'id' es el nombre del parámetro en la ruta
+      this.erronkaId = +params.get('id')!;
       console.log('Erronka ID desde URL:', this.erronkaId);
-    });
 
-    this.showText();
+      this.fullText = this.textMap[this.erronkaId] || 'Testurik ez dago ID honetarako.';
+      
+      this.startTextAnimation();
+    });
   }
 
-  showText() {
+  startTextAnimation() {
+    this.displayedText = '';
+    this.index = 0;
+    
     const interval = setInterval(() => {
       if (this.index < this.fullText.length) {
         this.displayedText += this.fullText[this.index];
         this.index++;
       } else {
-        this.index = 0;
-        clearInterval(interval); // Detener cuando termina
+        this.playErakutsi = true;
+        clearInterval(interval);
       }
     }, this.speed);
   }
+
+  audioaEntzun() {
+    const audio = new Audio();
+    audio.src = `assets/audio/aurkezpena${this.erronkaId}.m4a`;
+    audio.load();
+    audio.play();
+  }
 }
-
-
