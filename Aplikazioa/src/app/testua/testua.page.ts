@@ -10,6 +10,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 export class TestuaPage implements OnInit {
 
   erronka: number = 0;
+  
 
   constructor(private router: Router, private route: ActivatedRoute) { }
 
@@ -24,4 +25,6 @@ export class TestuaPage implements OnInit {
   mapaIkusi() {
     this.router.navigate(['/mapa'], { queryParams: { erronka: this.erronka } });
   }
+
+
 }

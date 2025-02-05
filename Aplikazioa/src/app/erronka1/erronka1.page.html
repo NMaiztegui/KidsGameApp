@@ -6,12 +6,12 @@
     <div>
       <img class="amona" src="assets/img/amona.png">
       <div class="speech-bubble">
-        <p style="font-family: 'DynaPuff', sans-serif;">Kaixo! Erronka honetan Ibarrurik utzitako mezua deszifratu
+        <p  class="testu-luzeak">Kaixo! Erronka honetan Ibarrurik utzitako mezua deszifratu
           beharko duzue, hutsune bakoitzean letra bat jarriz bere esanahia osatzeko.</p>
       </div>
       <img class="soinua" src="assets/img/soinua.png">
       <div class="text-bubble">
-        <p>
+        <p  class="testu-luzeak">
           <span *ngFor="let letra of letras; let i = index">
             <ng-container *ngIf="letra === ''">
               <input [(ngModel)]="letras[i]" type="text" maxlength="1" class="input-letter" style="width: 20px; text-align: center;" />
@@ -24,11 +24,11 @@
       </div>
       <div class="erantzuna-bubble" *ngIf="erantzuna !== null">
         <ng-container *ngIf="erantzuna === true">
-          <p style="color: green;">Zorionak! Mezuaren zati bar deszifratu duzu!</p>
+          <p class="testu-luzeak zuzena">Zorionak! Mezuaren zati bar deszifratu duzu!</p>
           <img (click)="ariketaSubmit()" class="hasi" src="assets/img/tik.png">
         </ng-container>
         <ng-container *ngIf="erantzuna === false">
-          <p style="color: red;">Saiatu berriro, erantzuna ez da zuzena.</p>
+          <p class="testu-luzeak okerra">Saiatu berriro, erantzuna ez da zuzena.</p>
           <img (click)="ariketaBerregin()" class="hasi" src="assets/img/rehacer.png">
         </ng-container>
       </div>

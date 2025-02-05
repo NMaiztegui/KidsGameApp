@@ -5,12 +5,12 @@
     <div>
       <img class="amona" src="assets/img/amona.png">
       <div class="speech-bubble">
-        <p style="font-family: 'DynaPuff', sans-serif;">{{ testua }}</p>
+        <p class="testu-luzeak">{{ testua }}</p>
         <img *ngIf="playErakutsi" (click)="erronkaHasi()" class="hasi" src="assets/img/play.png">
       </div>
       <img class="soinua" src="assets/img/soinua.png">
       <div *ngIf="hitzakErakutsi">
-        <p class="hitza"
+        <p class="hitza testu-luzeak"
            *ngFor="let item of hitzakPosizioa"
            (click)="hitzaAukeratu(item)"
            [ngStyle]="{'top': item.top, 'left': item.left, 'position': 'absolute'}"
@@ -20,11 +20,11 @@
       </div>                    
       <div class="erantzuna-bubble" *ngIf="erantzuna !== null">
         <ng-container *ngIf="erantzuna">
-          <p style="color: green;">Zorionak! Errezeta ondo ordenatu duzu!</p>
+          <p class="testu-luzeak zuzena" >Zorionak! Errezeta ondo ordenatu duzu!</p>
           <img (click)="erronkaSubmit()" class="zuzen" src="assets/img/tik.png">
         </ng-container>
         <ng-container *ngIf="!erantzuna">
-          <p style="color: red;">Saiatu berriro, errezeta ez dago ondo ordenatuta.</p>
+          <p class="testu-luzeak okerra" >Saiatu berriro, errezeta ez dago ondo ordenatuta.</p>
           <img (click)="ariketaBerregin()" class="oker" src="assets/img/rehacer.png">
         </ng-container>
       </div>

@@ -5,7 +5,7 @@
     <div>
       <img class="amona" src="assets/img/amona.png">
       <div class="speech-bubble">
-        <p style="font-family: 'DynaPuff', sans-serif;">{{ testua }}</p>
+        <p class="testu-luzeak">{{ testua }}</p>
         <img *ngIf="playErakutsi" (click)="erronkaHasi()" class="hasi" src="assets/img/play.png">
       </div>
       <img class="soinua" src="assets/img/soinua.png">
@@ -13,7 +13,7 @@
       <div *ngIf="hitzakErakutsi">
         <div class="hitzak-container">
           <ng-container *ngFor="let item of hitzak">
-            <p class="hitza"
+            <p class="hitza testu-luzeak"
                (click)="hitzaAukeratu(item)"
                [ngClass]="{'aukeratuta': item.aukeratuta}"
                *ngIf="!item.hitzErabilia">
@@ -24,7 +24,7 @@
         </div>
         
         <div class="esaldiak-container">
-          <p *ngFor="let esaldi of esaldiak">
+          <p *ngFor="let esaldi of esaldiak" class="testu-luzeak">
             {{ esaldi.testua1 }}
             <span class="hitz-hutsa" 
                   (click)="hitzHutsaAukeratu(esaldi)" 
@@ -38,11 +38,11 @@
       
       <div class="erantzuna-bubble" *ngIf="erantzuna !== null">
         <ng-container *ngIf="erantzuna">
-          <p style="color: green;">Zorionak! Frase guztiak ondo osatu dituzu!</p>
+          <p class="testu-luzeak zuzena" >Zorionak! Frase guztiak ondo osatu dituzu!</p>
           <img (click)="erronkaSubmit()" class="zuzen" src="assets/img/tik.png">
         </ng-container>
         <ng-container *ngIf="!erantzuna">
-          <p style="color: red;">Saiatu berriro, badaude akats batzuk.</p>
+          <p class="testu-luzeak okerra" >Saiatu berriro, badaude akats batzuk.</p>
           <img (click)="ariketaBerregin()" class="oker" src="assets/img/rehacer.png">
         </ng-container>
       </div>
