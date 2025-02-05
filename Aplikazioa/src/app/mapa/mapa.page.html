@@ -1,8 +1,7 @@
 <link href="https://fonts.googleapis.com/css2?family=DynaPuff:wght@400;700&display=swap" rel="stylesheet">
 
-<ion-content [fullscreen]="true">
+<ion-content [fullscreen]="true" [ngStyle]="{'--background': 'url(/assets/img/mapa' + erronkaId + '.png) no-repeat center / cover'}">
   <div>
-    <img class="amona" src="assets/img/amona.png">
     <img (click)="testuaIkusi()" class="text" src="assets/img/testuizkutupanela.png">
 
     <div class="text-bubble">
