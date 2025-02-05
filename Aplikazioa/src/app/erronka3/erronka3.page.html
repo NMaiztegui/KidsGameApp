@@ -6,7 +6,7 @@
     <div>
       <img class="amona" src="assets/img/amona.png">
       <div class="speech-bubble">
-        <p>{{ testua }}</p>
+        <p class="testu-luzeak">{{ testua }}</p>
         <img *ngIf="playErakutsi" (click)="erronkaHasi()" class="hasi" src="assets/img/play.png">
       </div>
       <img (click)="audioaEntzun()" class="soinua" src="assets/img/soinua.png">>
@@ -18,14 +18,14 @@
         </p>
       </div>
       <div *ngIf="hitzakErakutsi">
-        <p class="left-column"
+        <p class="left-column testu-luzeak"
            *ngFor="let item of leftItems; let i = index"
            [ngStyle]="{'top': (45 + i * 12) + 'vh'}"
            (click)="selectLeft(item.id)">
           {{ item.name }} <span *ngIf="getPairNumber(item.id)"> - {{ getPairNumber(item.id) }}</span>
         </p>
       
-        <p class="right-column"
+        <p class="right-column testu-luzeak"
            *ngFor="let item of rightItems; let i = index"
            [ngStyle]="{'top': (45 + i * 12) + 'vh'}"
            (click)="selectRight(item.id)">
@@ -34,15 +34,16 @@
       </div>            
       <div class="erantzuna-bubble" *ngIf="erantzuna !== null">
         <ng-container *ngIf="erantzuna && erantzunakErakutsi">
-          <p style="color: green;">Zorionak! Hurrengo galdera!</p>
+          <p class="testu-luzeak zuzena" >Zorionak! Hurrengo galdera!</p>
           <img (click)="ariketaSubmit()" class="zuzen" src="assets/img/tik.png">
         </ng-container>
         <ng-container *ngIf="erantzuna && hitzakErakutsi">
-          <p style="color: green;">Zorionak! Mezuaren zati bar deszifratu duzu!</p>
+          <p  class="testu-luzeak zuzena">Zorionak! Mezuaren zati bar deszifratu duzu!</p>
           <img (click)="testuaErakutsi()" class="zuzen" src="assets/img/tik.png">
+
         </ng-container>
         <ng-container *ngIf="erantzuna === false">
-          <p style="color: red;">Saiatu berriro, erantzuna ez da zuzena.</p>
+          <p class="testu-luzeak okerra">Saiatu berriro, erantzuna ez da zuzena.</p>
           <img (click)="ariketaBerregin()" class="oker" src="assets/img/rehacer.png">
         </ng-container>
       </div>

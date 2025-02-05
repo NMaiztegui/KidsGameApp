@@ -35,3 +35,21 @@
 /* @import "@ionic/angular/css/palettes/dark.always.css"; */
 /* @import "@ionic/angular/css/palettes/dark.class.css"; */
 @import "@ionic/angular/css/palettes/dark.system.css";
+
+@font-face {
+    font-family: 'SF-Pro-Rounded-Heavy';
+    src: url('/assets/fonts/SF-Pro-Rounded-Heavy.otf') format('opentype');
+}
+@font-face {
+    font-family: 'SF-Pro-Rounded-Medium';
+    src: url('/assets/fonts/SF-Pro-Rounded-Medium.otf') format('opentype');
+}
+.testu-luzeak{
+    font-family: 'SF-Pro-Rounded-Medium';
+}
+.zuzena{
+    color:green
+}
+.okerra{
+    color:red
+}

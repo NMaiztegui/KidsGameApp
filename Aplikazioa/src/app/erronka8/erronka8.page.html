@@ -6,8 +6,9 @@
     <div class="container">
       <img class="amona" src="assets/img/amona.png" alt="Amona">
       <!-- <div class="speech-bubble">
-        <p>{{ testua }}</p>
+        <p class="testu-luzeak">{{ testua }}</p>
         <img *ngIf="playErakutsi" (click)="erronkaHasi()" class="hasi" src="assets/img/play.png">
+
       </div>
       <img (click)="audioaEntzun()" class="soinua" src="assets/img/soinua.png"> -->
       <div class="letter-grid">
@@ -18,11 +19,13 @@
       </div>
       <div class="erantzuna-bubble" *ngIf="erantzuna !== null">
         <ng-container *ngIf="erantzuna">
-          <p style="color: green;">Zorionak! Mezuaren azken zatia deszifratu duzu!</p>
+
+          <p class="testu-luzeak zuzena">Zorionak! Mezuaren azken zatia deszifratu duzu!</p>
           <img (click)="testuaErakutsi()" class="zuzen" src="assets/img/tik.png" alt="Zuzen">
+
         </ng-container>
         <ng-container *ngIf="!erantzuna">
-          <p style="color: red;">Jarraitu jolasten, hitzak falta dira.</p>
+          <p class="testu-luzeak okerra" >Jarraitu jolasten, hitzak falta dira.</p>
           <img (click)="ariketaBerregin()" class="oker" src="assets/img/rehacer.png" alt="Oker">
         </ng-container>
       </div>
