@@ -12,8 +12,7 @@ use App\Http\Controllers\hizkiak_beteController;
 use App\Http\Controllers\lokalizazioaController;
 use App\Http\Controllers\mutikua_jantziController;
 use App\Http\Controllers\ordenatuController;
-use App\Models\erantzunak;
-use App\Models\parekatzeko_galdera;
+use App\Http\Controllers\parekatzeko_galderaController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -59,5 +58,5 @@ Route::get('/ordenatu',[ordenatuController::class,'showAll']);
 Route::get('/ordenatu/{id}',[ordenatuController::class,'show']);
 
 
-Route::get('/parekatzeko-galdera',[parekatzeko_galdera::class,'showAll']);
-Route::get('/parekatzeko-galdera/{id}',[parekatzeko_galdera::class,'show']);
+Route::get('/parekatzeko-galdera',[parekatzeko_galderaController::class,'showAll']);
+Route::get('/parekatzeko-galdera/{id}',[parekatzeko_galderaController::class,'show']);
