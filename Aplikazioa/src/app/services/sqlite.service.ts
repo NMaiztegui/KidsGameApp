@@ -92,14 +92,14 @@ public async fetchDataAndSave<T>(httpClient: HttpClient,endpoint: string, tableN
     return this.isDbReady.asObservable();
   }
 
-  public async getData(tableName: string) {
+  public async getData<T>(tableName: string) {
     console.log('tableName:', tableName);
     const query = `SELECT * FROM ${tableName}`; 
     console.log('query:', query);
     try {
       const result = await this.storage.executeSql(query, []);
       console.log('result:', result);
-      let data = [];
+      const data: T[] = [];
       for (let i = 0; i < result.rows.length; i++) {
         data.push(result.rows.item(i));
       }
