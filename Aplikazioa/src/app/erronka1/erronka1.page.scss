@@ -148,3 +148,8 @@ body::before {
         padding-right: 15vh;
     }
 }
+.keyboard-is-open {
+    ion-content {
+      padding-bottom: 200px; // Espacio extra para evitar que el teclado tape el contenido
+    }
+  }

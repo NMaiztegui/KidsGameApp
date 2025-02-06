@@ -16,7 +16,7 @@ export class ErronkaPage implements OnInit {
   erantzunZuzena = 'Txikitatik Trapagaraneko meategietatik mugitu izan naiz. Nire haurtzaroaren zatirik handiena inguru hauetan eman dut, familia eta senarrarekin egoteko. Horregaitik, herri eta inguruko sekretu gehienak dakizkit. Ibilbidean zehar deskubritzeko prest zaudete?';
 
   letras = this.erronkaTestua.split('').map((char) => (char === '_' ? '' : char));
-
+  
   erantzuna: boolean | null = null;
   testuaIkusi: boolean = false;
   playErakutsi: boolean | null = true;
@@ -30,9 +30,9 @@ export class ErronkaPage implements OnInit {
   }
 
   erantzunaEgiaztatu() {
-    const respuesta = this.letras.join('');
+    const respuesta = this.letras.join('').toLowerCase();
     
-    if (respuesta === this.erantzunZuzena) {
+    if (respuesta === this.erantzunZuzena.toLowerCase()) {
       this.erantzuna = true;
     } else {
       this.erantzuna = false;
@@ -53,10 +53,25 @@ export class ErronkaPage implements OnInit {
   erronkaSubmit() {
     this.router.navigate(['/mapa'], { queryParams: { erronka: 2 } });
   }  
-  
+
   ariketaBerregin() {
     this.erantzuna = null;
     this.letras = this.erronkaTestua.split('').map((char) => (char === '_' ? '' : char));
+  }
+
+  // Método para procesar la entrada del usuario
+  procesarLetra(event: any, index: number) {
+    let letraIngresada = event.target.value.toLowerCase(); // Convertir a minúscula
+
+    if (letraIngresada.match(/^[a-zA-ZñÑ]$/)) { // Solo acepta letras
+      this.letras[index] = letraIngresada;
+    } else {
+      this.letras[index] = ''; // Si no es una letra válida, se borra
+    }
+
+    setTimeout(() => {
+      event.target.value = ''; // Borra el input después de escribir
+    }, 50);
   }
 
   ngOnInit() {
