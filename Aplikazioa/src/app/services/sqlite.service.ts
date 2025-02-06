@@ -11,7 +11,7 @@ import { NetworkService } from './network.service';
 export class SqliteService {
   private storage!: SQLiteObject;
   private isDbReady: BehaviorSubject<boolean> = new BehaviorSubject(false);
-  private urlbase= 'http:/127.0.0.1:8000/api/';
+  private urlbase= 'http://127.0.0.1:8000/api/';
   constructor(
     private platform: Platform, 
     private sqlite: SQLite, 

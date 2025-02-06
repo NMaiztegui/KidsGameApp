@@ -44,10 +44,10 @@ export class ApiService {
 
   // Métodos específicos para cada entidad
   getErronkak(): Observable<Erronka[]> {
-    return from(this.sqliteService.fetchDataAndSave<Erronka>(this.httpClient,'erronkak', 'Erronka'));
+    return from(this.sqliteService.fetchDataAndSave<Erronka>(this.httpClient,'erronkak', 'erronkas'));
   }
   getERronkaById(id:number): Observable<Erronka | undefined>{
-    return from(this.sqliteService.fetchDataAndSave<Erronka>(this.httpClient,'erronkak', 'Erronka')).pipe(
+    return from(this.sqliteService.fetchDataAndSave<Erronka>(this.httpClient,'erronkak', 'erronkas')).pipe(
       map(erronkak => erronkak.find(erronka => erronka.id === id)), // Filtrar por ID
       catchError(error => {
         console.error('Error al obtener erronka:', error);
