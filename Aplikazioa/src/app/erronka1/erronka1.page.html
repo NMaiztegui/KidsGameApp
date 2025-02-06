@@ -9,7 +9,7 @@
         <img *ngIf="playErakutsi" (click)="erronkaHasi()" class="hasi" src="assets/img/play.png">
       </div>
       <img (click)="audioaEntzun()" class="soinua" src="assets/img/soinua.png">
-      <div class="text-bubble" *ngIf="ariketaErakutsi">
+      <div class="text-bubble" *ngIf="ariketaErakutsi" [ngClass]="{'move-up': moveTextUp}">
         <p class="testu-luzeak">
           <span *ngFor="let letra of letras; let i = index">
             <ng-container *ngIf="letra === ''">
@@ -18,7 +18,7 @@
                 maxlength="1" 
                 class="input-letter" 
                 style="width: 20px; text-align: center;" 
-                (input)="procesarLetra($event, i)" />
+                (input)="hizkiaIrakurri($event, i)" />
             </ng-container>
             <ng-container *ngIf="letra !== ''">
               <span>{{ letra }}</span>

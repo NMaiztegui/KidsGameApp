@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
+import { Keyboard } from '@capacitor/keyboard';  
 
 @Component({
   selector: 'app-erronka1',
@@ -7,10 +8,8 @@ import { Router } from '@angular/router';
   styleUrls: ['./erronka1.page.scss'],
   standalone: false,
 })
-export class ErronkaPage implements OnInit {
+export class ErronkaPage implements OnInit, OnDestroy {
   testua: string = 'Kaixo! Erronka honetan Ibarrurik utzitako mezua deszifratu beharko duzue, hutsune bakoitzean letra bat jarriz bere esanahia osatzeko.';
-
-  constructor(private router: Router) { }
 
   erronkaTestua = 'Tx_kit_tik Tr_p_ga_anek_ m_ateg_etat_k mu_itu i_an na_z. Ni_e ha_rtzaro_ren zati_ik han_ien_ ing_ru hauet_n eman dut, f_mi_ia eta sen_rrare_in ego_eko. Horre_aiti_, her_i eta ingu_uko se_retu gehi_nak dakizkit. Ib_lbid_an zehar desku_ritzek_ pre_t zaud_te?';
   erantzunZuzena = 'Txikitatik Trapagaraneko meategietatik mugitu izan naiz. Nire haurtzaroaren zatirik handiena inguru hauetan eman dut, familia eta senarrarekin egoteko. Horregaitik, herri eta inguruko sekretu gehienak dakizkit. Ibilbidean zehar deskubritzeko prest zaudete?';
@@ -22,6 +21,24 @@ export class ErronkaPage implements OnInit {
   playErakutsi: boolean | null = true;
   ariketaErakutsi: boolean | null = false;
   finishErakutsi: boolean | null = false;
+
+  moveTextUp: boolean = false; 
+
+  constructor(private router: Router) { }
+
+  ngOnInit() {
+    Keyboard.addListener('keyboardDidShow', () => {
+      this.moveTextUp = true; 
+    });
+
+    Keyboard.addListener('keyboardDidHide', () => {
+      this.moveTextUp = false; 
+    });
+  }
+
+  ngOnDestroy() {
+    Keyboard.removeAllListeners();
+  }
 
   erronkaHasi() {
     this.playErakutsi = false;
@@ -59,22 +76,17 @@ export class ErronkaPage implements OnInit {
     this.letras = this.erronkaTestua.split('').map((char) => (char === '_' ? '' : char));
   }
 
-  // Método para procesar la entrada del usuario
-  procesarLetra(event: any, index: number) {
-    let letraIngresada = event.target.value.toLowerCase(); // Convertir a minúscula
+  hizkiaIrakurri(event: any, index: number) {
+    let letraIngresada = event.target.value.toLowerCase();
 
-    if (letraIngresada.match(/^[a-zA-ZñÑ]$/)) { // Solo acepta letras
+    if (letraIngresada.match(/^[a-zA-ZñÑ]$/)) {
       this.letras[index] = letraIngresada;
     } else {
-      this.letras[index] = ''; // Si no es una letra válida, se borra
+      this.letras[index] = ''; 
     }
 
     setTimeout(() => {
-      event.target.value = ''; // Borra el input después de escribir
+      event.target.value = ''; 
     }, 50);
   }
-
-  ngOnInit() {
-  }
-
 }
