@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, of } from 'rxjs';
+import { BehaviorSubject, Observable, of, from } from 'rxjs';
+import { map, catchError } from 'rxjs/operators';
 import { SQLitePorter } from '@awesome-cordova-plugins/sqlite-porter/ngx';
 import { SQLite, SQLiteObject } from '@awesome-cordova-plugins/sqlite/ngx';
 import { Platform } from '@ionic/angular';
@@ -20,7 +21,7 @@ import { ParekatzekoGaldera } from '../classes/parekatzeko-galdera';
 import { SqliteService } from './sqlite.service';
 
 import { NetworkService } from './network.service';
-import { from } from 'rxjs';
+
 
 @Injectable({
   providedIn: 'root'
@@ -29,93 +30,96 @@ export class ApiService {
 
 
 
-  private urlbase= 'http://10.0.2.2:8000/api';
+ 
   constructor(
     private httpClient: HttpClient,
     private sqliteService: SqliteService,
-    private networkService: NetworkService,
+    
 
    ) { }
 
+
    // Función genérica para obtener y guardar datos
-private async fetchDataAndSave<T>(endpoint: string, tableName: string): Promise<T[]> {
-    try {
-      let data: T[] = [];
 
-      if (this.networkService.getStatus()) {
-        // Si hay conexión a la red
-          data = await this.httpClient.get<T[]>(`${this.urlbase}/${endpoint}`).toPromise() || [];
-          
-          // Guardar los datos en SQLite si la base de datos está vacía
-          const existingData = await this.sqliteService.getData(tableName);
-          if (existingData.length === 0) {
-            await this.sqliteService.insertData(tableName, data);
-          } else {
-            console.log(`Los datos de ${tableName} ya existen en SQLite.`);
-          }
-      } else {
-        // Si no hay conexión a la red, obtener los datos desde SQLite
-        data = await this.sqliteService.getData(tableName);
-      }
-
-      return data;
-    } catch (error) {
-      console.error(`Error al obtener o guardar los datos de ${endpoint}:`, error);
-      return [];
-    }
-  }
 
   // Métodos específicos para cada entidad
   getErronkak(): Observable<Erronka[]> {
-    return from(this.fetchDataAndSave<Erronka>('erronkak', 'Erronka'));
+    return from(this.sqliteService.fetchDataAndSave<Erronka>(this.httpClient,'erronkak', 'Erronka'));
+  }
+  getERronkaById(id:number): Observable<Erronka | undefined>{
+    return from(this.sqliteService.fetchDataAndSave<Erronka>(this.httpClient,'erronkak', 'Erronka')).pipe(
+      map(erronkak => erronkak.find(erronka => erronka.id === id)), // Filtrar por ID
+      catchError(error => {
+        console.error('Error al obtener erronka:', error);
+        return of(undefined); // Devuelve undefined si hay error
+      })
+    );
   }
 //convertir promesa en observable con from
   getArgazkiZuzenak(): Observable<ArgazkiaZuzena[]> {
-    return from(this.fetchDataAndSave<ArgazkiaZuzena>('argazki-zuzena', 'ArgazkiaZuzena'));
+    return from(this.sqliteService.fetchDataAndSave<ArgazkiaZuzena>(this.httpClient,'argazki-zuzena', 'ArgazkiaZuzena'));
   }
 
   getArikteak(): Observable<Ariketa[]> {
-    return from(this.fetchDataAndSave<Ariketa>('ariketak', 'Ariketa'));
+    return from(this.sqliteService.fetchDataAndSave<Ariketa>(this.httpClient,'ariketak', 'Ariketa'));
+  }
+  getAriketaById(id:number): Observable<Ariketa | undefined>{
+    return from(this.sqliteService.fetchDataAndSave<Ariketa>(this.httpClient,'ariketak', 'Ariketa')).pipe(
+      map(ariketak => ariketak.find(ariketa => ariketa.id_erronka === id)), // Filtrar por ID DE LA ERRONKA
+      catchError(error => {
+        console.error('Error al obtener ariketa:', error);
+        return of(undefined); // Devuelve undefined si hay error
+      })
+    );
   }
 
   gertAudioak(): Observable<Audioa[]> {
-    return from(this.fetchDataAndSave<Audioa>('audioak', 'Audioa'));
+    return from(this.sqliteService.fetchDataAndSave<Audioa>(this.httpClient,'audioak', 'Audioa'));
   }
 
+  getAudioaById(id:number,id_ariketa:number): Observable<Audioa | undefined>{
+    return from(this.sqliteService.fetchDataAndSave<Audioa>(this.httpClient,'audioak', 'Audioa')).pipe(
+      map(audioak => audioak.find(audioa => audioa.id === id && audioa.id_ariketa === id_ariketa)), // Filtrar por ID
+      catchError(error => {
+        console.error('Error al obtener audioa:', error);
+        return of(undefined); // Devuelve undefined si hay error
+      })
+    );
+  }
   getAukeraZuzenak(): Observable<AukeraZuzena[]> {
-    return from(this.fetchDataAndSave<AukeraZuzena>('aukera-zuzena', 'AukeraZuzena'));
+    return from(this.sqliteService.fetchDataAndSave<AukeraZuzena>(this.httpClient,'aukera-zuzena', 'AukeraZuzena'));
   }
 
   gertErantzunak(): Observable<Erantzunak[]> {
-    return from(this.fetchDataAndSave<Erantzunak>('erantzunak', 'Erantzunak'));
+    return from(this.sqliteService.fetchDataAndSave<Erantzunak>(this.httpClient,'erantzunak', 'Erantzunak'));
   }
 
   getEsaldiaBete(): Observable<EsaldiaBete[]> {
-    return from(this.fetchDataAndSave<EsaldiaBete>('esaldia-bete', 'EsaldiaBete'));
+    return from(this.sqliteService.fetchDataAndSave<EsaldiaBete>(this.httpClient,'esaldia-bete', 'EsaldiaBete'));
   }
 
   getFunikularrak(): Observable<Funikularra[]> {
-    return from(this.fetchDataAndSave<Funikularra>('funikularra', 'Funikularra'));
+    return from(this.sqliteService.fetchDataAndSave<Funikularra>(this.httpClient,'funikularra', 'Funikularra'));
   }
 
   getHizkiakBete(): Observable<HizkiakBete[]> {
-    return from(this.fetchDataAndSave<HizkiakBete>('hizkiak-bete', 'HizkiakBete'));
+    return from(this.sqliteService.fetchDataAndSave<HizkiakBete>(this.httpClient,'hizkiak-bete', 'HizkiakBete'));
   }
 
   getLokalizazioak(): Observable<Lokalizazioa[]> {
-    return from(this.fetchDataAndSave<Lokalizazioa>('lokalizazioa', 'Lokalizazioa'));
+    return from(this.sqliteService.fetchDataAndSave<Lokalizazioa>(this.httpClient,'lokalizazioa', 'Lokalizazioa'));
   }
 
   getMutikoaJantzi(): Observable<MutikoaJantzi[]> {
-    return from(this.fetchDataAndSave<MutikoaJantzi>('mutikua-jantzi', 'MutikoaJantzi'));
+    return from(this.sqliteService.fetchDataAndSave<MutikoaJantzi>(this.httpClient,'mutikua-jantzi', 'MutikoaJantzi'));
   }
 
   getOrdenatu(): Observable<Ordenatu[]> {
-    return from(this.fetchDataAndSave<Ordenatu>('ordenatu', 'Ordenatu'));
+    return from(this.sqliteService.fetchDataAndSave<Ordenatu>(this.httpClient,'ordenatu', 'Ordenatu'));
   }
 
   getParekatzekoGalderak(): Observable<ParekatzekoGaldera[]> {
-    return from(this.fetchDataAndSave<ParekatzekoGaldera>('parekatzeko-galdera', 'ParekatzekoGaldera'));
+    return from(this.sqliteService.fetchDataAndSave<ParekatzekoGaldera>(this.httpClient,'parekatzeko-galdera', 'ParekatzekoGaldera'));
   }
 
 }

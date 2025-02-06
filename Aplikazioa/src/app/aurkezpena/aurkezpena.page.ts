@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { ApiService } from '../services/api.service';
 
 @Component({
   selector: 'app-aurkezpena',
@@ -28,16 +29,14 @@ export class AurkezpenaPage implements OnInit {
   erronkaId: number | null = null;
   playErakutsi: boolean | null = false;
 
-  constructor(private route: ActivatedRoute) {}
+  constructor(private route: ActivatedRoute, private apiService:ApiService) {}
 
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
       this.erronkaId = +params.get('id')!;
       console.log('Erronka ID desde URL:', this.erronkaId);
 
-      this.fullText = this.textMap[this.erronkaId] || 'Testurik ez dago ID honetarako.';
-      
-      this.startTextAnimation();
+     this.loadErronkaAzalpena(this.erronkaId);
     });
   }
 
@@ -61,5 +60,18 @@ export class AurkezpenaPage implements OnInit {
     audio.src = `assets/audio/aurkezpena${this.erronkaId}.m4a`;
     audio.load();
     audio.play();
+  }
+  
+  loadErronkaAzalpena(id:number){
+    this.apiService.getERronkaById(id).subscribe({
+      next:(erronka)=>{
+        console.log('Erronka azalpena:', erronka);
+        this.fullText = erronka?.azalpena || 'Testurik ez dago ID honetarako.';
+        this.startTextAnimation();
+      },
+      error:(error)=>{
+        console.error('Error al obtener erronka:', error);
+      }
+    })
   }
 }

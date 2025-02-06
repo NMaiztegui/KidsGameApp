@@ -4,17 +4,20 @@ import { SQLitePorter } from '@awesome-cordova-plugins/sqlite-porter/ngx';
 import { SQLite, SQLiteObject } from '@awesome-cordova-plugins/sqlite/ngx';
 import { Platform } from '@ionic/angular';
 import { HttpClient } from '@angular/common/http';
+import { NetworkService } from './network.service';
 @Injectable({
   providedIn: 'root'
 })
 export class SqliteService {
   private storage!: SQLiteObject;
   private isDbReady: BehaviorSubject<boolean> = new BehaviorSubject(false);
+  private urlbase= 'http:/127.0.0.1:8000/api/';
   constructor(
     private platform: Platform, 
     private sqlite: SQLite, 
     private httpClient: HttpClient,
     private sqlPorter: SQLitePorter,
+    private networkService: NetworkService,
   ) { 
 
     this.platform.ready().then(() => {
@@ -28,7 +31,32 @@ export class SqliteService {
     });
   }
 
+public async fetchDataAndSave<T>(httpClient: HttpClient,endpoint: string, tableName: string): Promise<T[]> {
+    try {
+      let data: T[] = [];
 
+      if (this.networkService.getStatus()) {
+        // Si hay conexión a la red
+          data = await this.httpClient.get<T[]>(`${this.urlbase}${endpoint}`).toPromise() || [];
+          
+          // Guardar los datos en SQLite si la base de datos está vacía
+          const existingData = await this.getData(tableName);
+          if (existingData.length === 0) {
+            await this.insertData(tableName, data);
+          } else {
+            console.log(`Los datos de ${tableName} ya existen en SQLite.`);
+          }
+      } else {
+        // Si no hay conexión a la red, obtener los datos desde SQLite
+        data = await this.getData(tableName);
+      }
+
+      return data;
+    } catch (error) {
+      console.error(`Error al obtener o guardar los datos de ${endpoint}:`, error);
+      return [];
+    }
+  }
   prepareTables() {
     //Lehen aldia bada, taula sortuko du datu batzuekin (sqlPorter erabiltzen du sql-tik datubasera pasatzeko). Gero konexioa badago sinkronizatu eta amaieran getKlubak() exekutatuko da.
     this.httpClient.get(
