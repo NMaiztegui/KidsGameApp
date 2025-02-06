@@ -38,6 +38,7 @@ public async fetchDataAndSave<T>(httpClient: HttpClient,endpoint: string, tableN
       if (this.networkService.getStatus()) {
         // Si hay conexión a la red
           data = await this.httpClient.get<T[]>(`${this.urlbase}${endpoint}`).toPromise() || [];
+          console.log(data);
           
           // Guardar los datos en SQLite si la base de datos está vacía
           const existingData = await this.getData(tableName);
@@ -92,9 +93,12 @@ public async fetchDataAndSave<T>(httpClient: HttpClient,endpoint: string, tableN
   }
 
   public async getData(tableName: string) {
+    console.log('tableName:', tableName);
     const query = `SELECT * FROM ${tableName}`; 
+    console.log('query:', query);
     try {
       const result = await this.storage.executeSql(query, []);
+      console.log('result:', result);
       let data = [];
       for (let i = 0; i < result.rows.length; i++) {
         data.push(result.rows.item(i));
