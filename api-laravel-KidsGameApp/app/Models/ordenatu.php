@@ -11,11 +11,11 @@ class Ordenatu extends Model
     protected $fillable=[
         'esaldia',
         'posizioa',
-        'id_ariketa',
+        'id_erronka',
     ];
 
 
-    public function ariketa(){
-        return $this->belongsTo(ariketa::class, 'id_ariketa', 'id');
+    public function erronka(){
+        return $this->belongsTo(Erronka::class, 'id_erronka', 'id');
     }
 }

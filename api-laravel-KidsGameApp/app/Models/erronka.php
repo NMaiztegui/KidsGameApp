@@ -32,4 +32,8 @@ class Erronka extends Model
     public function lokalizazioa(){
         return $this->hasMany(lokalizazioa::class, 'id_erronka', 'id');
     }
+    
+    public function ordenatu(){
+        return $this->hasMany(ordenatu::class, 'id_ariketa', 'id');
+    }
 }
