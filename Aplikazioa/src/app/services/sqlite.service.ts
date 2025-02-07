@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, of } from 'rxjs';
+import { filter, first } from 'rxjs/operators';
 import { SQLitePorter } from '@awesome-cordova-plugins/sqlite-porter/ngx';
 import { SQLite, SQLiteObject } from '@awesome-cordova-plugins/sqlite/ngx';
 import { Platform } from '@ionic/angular';
@@ -27,30 +28,32 @@ export class SqliteService {
       }).then((db: SQLiteObject) => {
         this.storage = db;
         this.prepareTables();
+      }).catch(error => {
+        console.error("Error al abrir la base de datos:", error);
       });
-    });
+    });    
   }
 
 public async fetchDataAndSave<T>(httpClient: HttpClient,endpoint: string, tableName: string): Promise<T[]> {
     try {
       let data: T[] = [];
 
-      if (this.networkService.getStatus()) {
+      // if (this.networkService.getStatus()) {
         // Si hay conexión a la red
-          data = await this.httpClient.get<T[]>(`${this.urlbase}${endpoint}`).toPromise() || [];
-          console.log(data);
+          // data = await this.httpClient.get<T[]>(`${this.urlbase}${endpoint}`).toPromise() || [];
+          // console.log(data);
           
-          // Guardar los datos en SQLite si la base de datos está vacía
-          const existingData = await this.getData(tableName);
-          if (existingData.length === 0) {
-            await this.insertData(tableName, data);
-          } else {
-            console.log(`Los datos de ${tableName} ya existen en SQLite.`);
-          }
-      } else {
+          // // Guardar los datos en SQLite si la base de datos está vacía
+          // const existingData = await this.getData(tableName);
+          // if (existingData.length === 0) {
+          //   await this.insertData(tableName, data);
+          // } else {
+          //   console.log(`Los datos de ${tableName} ya existen en SQLite.`);
+          // }
+      // } else {
         // Si no hay conexión a la red, obtener los datos desde SQLite
         data = await this.getData(tableName);
-      }
+      // }
 
       return data;
     } catch (error) {
@@ -93,6 +96,8 @@ public async fetchDataAndSave<T>(httpClient: HttpClient,endpoint: string, tableN
   }
 
   public async getData<T>(tableName: string) {
+    await this.isDbReady.pipe(filter(isReady => isReady), first()).toPromise();
+    
     console.log('tableName:', tableName);
     const query = `SELECT * FROM ${tableName}`; 
     console.log('query:', query);
@@ -108,5 +113,5 @@ public async fetchDataAndSave<T>(httpClient: HttpClient,endpoint: string, tableN
       console.error("Error al obtener datos:", error);
       throw error;
     }
-  }
+  }  
 }

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ApiService } from '../services/api.service';
 
 @Component({
   selector: 'app-erronka7',
@@ -9,13 +10,16 @@ import { Router } from '@angular/router';
 })
 export class Erronka7Page implements OnInit {
 
-  testua: string = 'Tabernako sukaldariei babarrunen errezetaren orriak jausi zaizkie, eta desordenatu egin da errezeta. Azken erronka honetan babarrunak egiteko errezeta ordenatu beharko duzue.';
+  testua: string = '';
+  audioa: string = '';
   playErakutsi: boolean | null = true;
   hitzakErakutsi: boolean | null = false;
   finishErakutsi: boolean | null = false;
   erantzuna: boolean | null = null;
   hitzOrdena: number = 0;
   testuaIkusi: boolean = false;
+  erronka: number = 0;
+  erronkaId: number = 7;
 
   hitzakPosizioa = [
     { hitza: 'Prest jateko!', top: '70vh', left: '5vw', numero: null, aukeratuta: false },
@@ -28,7 +32,13 @@ export class Erronka7Page implements OnInit {
 
   hitzakAukeratu: { hitza: string; numero: number | null }[] = [];
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private apiService: ApiService) { }
+
+  ngOnInit() {
+    this.getAriketaAzalpena(this.erronkaId);
+    this.getAriketaAudioa(this.erronkaId);
+    this.getAriketa1();
+  }
 
   erronkaHasi() {
     this.playErakutsi = false;
@@ -84,7 +94,7 @@ export class Erronka7Page implements OnInit {
 
   audioaEntzun() {
     const audio = new Audio();
-    audio.src = 'assets/audio/erronka7.m4a';
+    audio.src = this.audioa;
     audio.load();
     audio.play();
   }
@@ -97,6 +107,42 @@ export class Erronka7Page implements OnInit {
     this.router.navigate(['/mapa'], { queryParams: { erronka: 8 } });
   }
 
-  ngOnInit() {
+  getAriketaAzalpena(id: number) {
+    this.apiService.getAriketaById(id).subscribe({
+      next: (ariketa) => {
+        console.log('Ariketa azalpena:', ariketa?.azalpena);
+        this.testua = ariketa?.azalpena || 'Testurik ez dago ID honetarako.';
+      },
+      error: (error) => {
+        console.error('Error al obtener erronka:', error);
+      }
+    })
   }
+
+  getAriketaAudioa(id: number) {
+    this.apiService.getAudioaById(id).subscribe({
+      next: (audioa) => {
+        console.log('Audioa:', audioa?.audioa);
+        this.audioa = audioa?.audioa || 'Audiorik ez dago ID honetarako.';
+      },
+      error: (error) => {
+        console.error('Error al obtener audioa:', error);
+      }
+    })
+  }
+
+  mapaIkusi() {
+    this.router.navigate(['/mapa'], { queryParams: { erronka: this.erronka + 7} });
+  }
+  getAriketa1() {
+    this.apiService.getOrdenatu().subscribe({
+      next: () => {
+
+      },
+      error: (error) => {
+        console.error('Error al obtener ariketa:', error);
+      }
+    })
+  }
+
 }

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ApiService } from '../services/api.service';
 
 @Component({
   selector: 'app-erronka5',
@@ -9,7 +10,8 @@ import { Router } from '@angular/router';
 })
 
 export class Erronka5Page implements OnInit {
-testua: string = 'Erronka honetan zuen aurrean La Reinetako funikularra duzue eta alboan hainbat elementuren argazkiak. Hauetako zein elementu garraiatzen zituzten antzinean funikularrean?';
+  testua: string = '';
+  audioa: string = '';
   erantzuna: boolean | null = null;
   argazkiAukeratua: number | null = null;
   argazkiAukeratuak: number[] = [];
@@ -17,8 +19,16 @@ testua: string = 'Erronka honetan zuen aurrean La Reinetako funikularra duzue et
   playErakutsi: boolean | null = true;
   ariketaErakutsi: boolean | null = false;
   finishErakutsi: boolean | null = false;
+  erronka: number = 0;
+  erronkaId: number = 5;
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private apiService: ApiService) { }
+
+  ngOnInit() {
+    this.getAriketaAzalpena(this.erronkaId);
+    this.getAriketaAudioa(this.erronkaId);
+    this.getAriketa1();
+  }
 
   erronkaHasi() {
     this.playErakutsi = false;
@@ -53,7 +63,7 @@ testua: string = 'Erronka honetan zuen aurrean La Reinetako funikularra duzue et
 
   audioaEntzun() {
     const audio = new Audio();
-    audio.src = 'assets/audio/erronka5.m4a';
+    audio.src = this.audioa;
     audio.load();
     audio.play();
   }
@@ -61,12 +71,47 @@ testua: string = 'Erronka honetan zuen aurrean La Reinetako funikularra duzue et
   testuaErakutsi() {
     this.testuaIkusi = true;
   }
-  
+
   erronkaSubmit() {
     this.router.navigate(['/mapa'], { queryParams: { erronka: 6 } });
   }
 
-  ngOnInit() {
+  getAriketaAzalpena(id: number) {
+    this.apiService.getAriketaById(id).subscribe({
+      next: (ariketa) => {
+        console.log('Ariketa azalpena:', ariketa?.azalpena);
+        this.testua = ariketa?.azalpena || 'Testurik ez dago ID honetarako.';
+      },
+      error: (error) => {
+        console.error('Error al obtener erronka:', error);
+      }
+    })
   }
 
+  getAriketaAudioa(id: number) {
+    this.apiService.getAudioaById(id).subscribe({
+      next: (audioa) => {
+        console.log('Audioa:', audioa?.audioa);
+        this.audioa = audioa?.audioa || 'Audiorik ez dago ID honetarako.';
+      },
+      error: (error) => {
+        console.error('Error al obtener audioa:', error);
+      }
+    })
+  }
+
+  getAriketa1() {
+    this.apiService.getFunikularrak().subscribe({
+      next: () => {
+
+      },
+      error: (error) => {
+        console.error('Error al obtener ariketa:', error);
+      }
+    })
+  }
+
+  mapaIkusi() {
+    this.router.navigate(['/mapa'], { queryParams: { erronka: this.erronka + 5} });
+  }
 }

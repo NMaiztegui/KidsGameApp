@@ -76,6 +76,7 @@ INSERT OR IGNORE INTO argazkia_zuzenas (id, url, zuzena) VALUES (1, '/assets/img
 
 INSERT OR IGNORE INTO argazkia_zuzenas (id, url, zuzena) VALUES (1, '/assets/img/harri_j.png', 0);
 
+
 INSERT OR IGNORE INTO argazkia_zuzenas (id, url, zuzena) VALUES (1, '/assets/img/harri_z.png', 1);
 
 CREATE TABLE IF NOT EXISTS audioas(
