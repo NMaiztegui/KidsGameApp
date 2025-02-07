@@ -42,7 +42,7 @@ export class MapaPage implements OnInit, OnDestroy {
         (position) => {
           this.koordenadak.latitud = position.coords.latitude;
           this.koordenadak.longitud = position.coords.longitude;
-          console.log('Koordenadak:', this.koordenadak);
+          // console.log('Koordenadak:', this.koordenadak);
         },
         (error) => console.error('Error obteniendo ubicación', error),
         { enableHighAccuracy: true, maximumAge: 0, timeout: 5000 }

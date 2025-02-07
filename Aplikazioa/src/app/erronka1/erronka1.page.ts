@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ApiService } from '../services/api.service';
 
 @Component({
   selector: 'app-erronka1',
@@ -7,21 +8,28 @@ import { Router } from '@angular/router';
   styleUrls: ['./erronka1.page.scss'],
   standalone: false,
 })
+
 export class ErronkaPage implements OnInit {
-  testua: string = 'Kaixo! Erronka honetan Ibarrurik utzitako mezua deszifratu beharko duzue, hutsune bakoitzean letra bat jarriz bere esanahia osatzeko.';
+  testua: string = '';
+  audioa: string = '';
+  textHutsunea = '';
+  textOsoa = '';
 
-  constructor(private router: Router) { }
-
-  erronkaTestua = 'Tx_kit_tik Tr_p_ga_anek_ m_ateg_etat_k mu_itu i_an na_z. Ni_e ha_rtzaro_ren zati_ik han_ien_ ing_ru hauet_n eman dut, f_mi_ia eta sen_rrare_in ego_eko. Horre_aiti_, her_i eta ingu_uko se_retu gehi_nak dakizkit. Ib_lbid_an zehar desku_ritzek_ pre_t zaud_te?';
-  erantzunZuzena = 'Txikitatik Trapagaraneko meategietatik mugitu izan naiz. Nire haurtzaroaren zatirik handiena inguru hauetan eman dut, familia eta senarrarekin egoteko. Horregaitik, herri eta inguruko sekretu gehienak dakizkit. Ibilbidean zehar deskubritzeko prest zaudete?';
-
-  letras = this.erronkaTestua.split('').map((char) => (char === '_' ? '' : char));
-
+  letras = this.textHutsunea.split('').map((char) => (char === '_' ? '' : char));
   erantzuna: boolean | null = null;
   testuaIkusi: boolean = false;
   playErakutsi: boolean | null = true;
   ariketaErakutsi: boolean | null = false;
   finishErakutsi: boolean | null = false;
+  erronkaId: number = 1;
+
+  constructor(private router: Router, private apiService: ApiService) { }
+
+  ngOnInit() {
+    this.getAriketaAzalpena(this.erronkaId);
+    this.getAriketaAudioa(this.erronkaId);
+    this.getAriketa();
+  }
 
   erronkaHasi() {
     this.playErakutsi = false;
@@ -31,8 +39,8 @@ export class ErronkaPage implements OnInit {
 
   erantzunaEgiaztatu() {
     const respuesta = this.letras.join('');
-    
-    if (respuesta === this.erantzunZuzena) {
+
+    if (respuesta === this.textOsoa) {
       this.erantzuna = true;
     } else {
       this.erantzuna = false;
@@ -41,7 +49,7 @@ export class ErronkaPage implements OnInit {
 
   audioaEntzun() {
     const audio = new Audio();
-    audio.src = 'assets/audio/erronka1.m4a';
+    audio.src = this.audioa;
     audio.load();
     audio.play();
   }
@@ -52,14 +60,46 @@ export class ErronkaPage implements OnInit {
 
   erronkaSubmit() {
     this.router.navigate(['/mapa'], { queryParams: { erronka: 2 } });
-  }  
-  
+  }
+
   ariketaBerregin() {
     this.erantzuna = null;
-    this.letras = this.erronkaTestua.split('').map((char) => (char === '_' ? '' : char));
+    this.letras = this.textHutsunea.split('').map((char) => (char === '_' ? '' : char));
   }
 
-  ngOnInit() {
+  getAriketaAzalpena(id: number) {
+    this.apiService.getAriketaById(id).subscribe({
+      next: (ariketa) => {
+        console.log('Erronka azalpena:', ariketa?.azalpena);
+        this.testua = ariketa?.azalpena || 'Testurik ez dago ID honetarako.';
+      },
+      error: (error) => {
+        console.error('Error al obtener erronka:', error);
+      }
+    })
   }
 
+  getAriketaAudioa(id: number) {
+    this.apiService.getAudioaById(this.erronkaId).subscribe({
+      next: (audioa) => {
+        console.log('Audioa:', audioa?.audioa);
+        this.audioa = audioa?.audioa || 'Audiorik ez dago ID honetarako.';
+      },
+      error: (error) => {
+        console.error('Error al obtener audioa:', error);
+      }
+    })
+  }
+
+  getAriketa() {
+    this.apiService.getHizkiakBete(this.textHutsunea, this.textOsoa).subscribe({
+      next: (hizkiak) => {
+        this.textHutsunea === hizkiak?.textHutsunea || 'Hitzik ez dago ID honetarako.';
+        this.textOsoa === hizkiak?.textOsoa || 'Hitzik ez dago ID honetarako.';
+      },
+      error: (error) => {
+        console.error('Error al obtener ariketa:', error);
+      }
+    })
+  }
 }
