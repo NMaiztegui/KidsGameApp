@@ -1,7 +1,7 @@
 <link href="https://fonts.googleapis.com/css2?family=DynaPuff:wght@400;700&display=swap" rel="stylesheet">
 
 <ion-content [fullscreen]="true">
-  <img (click)="mapaIkusi()" class="home" src="assets/img/home.png">
+  <img *ngIf="erronka <= 8" (click)="mapaIkusi()" class="home" src="assets/img/home.png">
   <div>
     <strong class="title">Trapagarango Kondaira</strong>
 

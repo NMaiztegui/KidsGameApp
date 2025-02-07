@@ -19,6 +19,7 @@ export class Erronka4Page implements OnInit {
   playErakutsi: boolean | null = true;
   ariketaErakutsi: boolean | null = false;
   finishErakutsi: boolean | null = false;
+  erronka: number = 0;
   erronkaId: number = 4;
 
   constructor(private router: Router, private apiService: ApiService) { }
@@ -110,4 +111,7 @@ export class Erronka4Page implements OnInit {
     })
   }
 
+  mapaIkusi() {
+    this.router.navigate(['/mapa'], { queryParams: { erronka: this.erronka + 4} });
+  }
 }

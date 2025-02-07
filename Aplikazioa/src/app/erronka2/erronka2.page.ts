@@ -19,9 +19,12 @@ export class Erronka2Page implements OnInit {
   erantzuna: boolean | null = null;
   esaldiOndo: boolean | null = null;
   testuaIkusi: boolean = false;
+
+  erronka: number = 0;
   hitzOrdena = 0;
   erronkaId: number = 2;
   esaldiZuzena: string[] = ['1. Barrenak', '2. harkaitzetan', '3. zuloak', '4. egiten', '5. eta', '6. lehergailuak', '7. jarriz', '8. harriak', '9. puskatzeko', '10. erabiltzen', '11. zituzten', '12. .'];
+
 
   hitzakPosizioa = [
     { hitza: 'harkaitzetan', top: '70vh', left: '5vw', numero: null, aukeratuta: false },
@@ -181,5 +184,9 @@ export class Erronka2Page implements OnInit {
         console.error('Error al obtener ariketa:', error);
       }
     })
+  }
+  
+  mapaIkusi() {
+    this.router.navigate(['/mapa'], { queryParams: { erronka: this.erronka + 2} });
   }
 }

@@ -18,6 +18,7 @@ export class Erronka7Page implements OnInit {
   erantzuna: boolean | null = null;
   hitzOrdena: number = 0;
   testuaIkusi: boolean = false;
+  erronka: number = 0;
   erronkaId: number = 7;
 
   hitzakPosizioa = [
@@ -130,6 +131,9 @@ export class Erronka7Page implements OnInit {
     })
   }
 
+  mapaIkusi() {
+    this.router.navigate(['/mapa'], { queryParams: { erronka: this.erronka + 7} });
+  }
   getAriketa1() {
     this.apiService.getOrdenatu().subscribe({
       next: () => {

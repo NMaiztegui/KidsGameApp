@@ -18,6 +18,7 @@ export class Erronka6Page implements OnInit {
   erantzuna: boolean | null = null;
   hitzAukeratua: string | null = null;
   testuaIkusi: boolean = false;
+  erronka: number = 0;
   erronkaId: number = 6;
 
   hitzak = [
@@ -147,5 +148,9 @@ export class Erronka6Page implements OnInit {
         console.error('Error al obtener ariketa:', error);
       }
     })
+  }
+
+  mapaIkusi() {
+    this.router.navigate(['/mapa'], { queryParams: { erronka: this.erronka + 6} });
   }
 }

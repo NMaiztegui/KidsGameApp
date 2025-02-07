@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
+import { Keyboard } from '@capacitor/keyboard'; 
 import { ApiService } from '../services/api.service';
 
 @Component({
@@ -9,7 +10,7 @@ import { ApiService } from '../services/api.service';
   standalone: false,
 })
 
-export class ErronkaPage implements OnInit {
+export class ErronkaPage implements OnInit, OnDestroy {
   testua: string = '';
   audioa: string = '';
   textHutsunea = '';
@@ -21,6 +22,14 @@ export class ErronkaPage implements OnInit {
   playErakutsi: boolean | null = true;
   ariketaErakutsi: boolean | null = false;
   finishErakutsi: boolean | null = false;
+  erronka: number = 0;
+
+  moveTextUp: boolean = false; 
+
+
+  ngOnDestroy() {
+    Keyboard.removeAllListeners();
+    
   erronkaId: number = 1;
 
   constructor(private router: Router, private apiService: ApiService) { }
@@ -29,6 +38,13 @@ export class ErronkaPage implements OnInit {
     this.getAriketaAzalpena(this.erronkaId);
     this.getAriketaAudioa(this.erronkaId);
     this.getAriketa();
+    Keyboard.addListener('keyboardDidShow', () => {
+      this.moveTextUp = true; 
+    });
+
+    Keyboard.addListener('keyboardDidHide', () => {
+      this.moveTextUp = false; 
+    });
   }
 
   erronkaHasi() {
@@ -38,9 +54,9 @@ export class ErronkaPage implements OnInit {
   }
 
   erantzunaEgiaztatu() {
-    const respuesta = this.letras.join('');
-
-    if (respuesta === this.textOsoa) {
+    const respuesta = this.letras.join('').toLowerCase();
+    
+    if (respuesta === this.textOsoa.toLowerCase()) {
       this.erantzuna = true;
     } else {
       this.erantzuna = false;
@@ -60,6 +76,7 @@ export class ErronkaPage implements OnInit {
 
   erronkaSubmit() {
     this.router.navigate(['/mapa'], { queryParams: { erronka: 2 } });
+
   }
 
   ariketaBerregin() {
@@ -67,6 +84,22 @@ export class ErronkaPage implements OnInit {
     this.letras = this.textHutsunea.split('').map((char) => (char === '_' ? '' : char));
   }
 
+  hizkiaIrakurri(event: any, index: number) {
+    let letraIngresada = event.target.value.toLowerCase();
+
+    if (letraIngresada.match(/^[a-zA-ZñÑ]$/)) {
+      this.letras[index] = letraIngresada;
+    } else {
+      this.letras[index] = ''; 
+    }
+
+    setTimeout(() => {
+      event.target.value = ''; 
+    }, 50);
+  }
+  mapaIkusi() {
+    this.router.navigate(['/mapa'], { queryParams: { erronka: this.erronka + 1} });
+  }
   getAriketaAzalpena(id: number) {
     this.apiService.getAriketaById(id).subscribe({
       next: (ariketa) => {
