@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { GestureController, Gesture } from '@ionic/angular';
 import { Router } from '@angular/router';
+import { ApiService } from '../services/api.service';
 
 @Component({
   selector: 'app-erronka8',
@@ -13,7 +14,7 @@ export class Erronka8Page implements OnInit, OnDestroy {
   testua: string = 'Azken erronkan, aurkitu letra-zopa honetan ikasi dugun guztiarekin lotutako 7 hitzak!';
   words = ['IBARRURI', 'BABARRUNAK', 'MEATEGIA', 'HARRIA', 'OSTION', 'GREBA', 'FUNIKULAR'];
   grid: string[] = [];
-  gridSize = 12;  
+  gridSize = 12;
   selectedLetters: number[] = [];
   confirmedLetters: Set<number> = new Set();
   foundWords: Set<string> = new Set();
@@ -29,18 +30,19 @@ export class Erronka8Page implements OnInit, OnDestroy {
   erronka: number = 0;
 
   gesture!: Gesture;
+  erronkaId: number = 8;
 
-  constructor(private router: Router,private gestureCtrl: GestureController) {}
-
-  erronkaHasi() {
-    this.playErakutsi = false;
-    this.ariketaErakutsi = true;
-  }
+  constructor(private router: Router, private gestureCtrl: GestureController, private apiService: ApiService) { }
 
   ngOnInit() {
     this.generateGrid();
     this.startTimer();
     this.initializeGesture();
+  }
+
+  erronkaHasi() {
+    this.playErakutsi = false;
+    this.ariketaErakutsi = true;
   }
 
   ngOnDestroy() {
@@ -55,7 +57,7 @@ export class Erronka8Page implements OnInit, OnDestroy {
       { x: 1, y: 0 }, { x: 0, y: 1 }, { x: 1, y: 1 }, { x: -1, y: 1 },
       { x: -1, y: 0 }, { x: 0, y: -1 }, { x: -1, y: -1 }, { x: 1, y: -1 }
     ];
-    
+
     this.words.forEach((word) => {
       let placed = false;
       let attempts = 0;
@@ -73,11 +75,11 @@ export class Erronka8Page implements OnInit, OnDestroy {
         attempts++;
       }
     });
-    
+
     this.grid = gridArray.map((char) => char || String.fromCharCode(65 + Math.floor(Math.random() * 26)));
   }
 
-  canPlaceWord(gridArray: string[], word: string, startX: number, startY: number, direction: {x: number, y: number}): boolean {
+  canPlaceWord(gridArray: string[], word: string, startX: number, startY: number, direction: { x: number, y: number }): boolean {
     for (let i = 0; i < word.length; i++) {
       let x = startX + i * direction.x;
       let y = startY + i * direction.y;
@@ -150,10 +152,10 @@ export class Erronka8Page implements OnInit, OnDestroy {
     const currentCoord = this.getCoordinates(index);
     const dx = currentCoord.col - startCoord.col;
     const dy = currentCoord.row - startCoord.row;
-    
+
     let stepX = 0;
     let stepY = 0;
-    
+
     if (dx === 0 && dy !== 0) {
       stepY = dy > 0 ? 1 : -1;
     } else if (dy === 0 && dx !== 0) {
@@ -164,7 +166,7 @@ export class Erronka8Page implements OnInit, OnDestroy {
     } else {
       return;
     }
-    
+
     const steps = Math.max(Math.abs(dx), Math.abs(dy));
     const newSelection: number[] = [];
     for (let i = 0; i <= steps; i++) {
@@ -210,7 +212,7 @@ export class Erronka8Page implements OnInit, OnDestroy {
     } else {
       this.erantzuna = false;
     }
-  }  
+  }
 
   ariketaBerregin() {
     this.erantzuna = null;
@@ -230,7 +232,7 @@ export class Erronka8Page implements OnInit, OnDestroy {
   testuaErakutsi() {
     this.testuaIkusi = true;
   }
-  
+
   erronkaSubmit() {
     this.router.navigate(['/testua'], { queryParams: { erronka: 9 } });
   }

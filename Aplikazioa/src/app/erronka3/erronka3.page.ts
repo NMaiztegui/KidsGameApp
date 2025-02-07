@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ApiService } from '../services/api.service';
 
 @Component({
   selector: 'app-erronka3',
@@ -9,7 +10,8 @@ import { Router } from '@angular/router';
 })
 
 export class Erronka3Page implements OnInit {
-  testua: string = 'Kaixo! Erronka honetan hainbat galdera erantzun beharko dituzue testu izkutua lortzeko.';
+  testua: string = '';
+  audioa: string = '';
   erantzunakErakutsi: boolean | null = false;
   hitzakErakutsi: boolean | null = false;
   playErakutsi: boolean | null = true;
@@ -22,6 +24,7 @@ export class Erronka3Page implements OnInit {
   pairCounter: number = 1;
   testuaIkusi: boolean = false;
   erronka: number = 0;
+  erronkaId: number = 3;
 
   aukerak = [
     "Lan egiteari uztea protestan.",
@@ -47,9 +50,17 @@ export class Erronka3Page implements OnInit {
     { left: 3, right: 1 }
   ];
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private apiService: ApiService) { }
+
+  ngOnInit() {
+    this.getErronkaAzalpena(this.erronkaId);
+    this.getAriketaAudioa(this.erronkaId);
+    this.getAriketa1();
+    this.getAriketa2();
+  }
 
   erronkaHasi() {
+    this.getAriketaAzalpena(this.erronkaId);
     this.testua = 'Zer da greba bat? Hautatu erantzun zuzena hurrengo hiru aukeretatik.';
     this.erantzunakErakutsi = true;
     this.playErakutsi = false;
@@ -117,7 +128,7 @@ export class Erronka3Page implements OnInit {
 
   audioaEntzun() {
     const audio = new Audio();
-    audio.src = 'assets/audio/erronka3.m4a';
+    audio.src = this.audioa;
     audio.load();
     audio.play();
   }
@@ -125,12 +136,67 @@ export class Erronka3Page implements OnInit {
   testuaErakutsi() {
     this.testuaIkusi = true;
   }
-  
+
   erronkaSubmit() {
     this.router.navigate(['/mapa'], { queryParams: { erronka: 4 } });
   }
 
-  ngOnInit() {
+  getErronkaAzalpena(id: number) {
+    this.apiService.getErronkaById(id).subscribe({
+      next: (erronka) => {
+        console.log('Erronka azalpena:', erronka?.azalpena);
+        this.testua = erronka?.azalpena || 'Testurik ez dago ID honetarako.';
+      },
+      error: (error) => {
+        console.error('Error al obtener erronka:', error);
+      }
+    })
+  }
+
+  getAriketaAzalpena(id: number) {
+    this.apiService.getAriketaById(id).subscribe({
+      next: (ariketa) => {
+        console.log('Ariketa azalpena:', ariketa?.azalpena);
+        this.testua = ariketa?.azalpena || 'Testurik ez dago ID honetarako.';
+      },
+      error: (error) => {
+        console.error('Error al obtener erronka:', error);
+      }
+    })
+  }
+
+  getAriketaAudioa(id: number) {
+    this.apiService.getAudioaById(id).subscribe({
+      next: (audioa) => {
+        console.log('Audioa:', audioa?.audioa);
+        this.audioa = audioa?.audioa || 'Audiorik ez dago ID honetarako.';
+      },
+      error: (error) => {
+        console.error('Error al obtener audioa:', error);
+      }
+    })
+  }
+
+  getAriketa1() {
+    this.apiService.getAukeraZuzenak().subscribe({
+      next: () => {
+
+      },
+      error: (error) => {
+        console.error('Error al obtener ariketa:', error);
+      }
+    })
+  }
+
+  getAriketa2() {
+    this.apiService.getParekatzekoGalderak().subscribe({
+      next: () => {
+
+      },
+      error: (error) => {
+        console.error('Error al obtener ariketa:', error);
+      }
+    })
   }
 
   mapaIkusi() {
