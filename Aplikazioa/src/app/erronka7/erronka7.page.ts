@@ -16,6 +16,7 @@ export class Erronka7Page implements OnInit {
   erantzuna: boolean | null = null;
   hitzOrdena: number = 0;
   testuaIkusi: boolean = false;
+  erronka: number = 0;
 
   hitzakPosizioa = [
     { hitza: 'Prest jateko!', top: '70vh', left: '5vw', numero: null, aukeratuta: false },
@@ -98,5 +99,9 @@ export class Erronka7Page implements OnInit {
   }
 
   ngOnInit() {
+  }
+
+  mapaIkusi() {
+    this.router.navigate(['/mapa'], { queryParams: { erronka: this.erronka + 7} });
   }
 }

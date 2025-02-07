@@ -26,6 +26,7 @@ export class Erronka8Page implements OnInit, OnDestroy {
   testuaIkusi: boolean = false;
   playErakutsi: boolean | null = true;
   ariketaErakutsi: boolean | null = false;
+  erronka: number = 0;
 
   gesture!: Gesture;
 
@@ -231,6 +232,9 @@ export class Erronka8Page implements OnInit, OnDestroy {
   }
   
   erronkaSubmit() {
-    this.router.navigate(['/mapa'], { queryParams: { erronka: 9 } });
+    this.router.navigate(['/testua'], { queryParams: { erronka: 9 } });
+  }
+  mapaIkusi() {
+    this.router.navigate(['/mapa'], { queryParams: { erronka: this.erronka + 8} });
   }
 }

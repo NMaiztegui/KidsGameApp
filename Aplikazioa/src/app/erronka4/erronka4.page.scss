@@ -24,6 +24,14 @@ body::before {
     z-index: -1;
 }
 
+.home {
+    position: fixed;
+    right: 4vh;
+    top: 7vh;
+    width: 7vw;
+    height: auto;
+}
+
 .amona {
     position: fixed;
     width: 12vw;

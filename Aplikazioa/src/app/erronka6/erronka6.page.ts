@@ -15,6 +15,7 @@ export class Erronka6Page implements OnInit {
   erantzuna: boolean | null = null;
   hitzAukeratua: string | null = null;
   testuaIkusi: boolean = false;
+  erronka: number = 0;
 
   hitzak = [
     { hitza: 'Eskulturak', aukeratuta: false, hitzErabilia: false },
@@ -105,5 +106,9 @@ export class Erronka6Page implements OnInit {
   }
 
   ngOnInit() {
+  }
+
+  mapaIkusi() {
+    this.router.navigate(['/mapa'], { queryParams: { erronka: this.erronka + 6} });
   }
 }

@@ -17,6 +17,7 @@ testua: string = 'Erronka honetan zuen aurrean La Reinetako funikularra duzue et
   playErakutsi: boolean | null = true;
   ariketaErakutsi: boolean | null = false;
   finishErakutsi: boolean | null = false;
+  erronka: number = 0;
 
   constructor(private router: Router) { }
 
@@ -69,4 +70,7 @@ testua: string = 'Erronka honetan zuen aurrean La Reinetako funikularra duzue et
   ngOnInit() {
   }
 
+  mapaIkusi() {
+    this.router.navigate(['/mapa'], { queryParams: { erronka: this.erronka + 5} });
+  }
 }

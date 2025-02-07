@@ -5,13 +5,14 @@
   <body>
     <div>
       <img class="amona" src="assets/img/amona.png">
+      <img (click)="mapaIkusi()" class="home" src="assets/img/home.png">
       <div class="speech-bubble">
 
         <p class="testu-luzeak">{{ testua }}</p>
         <img *ngIf="playErakutsi" (click)="erronkaHasi()" class="hasi" src="assets/img/play.png">
 
       </div>
-      <img (click)="audioaEntzun()" class="soinua" src="assets/img/soinua.png">>   
+      <img (click)="audioaEntzun()" class="soinua" src="assets/img/soinua.png">   
       <div class="argazkiak" *ngIf="ariketaErakutsi">
         <img class="argazkia" src="assets/img/funikular.jpg">
         <img class="argazkia" [class.aukeratuta]="argazkiAukeratuak.includes(1)" (click)="argazkiaAukeratu(1)" src="assets/img/autoa.png">

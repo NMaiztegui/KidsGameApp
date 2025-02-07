@@ -21,6 +21,7 @@ export class ErronkaPage implements OnInit, OnDestroy {
   playErakutsi: boolean | null = true;
   ariketaErakutsi: boolean | null = false;
   finishErakutsi: boolean | null = false;
+  erronka: number = 0;
 
   moveTextUp: boolean = false; 
 
@@ -88,5 +89,8 @@ export class ErronkaPage implements OnInit, OnDestroy {
     setTimeout(() => {
       event.target.value = ''; 
     }, 50);
+  }
+  mapaIkusi() {
+    this.router.navigate(['/mapa'], { queryParams: { erronka: this.erronka + 1} });
   }
 }

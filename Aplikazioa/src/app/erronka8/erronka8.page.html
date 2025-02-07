@@ -5,12 +5,20 @@
   <body>
     <div class="container">
       <img class="amona" src="assets/img/amona.png" alt="Amona">
+      <img (click)="mapaIkusi()" class="home" src="assets/img/home.png">
       <!-- <div class="speech-bubble">
         <p class="testu-luzeak">{{ testua }}</p>
         <img *ngIf="playErakutsi" (click)="erronkaHasi()" class="hasi" src="assets/img/play.png">
 
       </div>
       <img (click)="audioaEntzun()" class="soinua" src="assets/img/soinua.png"> -->
+      <div class="word-list">
+        <h3>Aurkitu behar diren hitzak:</h3>
+        <ul>
+          <li *ngFor="let word of words">{{ word }}</li>
+        </ul>
+      </div>
+      
       <div class="letter-grid">
         <div *ngFor="let letter of grid; let i = index" class="letter" [attr.data-index]="i"
           [class.selected]="selectedLetters.includes(i) || confirmedLetters.has(i)">
