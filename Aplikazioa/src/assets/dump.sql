@@ -22,7 +22,7 @@ CREATE TABLE IF NOT EXISTS argazkiaZuzenas(
     url TEXT NOT NULL,
     zuzena BOOLEAN NOT NULL
 );
-INSERT OR IGNORE INTO ArgazkiaZuzena (id, url, zuzena) VALUES (1, 'https://www.google.com', 0);
+INSERT OR IGNORE INTO argazkiaZuzenas (id, url, zuzena) VALUES (1, 'https://www.google.com', 0);
 
 CREATE TABLE IF NOT EXISTS Audioa(
     id INTEGER PRIMARY KEY AUTOINCREMENT,

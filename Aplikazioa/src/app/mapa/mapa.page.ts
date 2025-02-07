@@ -22,7 +22,7 @@ export class MapaPage implements OnInit, OnDestroy {
   ];
   private koordenadak = { latitud: 0, longitud: 0 };
   private margenError = 0.001;
-  private intervalId: any;
+  private watchId: number | null = null;
 
   constructor(private route: ActivatedRoute, private router: Router) { }
 
@@ -38,17 +38,15 @@ export class MapaPage implements OnInit, OnDestroy {
 
   getKoordenadak() {
     if (navigator.geolocation) {
-      this.intervalId = setInterval(() => {
-        navigator.geolocation.getCurrentPosition(
-          (position) => {
-            this.koordenadak.latitud = position.coords.latitude;
-            this.koordenadak.longitud = position.coords.longitude;
-            console.log('Koordenadak:', this.koordenadak);
-          },
-          (error) => console.error('Errorrea koordenadak lortzen', error),
-          { enableHighAccuracy: true }
-        );
-      }, 10000); // Koordenadak lortu 10 segunduro
+      this.watchId = navigator.geolocation.watchPosition(
+        (position) => {
+          this.koordenadak.latitud = position.coords.latitude;
+          this.koordenadak.longitud = position.coords.longitude;
+          console.log('Koordenadak:', this.koordenadak);
+        },
+        (error) => console.error('Error obteniendo ubicación', error),
+        { enableHighAccuracy: true, maximumAge: 0, timeout: 5000 }
+      );
     }
   }
 
@@ -73,12 +71,14 @@ export class MapaPage implements OnInit, OnDestroy {
     const erronkaIdLocalizado = this.lekuanBadago();
     if (erronkaIdLocalizado === this.erronkaId) {
       this.router.navigate(['/aurkezpena', erronkaIdLocalizado]);
+    } else {
+      console.log('Ez zaude kokalekuan.');
     }
   }
 
   ngOnDestroy() {
-    if (this.intervalId) {
-      clearInterval(this.intervalId);
+    if (this.watchId !== null) {
+      navigator.geolocation.clearWatch(this.watchId);
     }
   }
 }

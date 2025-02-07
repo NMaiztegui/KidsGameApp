@@ -63,7 +63,7 @@ export class AurkezpenaPage implements OnInit {
   }
   
   loadErronkaAzalpena(id:number){
-    this.apiService.getERronkaById(id).subscribe({
+    this.apiService.getErronkaById(id).subscribe({
       next:(erronka)=>{
         console.log('Erronka azalpena:', erronka);
         this.fullText = erronka?.azalpena || 'Testurik ez dago ID honetarako.';
