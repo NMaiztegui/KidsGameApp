@@ -29,7 +29,7 @@ export class ErronkaPage implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     Keyboard.removeAllListeners();
-    
+  }
   erronkaId: number = 1;
 
   constructor(private router: Router, private apiService: ApiService) { }
@@ -134,3 +134,4 @@ export class ErronkaPage implements OnInit, OnDestroy {
     })
   }
 }
+
