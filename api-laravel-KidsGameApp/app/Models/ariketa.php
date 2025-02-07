@@ -28,4 +28,9 @@ class Ariketa extends Model
     public function ordenatu(){
         return $this->hasMany(ordenatu::class, 'id_ariketa', 'id');
     }
+    
+    public function aukeraZuzena(){
+        return $this->hasMany(Aukera_zuzena::class, 'id_ariketa', 'id');
+    }
+
 }

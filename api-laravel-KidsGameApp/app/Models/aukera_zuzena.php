@@ -10,4 +10,8 @@ class Aukera_zuzena extends Model
         'esaldia',
         'zuzena',
     ];
+    public function ariketa()
+    {
+        return $this->belongsTo(Ariketa::class, 'id_ariketa', 'id');
+    }
 }
