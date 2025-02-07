@@ -26,12 +26,13 @@ export class ErronkaPage implements OnInit {
   constructor(private router: Router, private apiService: ApiService) { }
 
   ngOnInit() {
-    this.getAriketaAzalpena(this.erronkaId);
+    this.getErronkaAzalpena(this.erronkaId);
     this.getAriketaAudioa(this.erronkaId);
     this.getAriketa();
   }
 
   erronkaHasi() {
+    this.getAriketaAzalpena(this.erronkaId);
     this.playErakutsi = false;
     this.ariketaErakutsi = true;
     this.finishErakutsi = true;
@@ -67,10 +68,20 @@ export class ErronkaPage implements OnInit {
     this.letras = this.textHutsunea.split('').map((char) => (char === '_' ? '' : char));
   }
 
+  getErronkaAzalpena(id: number) {
+    this.apiService.getErronkaById(id).subscribe({
+      next: (erronka) => {
+        this.testua = erronka?.azalpena || 'Testurik ez dago ID honetarako.';
+      },
+      error: (error) => {
+        console.error('Error al obtener erronka:', error);
+      }
+    })
+  }
+
   getAriketaAzalpena(id: number) {
     this.apiService.getAriketaById(id).subscribe({
       next: (ariketa) => {
-        console.log('Erronka azalpena:', ariketa?.azalpena);
         this.testua = ariketa?.azalpena || 'Testurik ez dago ID honetarako.';
       },
       error: (error) => {
@@ -82,7 +93,6 @@ export class ErronkaPage implements OnInit {
   getAriketaAudioa(id: number) {
     this.apiService.getAudioaById(this.erronkaId).subscribe({
       next: (audioa) => {
-        console.log('Audioa:', audioa?.audioa);
         this.audioa = audioa?.audioa || 'Audiorik ez dago ID honetarako.';
       },
       error: (error) => {
@@ -93,9 +103,9 @@ export class ErronkaPage implements OnInit {
 
   getAriketa() {
     this.apiService.getHizkiakBete(this.textHutsunea, this.textOsoa).subscribe({
-      next: (hizkiak) => {
-        this.textHutsunea === hizkiak?.textHutsunea || 'Hitzik ez dago ID honetarako.';
-        this.textOsoa === hizkiak?.textOsoa || 'Hitzik ez dago ID honetarako.';
+      next: (hizkiak_bete) => {
+        this.textHutsunea === hizkiak_bete?.textHutsunea || 'Hitzik ez dago ID honetarako.';
+        this.textOsoa === hizkiak_bete?.textOsoa || 'Hitzik ez dago ID honetarako.';
       },
       error: (error) => {
         console.error('Error al obtener ariketa:', error);

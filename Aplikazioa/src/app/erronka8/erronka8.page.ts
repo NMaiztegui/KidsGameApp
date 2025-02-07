@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { GestureController, Gesture } from '@ionic/angular';
 import { Router } from '@angular/router';
+import { ApiService } from '../services/api.service';
 
 @Component({
   selector: 'app-erronka8',
@@ -26,20 +27,22 @@ export class Erronka8Page implements OnInit, OnDestroy {
   testuaIkusi: boolean = false;
   playErakutsi: boolean | null = true;
   ariketaErakutsi: boolean | null = false;
-
   gesture!: Gesture;
+  erronkaId: number = 8;
 
-  constructor(private router: Router,private gestureCtrl: GestureController) {}
-
-  erronkaHasi() {
-    this.playErakutsi = false;
-    this.ariketaErakutsi = true;
-  }
+  constructor(private router: Router,private gestureCtrl: GestureController, private apiService: ApiService) {}
 
   ngOnInit() {
+    this.getErronkaAzalpena(this.erronkaId);
     this.generateGrid();
     this.startTimer();
     this.initializeGesture();
+  }
+
+  erronkaHasi() {
+    this.getAriketaAzalpena(this.erronkaId);
+    this.playErakutsi = false;
+    this.ariketaErakutsi = true;
   }
 
   ngOnDestroy() {
@@ -233,4 +236,29 @@ export class Erronka8Page implements OnInit, OnDestroy {
   erronkaSubmit() {
     this.router.navigate(['/mapa'], { queryParams: { erronka: 9 } });
   }
+
+  getErronkaAzalpena(id: number) {
+    this.apiService.getErronkaById(id).subscribe({
+      next: (erronka) => {
+        console.log('Erronka azalpena:', erronka?.azalpena);
+        this.testua = erronka?.azalpena || 'Testurik ez dago ID honetarako.';
+      },
+      error: (error) => {
+        console.error('Error al obtener erronka:', error);
+      }
+    })
+  }
+
+  getAriketaAzalpena(id: number) {
+    this.apiService.getAriketaById(id).subscribe({
+      next: (ariketa) => {
+        console.log('Ariketa azalpena:', ariketa?.azalpena);
+        this.testua = ariketa?.azalpena || 'Testurik ez dago ID honetarako.';
+      },
+      error: (error) => {
+        console.error('Error al obtener erronka:', error);
+      }
+    })
+  }
+
 }

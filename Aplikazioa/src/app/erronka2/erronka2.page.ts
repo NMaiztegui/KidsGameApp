@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ApiService } from '../services/api.service';
 
 @Component({
   selector: 'app-erronka2',
@@ -8,16 +9,19 @@ import { Router } from '@angular/router';
   standalone: false,
 })
 export class Erronka2Page implements OnInit {
-  testua: string = 'Kaixo! Erronka honetan harri zulatzaileen inguruko 2 galdera erantzun beharko dituzue.';
+  testua: string = '';
+  audioa: string = '';
   argazkiakErakutsi: boolean | null = false;
   hitzakErakutsi: boolean | null = false;
   playErakutsi: boolean | null = true;
   finishErakutsi: boolean | null = false;
   argazkiAukeratua: number | null = null;
   erantzuna: boolean | null = null;
-  esaldiZuzena: string[] = ['1. Barrenak', '2. harkaitzetan', '3. zuloak', '4. egiten', '5. eta', '6. lehergailuak', '7. jarriz', '8. harriak', '9. puskatzeko', '10. erabiltzen', '11. zituzten', '12. .'];
   esaldiOndo: boolean | null = null;
   testuaIkusi: boolean = false;
+  hitzOrdena = 0;
+  erronkaId: number = 2;
+  esaldiZuzena: string[] = ['1. Barrenak', '2. harkaitzetan', '3. zuloak', '4. egiten', '5. eta', '6. lehergailuak', '7. jarriz', '8. harriak', '9. puskatzeko', '10. erabiltzen', '11. zituzten', '12. .'];
 
   hitzakPosizioa = [
     { hitza: 'harkaitzetan', top: '70vh', left: '5vw', numero: null, aukeratuta: false },
@@ -36,10 +40,18 @@ export class Erronka2Page implements OnInit {
 
   hitzakAukeratu: { hitza: string; numero: number | null }[] = [];
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private apiService: ApiService) { }
+
+  ngOnInit() {
+    this.getErronkaAzalpena(this.erronkaId);
+    this.getAriketaAudioa(this.erronkaId);
+    this.getAriketa1();
+    this.getAriketa2();
+  }
 
   erronkaHasi() {
-    this.testua = 'Ondorengo argazkietatik, zeinek erakusten du harrizulatzaile bat ? Hautatu erantzun zuzena.';
+    this.getAriketaAzalpena(this.erronkaId);
+    this.testua = 'Ondorengo argazkietatik, zeinek erakusten du harrizulatzaile bat? Hautatu erantzun zuzena.';
     this.argazkiakErakutsi = true;
     this.playErakutsi = false;
     this.finishErakutsi = true;
@@ -48,8 +60,6 @@ export class Erronka2Page implements OnInit {
   argazkiaAukeratu(argazkiId: number) {
     this.argazkiAukeratua = argazkiId;
   }
-
-  hitzOrdena = 0;
 
   hitzaAukeratu(item: any) {
     if (item.numero === null) {
@@ -71,9 +81,9 @@ export class Erronka2Page implements OnInit {
       const hitzakOrdenatuta = this.hitzakAukeratu
         .sort((a, b) => (a.numero || 0) - (b.numero || 0))
         .map(item => item.hitza);
-  
+
       const esaldiZuzenaHitzak = this.esaldiZuzena.map(item => item.split('. ')[1]);
-  
+
       if (JSON.stringify(hitzakOrdenatuta) === JSON.stringify(esaldiZuzenaHitzak)) {
         this.erantzuna = true;
       } else {
@@ -84,7 +94,7 @@ export class Erronka2Page implements OnInit {
 
   audioaEntzun() {
     const audio = new Audio();
-    audio.src = 'assets/audio/erronka2.m4a';
+    audio.src = this.audioa;
     audio.load();
     audio.play();
   }
@@ -104,7 +114,7 @@ export class Erronka2Page implements OnInit {
     this.erantzuna = null;
     this.hitzakAukeratu = [];
     this.hitzOrdena = 0;
-  
+
     this.hitzakPosizioa.forEach((item) => {
       item.numero = null;
       item.aukeratuta = false;
@@ -115,6 +125,61 @@ export class Erronka2Page implements OnInit {
     this.router.navigate(['/mapa'], { queryParams: { erronka: 3 } });
   }
 
-  ngOnInit() {
+  getErronkaAzalpena(id: number) {
+    this.apiService.getErronkaById(id).subscribe({
+      next: (erronka) => {
+        console.log('Erronka azalpena:', erronka?.azalpena);
+        this.testua = erronka?.azalpena || 'Testurik ez dago ID honetarako.';
+      },
+      error: (error) => {
+        console.error('Error al obtener erronka:', error);
+      }
+    })
+  }
+
+  getAriketaAzalpena(id: number) {
+    this.apiService.getAriketaById(id).subscribe({
+      next: (ariketa) => {
+        console.log('Ariketa azalpena:', ariketa?.azalpena);
+        this.testua = ariketa?.azalpena || 'Testurik ez dago ID honetarako.';
+      },
+      error: (error) => {
+        console.error('Error al obtener erronka:', error);
+      }
+    })
+  }
+
+  getAriketaAudioa(id: number) {
+    this.apiService.getAudioaById(id).subscribe({
+      next: (audioa) => {
+        console.log('Audioa:', audioa?.audioa);
+        this.audioa = audioa?.audioa || 'Audiorik ez dago ID honetarako.';
+      },
+      error: (error) => {
+        console.error('Error al obtener audioa:', error);
+      }
+    })
+  }
+
+  getAriketa1() {
+    this.apiService.getArgazkiZuzenak().subscribe({
+      next: (argazkia_zuzenak) => {
+
+      },
+      error: (error) => {
+        console.error('Error al obtener ariketa:', error);
+      }
+    })
+  }
+
+  getAriketa2() {
+    this.apiService.getOrdenatu().subscribe({
+      next: (ordenatu) => {
+
+      },
+      error: (error) => {
+        console.error('Error al obtener ariketa:', error);
+      }
+    })
   }
 }
