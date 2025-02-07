@@ -24,13 +24,12 @@ export class Erronka5Page implements OnInit {
   constructor(private router: Router, private apiService: ApiService) { }
 
   ngOnInit() {
-    this.getErronkaAzalpena(this.erronkaId);
+    this.getAriketaAzalpena(this.erronkaId);
     this.getAriketaAudioa(this.erronkaId);
     this.getAriketa1();
   }
 
   erronkaHasi() {
-    this.getAriketaAzalpena(this.erronkaId);
     this.playErakutsi = false;
     this.ariketaErakutsi = true;
     this.finishErakutsi = true;
@@ -74,18 +73,6 @@ export class Erronka5Page implements OnInit {
 
   erronkaSubmit() {
     this.router.navigate(['/mapa'], { queryParams: { erronka: 6 } });
-  }
-
-  getErronkaAzalpena(id: number) {
-    this.apiService.getErronkaById(id).subscribe({
-      next: (erronka) => {
-        console.log('Erronka azalpena:', erronka?.azalpena);
-        this.testua = erronka?.azalpena || 'Testurik ez dago ID honetarako.';
-      },
-      error: (error) => {
-        console.error('Error al obtener erronka:', error);
-      }
-    })
   }
 
   getAriketaAzalpena(id: number) {

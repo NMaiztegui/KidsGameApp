@@ -26,13 +26,12 @@ export class ErronkaPage implements OnInit {
   constructor(private router: Router, private apiService: ApiService) { }
 
   ngOnInit() {
-    this.getErronkaAzalpena(this.erronkaId);
+    this.getAriketaAzalpena(this.erronkaId);
     this.getAriketaAudioa(this.erronkaId);
     this.getAriketa();
   }
 
   erronkaHasi() {
-    this.getAriketaAzalpena(this.erronkaId);
     this.playErakutsi = false;
     this.ariketaErakutsi = true;
     this.finishErakutsi = true;
@@ -66,17 +65,6 @@ export class ErronkaPage implements OnInit {
   ariketaBerregin() {
     this.erantzuna = null;
     this.letras = this.textHutsunea.split('').map((char) => (char === '_' ? '' : char));
-  }
-
-  getErronkaAzalpena(id: number) {
-    this.apiService.getErronkaById(id).subscribe({
-      next: (erronka) => {
-        this.testua = erronka?.azalpena || 'Testurik ez dago ID honetarako.';
-      },
-      error: (error) => {
-        console.error('Error al obtener erronka:', error);
-      }
-    })
   }
 
   getAriketaAzalpena(id: number) {
