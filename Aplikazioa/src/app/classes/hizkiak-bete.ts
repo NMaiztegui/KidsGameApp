@@ -1,5 +1,5 @@
 export class HizkiakBete {
     id!:number;
-    hizkia!:string;
-    posizioa!:number;
+    text_hustsuneak!:string;
+    text_osoa!:number;
 }
