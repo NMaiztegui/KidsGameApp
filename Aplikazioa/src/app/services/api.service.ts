@@ -91,9 +91,9 @@ export class ApiService {
     return from(this.sqliteService.fetchDataAndSave<Funikularra>(this.httpClient, 'funikularra', 'funikularras'));
   }
 
-  getHizkiakBete(textHutsunea: string, textOsoa: string): Observable<HizkiakBete | undefined> {
+  getHizkiakBete(id: number): Observable<HizkiakBete | undefined> {
     return from(this.sqliteService.fetchDataAndSave<HizkiakBete>(this.httpClient, 'hizkiak_bete', 'hizkiak_betes')).pipe(
-      map(hizkiak => hizkiak.find(hizkia => hizkia.text_hutsunea === textHutsunea && hizkia.text_osoa === textOsoa)),
+      map(hizkiak => hizkiak.find(hizkia => hizkia.id === id)),
       catchError(error => {
         console.error('Error al obtener audioa:', error);
         return of(undefined);

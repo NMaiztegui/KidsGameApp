@@ -13,10 +13,9 @@ import { ApiService } from '../services/api.service';
 export class ErronkaPage implements OnInit, OnDestroy {
   testua: string = '';
   audioa: string = '';
-  textHutsunea = 'Tx_kit_tik Tr_p_ga_anek_ m_ateg_etat_k mu_itu i_an na_z. Ni_e ha_rtzaro_ren zati_ik han_ien_ ing_ru hauet_n eman dut, f_mi_ia eta sen_rrare_in ego_eko. Horre_aiti_, her_i eta ingu_uko se_retu gehi_nak dakizkit. Ib_lbid_an zehar desku_ritzek_ pre_t zaud_te?';
-  textOsoa = 'Txikitatik Trapagaraneko meategietatik mugitu izan naiz. Nire haurtzaroaren zatirik handiena inguru hauetan eman dut, familia eta senarrarekin egoteko. Horregaitik, herri eta inguruko sekretu gehienak dakizkit. Ibilbidean zehar deskubritzeko prest zaudete?';
-
-  letras = this.textHutsunea.split('').map((char) => (char === '_' ? '' : char));
+  textHutsunea: string = '';
+  textOsoa: string = '';
+  letras: string[] = [];
   erantzuna: boolean | null = null;
   testuaIkusi: boolean = false;
   playErakutsi: boolean | null = true;
@@ -31,7 +30,7 @@ export class ErronkaPage implements OnInit, OnDestroy {
   ngOnInit() {
     this.getAriketaAzalpena(this.erronkaId);
     this.getAriketaAudioa(this.erronkaId);
-    this.getAriketa();
+    this.getAriketa(this.erronkaId);
     Keyboard.addListener('keyboardDidShow', () => {
       this.moveTextUp = true;
     });
@@ -46,6 +45,7 @@ export class ErronkaPage implements OnInit, OnDestroy {
   }
 
   erronkaHasi() {
+    this.letras = this.textHutsunea.split('').map((char) => (char === '_' ? '' : char));
     this.playErakutsi = false;
     this.ariketaErakutsi = true;
     this.finishErakutsi = true;
@@ -111,7 +111,7 @@ export class ErronkaPage implements OnInit, OnDestroy {
   }
 
   getAriketaAudioa(id: number) {
-    this.apiService.getAudioaById(this.erronkaId).subscribe({
+    this.apiService.getAudioaById(id).subscribe({
       next: (audioa) => {
         this.audioa = audioa?.audioa || 'Audiorik ez dago ID honetarako.';
       },
@@ -121,11 +121,11 @@ export class ErronkaPage implements OnInit, OnDestroy {
     })
   }
 
-  getAriketa() {
-    this.apiService.getHizkiakBete(this.textHutsunea, this.textOsoa).subscribe({
-      next: (hizkiak_bete) => {
-        // this.textHutsunea = hizkiak_bete?.text_hutsunea || 'Hitzik ez dago ID honetarako.';
-        // this.textOsoa = hizkiak_bete?.text_osoa || 'Hitzik ez dago ID honetarako.';
+  getAriketa(id: number) {
+    this.apiService.getHizkiakBete(id).subscribe({
+      next: (hizkia) => {
+        this.textHutsunea = hizkia?.text_hutsunea || 'Hitzik ez dago ID honetarako.';
+        this.textOsoa = hizkia?.text_osoa || 'Hitzik ez dago ID honetarako.';
       },
       error: (error) => {
         console.error('Error al obtener ariketa:', error);
