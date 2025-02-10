@@ -46,26 +46,17 @@ INSERT OR IGNORE INTO ariketas (id, azalpena, id_erronka) VALUES (1, "Kaixo! Err
 
 INSERT OR IGNORE INTO ariketas (id, azalpena, id_erronka) VALUES (2, "Kaixo! Erronka honetan harri zulatzaileen inguruko 2 galdera erantzun beharko dituzue.", 2);
 
-INSERT OR IGNORE INTO ariketas (id, azalpena, id_erronka) VALUES (3, "Ondorengo argazkietatik, zeinek erakusten du harrizulatzaile bat?", 2);
+INSERT OR IGNORE INTO ariketas (id, azalpena, id_erronka) VALUES (3, "Erronka honetan beste 2 galdera erantzun beharko dituzue.", 3);
 
-INSERT OR IGNORE INTO ariketas (id, azalpena, id_erronka) VALUES (4, "Zein da harrizulatzaile baten lana?Esaldia ordenatu", 2);
+INSERT OR IGNORE INTO ariketas (id, azalpena, id_erronka) VALUES (4, "Argazki honetan agertzen den pertsonaia meatzariz mozorratu nahi da. Zein elementu erabiliko ditu?", 4);
 
-INSERT OR IGNORE INTO ariketas (id, azalpena, id_erronka) VALUES (5, "Zer da greba bat?Aukeratu erantzun zuzena", 3);
+INSERT OR IGNORE INTO ariketas (id, azalpena, id_erronka) VALUES (5, "Zuen aurrean La Reinetako funikularra duzue eta alboan hainbat elementuren argazkiak. Hauetako  zein elementu garraiatzen zituzten antzinean funikularrean? garraiazten zituzten elementuen argazkiak funikularreraino arrastratu beharko dituzue.", 5);
 
-INSERT OR IGNORE INTO ariketas (id, azalpena, id_erronka) VALUES (6, "Greba Bizkaiko 500 langileekin hasi  zen.Egia edo gezurra", 3);
+INSERT OR IGNORE INTO ariketas (id, azalpena, id_erronka) VALUES (6, "Jarduera honetan, esaldietan agertzen diren hutsuneak bete beharko dituzue. Horretarako, goian agertzen diren hitzetatik egokia dena aukeratu  eta bere lekura arrastratu.", 6);
 
-INSERT OR IGNORE INTO ariketas (id, azalpena, id_erronka) VALUES (7, "Funtsezko  pertsonaiak eta gertaerak erlazionatu Lotu", 3);
+INSERT OR IGNORE INTO ariketas (id, azalpena, id_erronka) VALUES (7, "Tabernako sukaldariei babarrunen errezetaren orriak jausi zaizkie, eta desordenatu egin da errezeta. Azken erronka honetan babarrunak egiteko errezeta ordenatu beharko duzue, babarrunak berriz prestatu ahal izateko.", 7);
 
-INSERT OR IGNORE INTO ariketas (id, azalpena, id_erronka) VALUES (8, "Argazki honetan agertzen den pertsonaia meatzariz mozorratu nahi da. Zein elementu erabiliko ditu?", 4);
-
-INSERT OR IGNORE INTO ariketas (id, azalpena, id_erronka) VALUES (9, "Zuen aurrean La Reinetako funikularra duzue eta alboan hainbat elementuren argazkiak. Hauetako  zein elementu garraiatzen zituzten antzinean funikularrean? garraiazten zituzten elementuen argazkiak funikularreraino arrastratu beharko dituzue.", 5);
-
-INSERT OR IGNORE INTO ariketas (id, azalpena, id_erronka) VALUES (10, "Jarduera honetan, esaldietan agertzen diren hutsuneak bete beharko dituzue. Horretarako, goian agertzen diren hitzetatik egokia dena aukeratu  eta bere lekura arrastratu.", 6);
-
-
-INSERT OR IGNORE INTO ariketas (id, azalpena, id_erronka) VALUES (11, "Tabernako sukaldariei babarrunen errezetaren orriak jausi zaizkie, eta desordenatu egin da errezeta. Azken erronka honetan babarrunak egiteko errezeta ordenatu beharko duzue, babarrunak berriz prestatu ahal izateko.", 7);
-
-INSERT OR IGNORE INTO ariketas (id, azalpena, id_erronka) VALUES (12, "Zenbat hitz berri ikasi dituzue gaur? Ikasitakoa frogatzeko aukera duzue orain.", 8);
+INSERT OR IGNORE INTO ariketas (id, azalpena, id_erronka) VALUES (8, "Zenbat hitz berri ikasi dituzue gaur? Ikasitakoa frogatzeko aukera duzue orain.", 8);
 
 CREATE TABLE IF NOT EXISTS argazkia_zuzenas(
     id INTEGER PRIMARY KEY AUTOINCREMENT,

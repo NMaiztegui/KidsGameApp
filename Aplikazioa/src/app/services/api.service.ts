@@ -93,7 +93,7 @@ export class ApiService {
 
   getHizkiakBete(textHutsunea: string, textOsoa: string): Observable<HizkiakBete | undefined> {
     return from(this.sqliteService.fetchDataAndSave<HizkiakBete>(this.httpClient, 'hizkiak_bete', 'hizkiak_betes')).pipe(
-      map(hizkiak => hizkiak.find(hizkia => hizkia.textHutsunea === textHutsunea && hizkia.textOsoa === textOsoa)),
+      map(hizkiak => hizkiak.find(hizkia => hizkia.text_hutsunea === textHutsunea && hizkia.text_osoa === textOsoa)),
       catchError(error => {
         console.error('Error al obtener audioa:', error);
         return of(undefined);

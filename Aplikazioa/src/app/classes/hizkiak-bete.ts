@@ -1,6 +1,6 @@
 export class HizkiakBete {
     id!:number;
-    textHutsunea!:string;
-    textOsoa!:string;
+    text_hutsunea!:string;
+    text_osoa!:string;
 
 }

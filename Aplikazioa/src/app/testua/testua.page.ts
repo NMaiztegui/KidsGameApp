@@ -13,14 +13,14 @@ export class TestuaPage implements OnInit {
   orria: number = 0;
 
   testuak: string[] = [
-    "testu1",
-    "testu2",
-    "testu3",
-    "testu4",
-    "testu5",
-    "testu6",
-    "testu7",
-    "testu8",
+    "Aspaldian, Trapagaran misteriotsuan, meatzari ausartak mendietan sartzen ziren altxor ezkutuak ateratzeko; hain zuzen, herriari bizia ematen zioten mineral distiratsuak.",
+    "Herritarren artean, Dolores Ibarruri izeneko emakume berezi bat oso maitatua zen.",
+    "Handik ez oso urrun, Gallartan, meatzariek lehia zirraragarria ospatzen zuten: altzairuzko barra izugarriekin zuloak egiten zituzten harkaitzetan! Nork azkarrago egiten zuen ikustea benetako ikuskizuna zen.",
+    "Makinak iritsi eta beren lekua hartu bazuten ere, tradizio horren emozioak bizirik dirau.",
+    "1890ean, meatzariek euren unerik zailenetako bat bizi izan zuten. Greba handi bat hasi zen lankide batzu bidegabeki kaleratu zituztenean. Baina ez zuten amore eman, eta azkenean, haien bizitzak hobetu zituen akordio bat irabazi zuten, Loma Ituna bezala ezaguna.",
+    "Gainera, funikularra, asmakizun harrigarria, agertu zen. Garraio magiko horrek Trapagarango jendea Zugaztietara eramaten zuen minutu gutxitan, bizitza askoz errazagoa eginez.",
+    "Gaur egun, meategiak itxita badaude ere, Zugaztieta leku berezia da oraindik. Aintzinako putzuak laku eder bihurtu ziren, eta familiak herrian hain gustuko dituzten babarrun gozoak jatera joaten dira.",
+    "Testu guztiak lortuta, ikus dezagun esanahia",
   ];
 
   constructor(private router: Router, private route: ActivatedRoute) { }

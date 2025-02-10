@@ -50,10 +50,11 @@ export class MapaPage implements OnInit, OnDestroy {
     //     Math.abs(this.koordenadak.latitud - erronka.latitud) < this.margenError &&
     //     Math.abs(this.koordenadak.longitud - erronka.longitud) < this.margenError
     //   ) {
+    //     console.log('Koordenadak:', this.erronkak);
     //     return erronka.id;
     //   }
     // }
-    // return null;
+    return null;
   }
 
   testuaIkusi() {

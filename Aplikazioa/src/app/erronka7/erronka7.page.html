@@ -1,6 +1,7 @@
 <link href="https://fonts.googleapis.com/css2?family=DynaPuff:wght@400;700&display=swap" rel="stylesheet">
 
 <ion-content [fullscreen]="true">
+
   <body>
     <div>
       <img class="amona" src="assets/img/amona.png">
@@ -11,14 +12,12 @@
       </div>
       <img (click)="audioaEntzun()" class="soinua" src="assets/img/soinua.png">>
       <div *ngIf="hitzakErakutsi">
-        <p class="hitza testu-luzeak"
-           *ngFor="let item of hitzakPosizioa"
-           (click)="hitzaAukeratu(item)"
-           [ngStyle]="{'top': item.top, 'left': item.left, 'position': 'absolute'}"
-           [ngClass]="{'aukeratuta': item.aukeratuta}">
+        <p class="hitza testu-luzeak" *ngFor="let item of hitzakPosizioa" (click)="hitzaAukeratu(item)"
+          [ngStyle]="{'top': item.top, 'left': item.left, 'position': 'absolute'}"
+          [ngClass]="{'aukeratuta': item.aukeratuta}">
           {{ item.numero ? item.numero + '.' : '' }} {{ item.hitza }}
         </p>
-      </div>                    
+      </div>
       <div class="erantzuna-bubble" *ngIf="erantzuna !== null">
         <ng-container *ngIf="erantzuna">
 
@@ -27,7 +26,7 @@
 
         </ng-container>
         <ng-container *ngIf="!erantzuna">
-          <p class="testu-luzeak okerra" >Saiatu berriro, errezeta ez dago ondo ordenatuta.</p>
+          <p class="testu-luzeak okerra">Saiatu berriro, errezeta ez dago ondo ordenatuta.</p>
           <img (click)="ariketaBerregin()" class="oker" src="assets/img/rehacer.png">
         </ng-container>
       </div>
@@ -35,8 +34,8 @@
         <img class="img" src="assets/img/testuizkutua2.png">
         <p class="itxi" (click)="erronkaSubmit()">X</p>
         <p class="text">
-          “Aspaldian, Trapagaran misteriotsuan, meatzari ausartak mendietan sartzen ziren altxor ezkutuak ateratzeko;
-          hain zuzen, herriari bizia ematen zioten mineral distiratsuak.”
+          “Gaur egun, meategiak itxita badaude ere, Zugaztieta leku berezia da oraindik. Aintzinako putzuak laku eder
+          bihurtu ziren, eta familiak herrian hain gustuko dituzten babarrun gozoak jatera joaten dira.”
         </p>
       </div>
       <img *ngIf="finishErakutsi" (click)="erantzunaEgiaztatu()" class="tik" src="assets/img/tik.png">

@@ -34,11 +34,11 @@
       <div class="erantzuna-bubble" *ngIf="erantzuna !== null">
         <ng-container *ngIf="erantzuna">
 
-          <p class="testu-luzeak zuzena" >Zorionak! Mezuaren zati bar deszifratu duzu!</p>
+          <p class="testu-luzeak zuzena">Zorionak! Mezuaren zati bar deszifratu duzu!</p>
           <img (click)="testuaErakutsi()" class="zuzen" src="assets/img/tik.png">
         </ng-container>
         <ng-container *ngIf="!erantzuna">
-          <p class="testu-luzeak okerra" >Saiatu berriro, badaude akats batzuk.</p>
+          <p class="testu-luzeak okerra">Saiatu berriro, badaude akats batzuk.</p>
           <img (click)="ariketaBerregin()" class="oker" src="assets/img/rehacer.png">
         </ng-container>
       </div>
@@ -46,8 +46,8 @@
         <img class="img" src="assets/img/testuizkutua2.png">
         <p class="itxi" (click)="erronkaSubmit()">X</p>
         <p class="text">
-          “Aspaldian, Trapagaran misteriotsuan, meatzari ausartak mendietan sartzen ziren altxor ezkutuak ateratzeko;
-          hain zuzen, herriari bizia ematen zioten mineral distiratsuak.”
+          “Gainera, funikularra, asmakizun harrigarria, agertu zen. Garraio magiko horrek Trapagarango jendea
+          Zugaztietara eramaten zuen minutu gutxitan, bizitza askoz errazagoa eginez.”
         </p>
       </div>
       <img *ngIf="finishErakutsi" (click)="erantzunaEgiaztatu()" class="tik" src="assets/img/tik.png">
