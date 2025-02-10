@@ -44,9 +44,8 @@
           <img (click)="ariketaBerregin()" class="oker" src="assets/img/rehacer.png">
         </ng-container>
       </div>
-      <div class="testu-izkutua" *ngIf="testuaIkusi">
+      <div class="testu-izkutua" (click)="erronkaSubmit()" *ngIf="testuaIkusi">
         <img class="img" src="assets/img/testuizkutua2.png">
-        <p class="itxi" (click)="erronkaSubmit()">X</p>
         <p class="text">
           “Handik ez oso urrun, Gallartan, meatzariek lehia zirraragarria ospatzen zuten: altzairuzko barra izugarriekin
           zuloak egiten zituzten harkaitzetan! Nork azkarrago egiten zuen ikustea benetako ikuskizuna zen.”

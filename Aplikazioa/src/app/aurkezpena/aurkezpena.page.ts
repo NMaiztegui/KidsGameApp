@@ -13,7 +13,6 @@ export class AurkezpenaPage implements OnInit {
   displayedText: string = '';
   index: number = 0;
   speed: number = 55;
-
   erronkaId: number | null = null;
   playErakutsi: boolean | null = false;
 

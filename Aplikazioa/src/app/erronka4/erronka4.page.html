@@ -34,9 +34,8 @@
           <img (click)="ariketaBerregin()" class="oker" src="assets/img/rehacer.png">
         </ng-container>
       </div>
-      <div class="testu-izkutua" *ngIf="testuaIkusi">
+      <div class="testu-izkutua" (click)="erronkaSubmit()" *ngIf="testuaIkusi">
         <img class="img" src="assets/img/testuizkutua2.png">
-        <p class="itxi" (click)="erronkaSubmit()">X</p>
         <p class="text">
           “Makinak iritsi eta beren lekua hartu bazuten ere, tradizio horren emozioak bizirik dirau.”
         </p>

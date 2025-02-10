@@ -53,13 +53,13 @@ export class Erronka3Page implements OnInit {
   constructor(private router: Router, private apiService: ApiService) { }
 
   ngOnInit() {
+    this.getAriketaAzalpena(this.erronkaId);
     this.getAriketaAudioa(this.erronkaId);
     this.getAriketa1();
     this.getAriketa2();
   }
 
   erronkaHasi() {
-    this.getAriketaAzalpena(this.erronkaId);
     this.testua = 'Zer da greba bat? Hautatu erantzun zuzena hurrengo hiru aukeretatik.';
     this.erantzunakErakutsi = true;
     this.playErakutsi = false;
