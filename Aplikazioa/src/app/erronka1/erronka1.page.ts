@@ -23,13 +23,7 @@ export class ErronkaPage implements OnInit, OnDestroy {
   ariketaErakutsi: boolean | null = false;
   finishErakutsi: boolean | null = false;
   erronka: number = 0;
-
   moveTextUp: boolean = false; 
-
-
-  ngOnDestroy() {
-    Keyboard.removeAllListeners();
-  }
   erronkaId: number = 1;
 
   constructor(private router: Router, private apiService: ApiService) { }
@@ -45,6 +39,10 @@ export class ErronkaPage implements OnInit, OnDestroy {
     Keyboard.addListener('keyboardDidHide', () => {
       this.moveTextUp = false; 
     });
+  }
+
+  ngOnDestroy() {
+    Keyboard.removeAllListeners();
   }
 
   erronkaHasi() {
@@ -97,9 +95,11 @@ export class ErronkaPage implements OnInit, OnDestroy {
       event.target.value = ''; 
     }, 50);
   }
+
   mapaIkusi() {
     this.router.navigate(['/mapa'], { queryParams: { erronka: this.erronka + 1} });
   }
+
   getAriketaAzalpena(id: number) {
     this.apiService.getAriketaById(id).subscribe({
       next: (ariketa) => {

@@ -8,6 +8,7 @@ import { ApiService } from '../services/api.service';
   styleUrls: ['./erronka2.page.scss'],
   standalone: false,
 })
+
 export class Erronka2Page implements OnInit {
   testua: string = '';
   audioa: string = '';
@@ -19,7 +20,6 @@ export class Erronka2Page implements OnInit {
   erantzuna: boolean | null = null;
   esaldiOndo: boolean | null = null;
   testuaIkusi: boolean = false;
-
   erronka: number = 0;
   hitzOrdena = 0;
   erronkaId: number = 2;
@@ -185,8 +185,8 @@ export class Erronka2Page implements OnInit {
       }
     })
   }
-  
+
   mapaIkusi() {
-    this.router.navigate(['/mapa'], { queryParams: { erronka: this.erronka + 2} });
+    this.router.navigate(['/mapa'], { queryParams: { erronka: this.erronka + 2 } });
   }
 }
