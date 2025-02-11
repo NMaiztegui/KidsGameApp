@@ -266,7 +266,7 @@ CREATE TABLE IF NOT EXISTS parekatzeko_galderas(
 );
 INSERT OR IGNORE INTO parekatzeko_galderas (id, aukera, erlazioa) VALUES (1, "Loma ", 4);
 
-INSERT OR IGNORE INTO parekatzeko_galderas (id, aukera, erlazioa) VALUES (2, "Maiatzaren ", 5);
+INSERT OR IGNORE INTO parekatzeko_galderas (id, aukera, erlazioa) VALUES (2, "Maiatzaren 1a", 5);
 
 INSERT OR IGNORE INTO parekatzeko_galderas (id, aukera, erlazioa) VALUES (3, "Orconera ", 6);
 
@@ -282,21 +282,21 @@ CREATE TABLE IF NOT EXISTS mutikua_jantzis(
     objetua TEXT NOT NULL,
     zuzena BOOLEAN NOT NULL
 );
-INSERT OR IGNORE INTO mutikua_jantzis (id, url, objetua, zuzena) VALUES (1, "assets/img/mutikoa.png", "mutikoa", 1);
+INSERT OR IGNORE INTO mutikua_jantzis (id, url, objetua, zuzena) VALUES (1, "assets/img/mutikoa.png", "mutikoa", 0);
 
-INSERT OR IGNORE INTO mutikua_jantzis (id, url, objetua, zuzena) VALUES (2, "assets/img/takoia.png", "takoia", 1);
+INSERT OR IGNORE INTO mutikua_jantzis (id, url, objetua, zuzena) VALUES (2, "assets/img/takoia.png", "takoia", 0);
 
 INSERT OR IGNORE INTO mutikua_jantzis (id, url, objetua, zuzena) VALUES (3, "assets/img/caco.png", "babes kaskoa", 1);
 
 INSERT OR IGNORE INTO mutikua_jantzis (id, url, objetua, zuzena) VALUES (4, "assets/img/linterna.png", "linterna", 1);
 
-INSERT OR IGNORE INTO mutikua_jantzis (id, url, objetua, zuzena) VALUES (5, "assets/img/sonbrero.png", "txapela", 1);
+INSERT OR IGNORE INTO mutikua_jantzis (id, url, objetua, zuzena) VALUES (5, "assets/img/sonbrero.png", "txapela", 0);
 
 INSERT OR IGNORE INTO mutikua_jantzis (id, url, objetua, zuzena) VALUES (6, "assets/img/lanegitekojantzia.png", "langile jantzia", 1);
 
-INSERT OR IGNORE INTO mutikua_jantzis (id, url, objetua, zuzena) VALUES (7, "assets/img/botas.png", "laneko botak", 1);
+INSERT OR IGNORE INTO mutikua_jantzis (id, url, objetua, zuzena) VALUES (7, "assets/img/botas.png", "laneko botak", 0);
 
-INSERT OR IGNORE INTO mutikua_jantzis (id, url, objetua, zuzena) VALUES (8, "assets/img/soinekoa.png", "soinekoa", 1);
+INSERT OR IGNORE INTO mutikua_jantzis (id, url, objetua, zuzena) VALUES (8, "assets/img/soinekoa.png", "soinekoa", 0);
 
 INSERT OR IGNORE INTO mutikua_jantzis (id, url, objetua, zuzena) VALUES (9, "assets/img/pico.png", "pikotxa", 1);
 

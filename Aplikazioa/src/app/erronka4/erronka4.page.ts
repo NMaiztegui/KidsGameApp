@@ -12,21 +12,21 @@ import { ApiService } from '../services/api.service';
 export class Erronka4Page implements OnInit {
   testua: string = '';
   audioa: string = '';
+  imgUrls: string[] = [];
   erantzuna: boolean | null = null;
-  argazkiAukeratua: number | null = null;
-  argazkiAukeratuak: number[] = [];
+  argazkiAukeratuak: Set<number> = new Set();
   testuaIkusi: boolean = false;
   playErakutsi: boolean | null = true;
   ariketaErakutsi: boolean | null = false;
   finishErakutsi: boolean | null = false;
-  erronka: number = 0;
   erronkaId: number = 4;
+  erantzunEgokiak = new Set([2, 3, 5, 8]);
 
   constructor(private router: Router, private apiService: ApiService) { }
 
   ngOnInit() {
-    this.getAriketaAzalpena(this.erronkaId);
-    this.getAriketaAudioa(this.erronkaId);
+    this.getAriketaAzalpena();
+    this.getAriketaAudioa();
     this.getAriketa1();
   }
 
@@ -37,34 +37,25 @@ export class Erronka4Page implements OnInit {
   }
 
   argazkiaAukeratu(argazkiId: number) {
-    const index = this.argazkiAukeratuak.indexOf(argazkiId);
-
-    if (index !== -1) {
-      this.argazkiAukeratuak.splice(index, 1);
-    } else {
-      if (this.argazkiAukeratuak.length < 4) {
-        this.argazkiAukeratuak.push(argazkiId);
-      }
+    if (this.argazkiAukeratuak.has(argazkiId)) {
+      this.argazkiAukeratuak.delete(argazkiId);
+    } else if (this.argazkiAukeratuak.size < 4) {
+      this.argazkiAukeratuak.add(argazkiId);
     }
   }
 
   erantzunaEgiaztatu() {
-    if (this.argazkiAukeratuak.includes(2) && this.argazkiAukeratuak.includes(3) && this.argazkiAukeratuak.includes(5) && this.argazkiAukeratuak.includes(8)) {
-      this.erantzuna = true;
-    } else {
-      this.erantzuna = false;
-    }
+    this.erantzuna = this.argazkiAukeratuak.size === this.erantzunEgokiak.size &&
+      [...this.argazkiAukeratuak].every(id => this.erantzunEgokiak.has(id));
   }
 
   ariketaBerregin() {
     this.erantzuna = null;
-    this.argazkiAukeratuak = [];
+    this.argazkiAukeratuak.clear();
   }
 
   audioaEntzun() {
-    const audio = new Audio();
-    audio.src = this.audioa;
-    audio.load();
+    const audio = new Audio(this.audioa);
     audio.play();
   }
 
@@ -76,42 +67,34 @@ export class Erronka4Page implements OnInit {
     this.router.navigate(['/mapa'], { queryParams: { erronka: 5 } });
   }
 
-  getAriketaAzalpena(id: number) {
-    this.apiService.getAriketaById(id).subscribe({
+  getAriketaAzalpena() {
+    this.apiService.getAriketaById(this.erronkaId).subscribe({
       next: (ariketa) => {
-        const azalpenak = ariketa.map(a => a.azalpena);
-        this.testua = azalpenak[0] || 'Testurik ez dago ID honetarako.';
+        this.testua = ariketa[0]?.azalpena || 'Testurik ez dago ID honetarako.';
       },
-      error: (error) => {
-        console.error('Error al obtener erronka:', error);
-      }
-    })
+      error: (error) => console.error('Error al obtener erronka:', error),
+    });
   }
 
-  getAriketaAudioa(id: number) {
-    this.apiService.getAudioaById(id).subscribe({
+  getAriketaAudioa() {
+    this.apiService.getAudioaById(this.erronkaId).subscribe({
       next: (audioa) => {
-        const audioak = audioa.map(a => a.audioa);
-        this.audioa = audioak[0] || '';
+        this.audioa = audioa[0]?.audioa || '';
       },
-      error: (error) => {
-        console.error('Error al obtener audioa:', error);
-      }
-    })
+      error: (error) => console.error('Error al obtener audioa:', error),
+    });
   }
 
   getAriketa1() {
     this.apiService.getMutikoaJantzi().subscribe({
-      next: () => {
-
+      next: (mutikoa) => {
+        this.imgUrls = mutikoa.map(item => item.url) || [];
       },
-      error: (error) => {
-        console.error('Error al obtener ariketa:', error);
-      }
-    })
+      error: (error) => console.error('Error al obtener ariketa:', error),
+    });
   }
 
   mapaIkusi() {
-    this.router.navigate(['/mapa'], { queryParams: { erronka: this.erronka + 4} });
+    this.router.navigate(['/mapa'], { queryParams: { erronka: this.erronkaId + 1 } });
   }
 }

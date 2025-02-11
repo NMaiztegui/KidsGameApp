@@ -30,28 +30,15 @@ export class Erronka3Page implements OnInit {
   erronka: number = 0;
   erronkaId: number = 3;
 
-  aukerak = [
-    "Lan egiteari uztea protestan.",
-    "Jaiegun batean lana egitea.",
-    "Lan gehiago egitea."
-  ];
+  aukerak: string[] = [];
 
-  leftItems = [
-    { id: 1, name: 'Loma' },
-    { id: 2, name: 'Maiatzaren 1a' },
-    { id: 3, name: 'Orconera' }
-  ];
-
-  rightItems = [
-    { id: 1, name: 'Kaleratutako 5 meatzarien enpresa' },
-    { id: 2, name: 'Jeneral bat negoziatzera bidali zuten' },
-    { id: 3, name: 'Langileen Nazioarteko Eguna' }
-  ];
+  leftItems: { id: number, name: string }[] = [];
+  rightItems: { id: number, name: string }[] = [];
 
   ordenaZuzena = [
-    { left: 1, right: 2 },
-    { left: 2, right: 3 },
-    { left: 3, right: 1 }
+    { left: 1, right: 4 },
+    { left: 2, right: 5 },
+    { left: 3, right: 6 }
   ];
 
   constructor(private router: Router, private apiService: ApiService) { }
@@ -153,7 +140,7 @@ export class Erronka3Page implements OnInit {
     this.apiService.getAriketaById(id).subscribe({
       next: (ariketa) => {
         const azalpenak = ariketa.map(a => a.azalpena);
-        this.testua = azalpenak[0] || 'Testurik ez dago ID honetarako.';
+        this.testua = azalpenak[0] || '';
         this.testua2 = azalpenak[2] || '';
       },
       error: (error) => {
@@ -178,8 +165,9 @@ export class Erronka3Page implements OnInit {
 
   getAriketa1() {
     this.apiService.getAukeraZuzenak().subscribe({
-      next: () => {
-
+      next: (aukeraZuzenak) => {
+        const ariketa5 = aukeraZuzenak.filter(item => item.id_ariketa === 5);
+        this.aukerak = ariketa5.map(item => item.esaldia);
       },
       error: (error) => {
         console.error('Error al obtener ariketa:', error);
@@ -189,8 +177,10 @@ export class Erronka3Page implements OnInit {
 
   getAriketa2() {
     this.apiService.getParekatzekoGalderak().subscribe({
-      next: () => {
-
+      next: (parekatzekoak) => {
+        const sortedItems = parekatzekoak.sort((a, b) => a.erlazioa - b.erlazioa);
+        this.leftItems = sortedItems.filter(item => item.id <= 3).map(item => ({ id: item.id, name: item.aukera }));
+        this.rightItems = sortedItems.filter(item => item.id > 3).map(item => ({ id: item.id, name: item.aukera }));
       },
       error: (error) => {
         console.error('Error al obtener ariketa:', error);
