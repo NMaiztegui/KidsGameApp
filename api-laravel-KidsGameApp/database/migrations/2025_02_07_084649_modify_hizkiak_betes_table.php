@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::table('hizkiak_betes', function (Blueprint $table) {
             //
             $table->renameColumn('hizkia', 'text_hutsunea');
-            $table->renameColumn('hizkia', 'text_osoa');
+            $table->renameColumn('posizioa', 'text_osoa');
         });
         Schema::table('hizkiak_betes', function (Blueprint $table) {
             //
