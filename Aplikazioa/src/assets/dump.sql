@@ -216,7 +216,7 @@ CREATE TABLE IF NOT EXISTS funikularras(
     objetua TEXT NOT NULL,
     zuzena BOOLEAN NOT NULL 
 );
-INSERT OR IGNORE INTO funikularras (id, url, objetua, zuzena) VALUES (1, "assets/img/funikular.jpg", "funikularra", 1);
+INSERT OR IGNORE INTO funikularras (id, url, objetua, zuzena) VALUES (1, "assets/img/funikular.jpg", "funikularra", 0);
 
 INSERT OR IGNORE INTO funikularras (id, url, objetua, zuzena) VALUES (2, "assets/img/autoa.png", "autoa", 1);
 
