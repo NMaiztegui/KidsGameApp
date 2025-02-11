@@ -110,8 +110,8 @@ export class Erronka7Page implements OnInit {
   getAriketaAzalpena(id: number) {
     this.apiService.getAriketaById(id).subscribe({
       next: (ariketa) => {
-        console.log('Ariketa azalpena:', ariketa?.azalpena);
-        this.testua = ariketa?.azalpena || 'Testurik ez dago ID honetarako.';
+        const azalpenak = ariketa.map(a => a.azalpena);
+        this.testua = azalpenak[0] || 'Testurik ez dago ID honetarako.';
       },
       error: (error) => {
         console.error('Error al obtener erronka:', error);
@@ -122,8 +122,8 @@ export class Erronka7Page implements OnInit {
   getAriketaAudioa(id: number) {
     this.apiService.getAudioaById(id).subscribe({
       next: (audioa) => {
-        console.log('Audioa:', audioa?.audioa);
-        this.audioa = audioa?.audioa || 'Audiorik ez dago ID honetarako.';
+        const audioak = audioa.map(a => a.audioa);
+        this.audioa = audioak[0] || '';
       },
       error: (error) => {
         console.error('Error al obtener audioa:', error);
