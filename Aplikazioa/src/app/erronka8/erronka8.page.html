@@ -5,12 +5,15 @@
   <body>
     <div class="container">
       <img class="amona" src="assets/img/amona.png" alt="Amona">
-      <!-- <div class="speech-bubble">
-        <p class="testu-luzeak">{{ testua }}</p>
-        <img *ngIf="playErakutsi" (click)="erronkaHasi()" class="hasi" src="assets/img/play.png">
+      <img (click)="mapaIkusi()" class="home" src="assets/img/home.png">
 
+      <div class="word-list testu-luzeak">
+        <h3>AURKITU BEHAR DIREN HITZAK:</h3>
+        <ul>
+          <li *ngFor="let word of words">{{ word }}</li>
+        </ul>
       </div>
-      <img (click)="audioaEntzun()" class="soinua" src="assets/img/soinua.png"> -->
+
       <div class="letter-grid">
         <div *ngFor="let letter of grid; let i = index" class="letter" [attr.data-index]="i"
           [class.selected]="selectedLetters.includes(i) || confirmedLetters.has(i)">
@@ -25,16 +28,14 @@
 
         </ng-container>
         <ng-container *ngIf="!erantzuna">
-          <p class="testu-luzeak okerra" >Jarraitu jolasten, hitzak falta dira.</p>
+          <p class="testu-luzeak okerra">Jarraitu jolasten, hitzak falta dira.</p>
           <img (click)="ariketaBerregin()" class="oker" src="assets/img/rehacer.png" alt="Oker">
         </ng-container>
       </div>
-      <div class="testu-izkutua" *ngIf="testuaIkusi">
+      <div class="testu-izkutua" (click)="erronkaSubmit()" *ngIf="testuaIkusi">
         <img class="img" src="assets/img/testuizkutua2.png">
-        <p class="itxi" (click)="erronkaSubmit()">X</p>
         <p class="text">
-          “Aspaldian, Trapagaran misteriotsuan, meatzari ausartak mendietan sartzen ziren altxor ezkutuak ateratzeko;
-          hain zuzen, herriari bizia ematen zioten mineral distiratsuak.”
+          “Testu guztiak lortuta, ikus dezagun esanahia”
         </p>
       </div>
       <img (click)="erantzunaEgiaztatu()" class="tik" src="assets/img/tik.png" alt="Tik">

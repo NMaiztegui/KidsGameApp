@@ -13,6 +13,14 @@ body {
     background: white;
 }
 
+.home {
+    position: fixed;
+    right: 4vh;
+    top: 7vh;
+    width: 7vw;
+    height: auto;
+}
+
 body::before {
     content: '';
     position: absolute;

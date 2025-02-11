@@ -8,7 +8,7 @@ class Hizkiak_bete extends Model
 {
     //
     protected $fillable=[
-        'hizkia',
-        'poizioa',
+        'text_hutsunea',
+        'text_osoa',
     ];
 }

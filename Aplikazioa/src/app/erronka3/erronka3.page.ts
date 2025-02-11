@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ApiService } from '../services/api.service';
 
 @Component({
   selector: 'app-erronka3',
@@ -9,7 +10,12 @@ import { Router } from '@angular/router';
 })
 
 export class Erronka3Page implements OnInit {
-  testua: string = 'Kaixo! Erronka honetan hainbat galdera erantzun beharko dituzue testu izkutua lortzeko.';
+  testua: string = '';
+  testua1: string = '';
+  testua2: string = '';
+  audioa: string = '';
+  audioa1: string = '';
+  audioa2: string = '';
   erantzunakErakutsi: boolean | null = false;
   hitzakErakutsi: boolean | null = false;
   playErakutsi: boolean | null = true;
@@ -21,6 +27,8 @@ export class Erronka3Page implements OnInit {
   pairs: { id: number, left: number, right: number }[] = [];
   pairCounter: number = 1;
   testuaIkusi: boolean = false;
+  erronka: number = 0;
+  erronkaId: number = 3;
 
   aukerak = [
     "Lan egiteari uztea protestan.",
@@ -46,10 +54,16 @@ export class Erronka3Page implements OnInit {
     { left: 3, right: 1 }
   ];
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private apiService: ApiService) { }
+
+  ngOnInit() {
+    this.getAriketaAzalpena(this.erronkaId);
+    this.getAriketaAudioa(this.erronkaId);
+    this.getAriketa1();
+    this.getAriketa2();
+  }
 
   erronkaHasi() {
-    this.testua = 'Zer da greba bat? Hautatu erantzun zuzena hurrengo hiru aukeretatik.';
     this.erantzunakErakutsi = true;
     this.playErakutsi = false;
     this.finishErakutsi = true;
@@ -100,7 +114,7 @@ export class Erronka3Page implements OnInit {
 
   ariketaSubmit() {
     if (this.erantzuna === true && this.erantzunakErakutsi === true) {
-      this.testua = 'Funtsezko pertsonaiak eta gertaerak erlazionatu. Lotu itzazu beraien artean.';
+      this.testua = this.testua2;
       this.hitzakErakutsi = true;
     }
     this.erantzuna = null;
@@ -116,7 +130,13 @@ export class Erronka3Page implements OnInit {
 
   audioaEntzun() {
     const audio = new Audio();
-    audio.src = 'assets/audio/erronka3.m4a';
+    if (this.erantzunakErakutsi) {
+      audio.src = this.audioa;
+    } else if (this.hitzakErakutsi) {
+      audio.src = this.audioa2;
+    } else {
+      audio.src = this.audioa1;
+    }
     audio.load();
     audio.play();
   }
@@ -124,11 +144,61 @@ export class Erronka3Page implements OnInit {
   testuaErakutsi() {
     this.testuaIkusi = true;
   }
-  
+
   erronkaSubmit() {
     this.router.navigate(['/mapa'], { queryParams: { erronka: 4 } });
   }
 
-  ngOnInit() {
+  getAriketaAzalpena(id: number) {
+    this.apiService.getAriketaById(id).subscribe({
+      next: (ariketa) => {
+        const azalpenak = ariketa.map(a => a.azalpena);
+        this.testua = azalpenak[0] || 'Testurik ez dago ID honetarako.';
+        this.testua2 = azalpenak[2] || '';
+      },
+      error: (error) => {
+        console.error('Error al obtener erronka:', error);
+      }
+    })
+  }
+
+  getAriketaAudioa(id: number) {
+    this.apiService.getAudioaById(id).subscribe({
+      next: (audioa) => {
+        const audioak = audioa.map(a => a.audioa);
+        this.audioa = audioak[0] || '';
+        this.audioa1 = audioak[1] || '';
+        this.audioa2 = audioak[2] || '';
+      },
+      error: (error) => {
+        console.error('Error al obtener audioa:', error);
+      }
+    })
+  }
+
+  getAriketa1() {
+    this.apiService.getAukeraZuzenak().subscribe({
+      next: () => {
+
+      },
+      error: (error) => {
+        console.error('Error al obtener ariketa:', error);
+      }
+    })
+  }
+
+  getAriketa2() {
+    this.apiService.getParekatzekoGalderak().subscribe({
+      next: () => {
+
+      },
+      error: (error) => {
+        console.error('Error al obtener ariketa:', error);
+      }
+    })
+  }
+
+  mapaIkusi() {
+    this.router.navigate(['/mapa'], { queryParams: { erronka: this.erronka + 3 } });
   }
 }

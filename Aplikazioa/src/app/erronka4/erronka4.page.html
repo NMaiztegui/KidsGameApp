@@ -5,12 +5,13 @@
   <body>
     <div>
       <img class="amona" src="assets/img/amona.png">
+      <img (click)="mapaIkusi()" class="home" src="assets/img/home.png">
       <div class="speech-bubble">
         <p class="testu-luzeak">{{ testua }}</p>
         <img *ngIf="playErakutsi" (click)="erronkaHasi()" class="hasi" src="assets/img/play.png">
 
       </div>
-      <img (click)="audioaEntzun()" class="soinua" src="assets/img/soinua.png">>   
+      <img (click)="audioaEntzun()" class="soinua" src="assets/img/soinua.png">
       <div class="argazkiak" *ngIf="ariketaErakutsi">
         <img class="argazkia" src="assets/img/mutikoa.png">
         <img class="argazkia" [class.aukeratuta]="argazkiAukeratuak.includes(1)" (click)="argazkiaAukeratu(1)" src="assets/img/takoia.png">
@@ -33,12 +34,10 @@
           <img (click)="ariketaBerregin()" class="oker" src="assets/img/rehacer.png">
         </ng-container>
       </div>
-      <div class="testu-izkutua" *ngIf="testuaIkusi">
+      <div class="testu-izkutua" (click)="erronkaSubmit()" *ngIf="testuaIkusi">
         <img class="img" src="assets/img/testuizkutua2.png">
-        <p class="itxi" (click)="erronkaSubmit()">X</p>
         <p class="text">
-          “Aspaldian, Trapagaran misteriotsuan, meatzari ausartak mendietan sartzen ziren altxor ezkutuak ateratzeko;
-          hain zuzen, herriari bizia ematen zioten mineral distiratsuak.”
+          “Makinak iritsi eta beren lekua hartu bazuten ere, tradizio horren emozioak bizirik dirau.”
         </p>
       </div>
       <img *ngIf="finishErakutsi" (click)="erantzunaEgiaztatu()" class="tik" src="assets/img/tik.png">

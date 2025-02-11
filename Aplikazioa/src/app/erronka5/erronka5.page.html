@@ -5,23 +5,31 @@
   <body>
     <div>
       <img class="amona" src="assets/img/amona.png">
+      <img (click)="mapaIkusi()" class="home" src="assets/img/home.png">
       <div class="speech-bubble">
 
         <p class="testu-luzeak">{{ testua }}</p>
         <img *ngIf="playErakutsi" (click)="erronkaHasi()" class="hasi" src="assets/img/play.png">
 
       </div>
-      <img (click)="audioaEntzun()" class="soinua" src="assets/img/soinua.png">>   
+      <img (click)="audioaEntzun()" class="soinua" src="assets/img/soinua.png">
       <div class="argazkiak" *ngIf="ariketaErakutsi">
         <img class="argazkia" src="assets/img/funikular.jpg">
-        <img class="argazkia" [class.aukeratuta]="argazkiAukeratuak.includes(1)" (click)="argazkiaAukeratu(1)" src="assets/img/autoa.png">
-        <img class="argazkia" [class.aukeratuta]="argazkiAukeratuak.includes(2)" (click)="argazkiaAukeratu(2)" src="assets/img/balea.jpg">
-        <img class="argazkia" [class.aukeratuta]="argazkiAukeratuak.includes(3)" (click)="argazkiaAukeratu(3)" src="assets/img/hegazkina.jpg">
-        <img class="argazkia" [class.aukeratuta]="argazkiAukeratuak.includes(4)" (click)="argazkiaAukeratu(4)" src="assets/img/itsasontzia.png">
-        <img class="argazkia" [class.aukeratuta]="argazkiAukeratuak.includes(5)" (click)="argazkiaAukeratu(5)" src="assets/img/janaria.jpg">
-        <img class="argazkia" [class.aukeratuta]="argazkiAukeratuak.includes(6)" (click)="argazkiaAukeratu(6)" src="assets/img/meatzaria.jpg">
-        <img class="argazkia" [class.aukeratuta]="argazkiAukeratuak.includes(7)" (click)="argazkiaAukeratu(7)" src="assets/img/mineralak.jpg">
-      </div>     
+        <img class="argazkia" [class.aukeratuta]="argazkiAukeratuak.includes(1)" (click)="argazkiaAukeratu(1)"
+          src="assets/img/autoa.png">
+        <img class="argazkia" [class.aukeratuta]="argazkiAukeratuak.includes(2)" (click)="argazkiaAukeratu(2)"
+          src="assets/img/balea.jpg">
+        <img class="argazkia" [class.aukeratuta]="argazkiAukeratuak.includes(3)" (click)="argazkiaAukeratu(3)"
+          src="assets/img/hegazkina.jpg">
+        <img class="argazkia" [class.aukeratuta]="argazkiAukeratuak.includes(4)" (click)="argazkiaAukeratu(4)"
+          src="assets/img/itsasontzia.png">
+        <img class="argazkia" [class.aukeratuta]="argazkiAukeratuak.includes(5)" (click)="argazkiaAukeratu(5)"
+          src="assets/img/janaria.jpg">
+        <img class="argazkia" [class.aukeratuta]="argazkiAukeratuak.includes(6)" (click)="argazkiaAukeratu(6)"
+          src="assets/img/meatzaria.jpg">
+        <img class="argazkia" [class.aukeratuta]="argazkiAukeratuak.includes(7)" (click)="argazkiaAukeratu(7)"
+          src="assets/img/mineralak.jpg">
+      </div>
       <div class="erantzuna-bubble" *ngIf="erantzuna !== null">
         <ng-container *ngIf="erantzuna">
           <p class="testu-luzeak zuzena">Zorionak! Mezuaren zati bar deszifratu duzu!</p>
@@ -29,16 +37,16 @@
 
         </ng-container>
         <ng-container *ngIf="erantzuna === false">
-          <p class="testu-luzeak okerra" >Saiatu berriro, erantzuna ez da zuzena.</p>
+          <p class="testu-luzeak okerra">Saiatu berriro, erantzuna ez da zuzena.</p>
           <img (click)="ariketaBerregin()" class="oker" src="assets/img/rehacer.png">
         </ng-container>
       </div>
-      <div class="testu-izkutua" *ngIf="testuaIkusi">
+      <div class="testu-izkutua" (click)="erronkaSubmit()" *ngIf="testuaIkusi">
         <img class="img" src="assets/img/testuizkutua2.png">
-        <p class="itxi" (click)="erronkaSubmit()">X</p>
         <p class="text">
-          “Aspaldian, Trapagaran misteriotsuan, meatzari ausartak mendietan sartzen ziren altxor ezkutuak ateratzeko;
-          hain zuzen, herriari bizia ematen zioten mineral distiratsuak.”
+          “1890ean, meatzariek euren unerik zailenetako bat bizi izan zuten. Greba handi bat hasi zen lankide batzuk
+          bidegabeki kaleratu zituztenean. Baina ez zuten amore eman, eta azkenean, haien bizitzak hobetu zituen akordio
+          bat irabazi zuten, Loma Ituna bezala ezaguna.”
         </p>
       </div>
       <img *ngIf="finishErakutsi" (click)="erantzunaEgiaztatu()" class="tik" src="assets/img/tik.png">
