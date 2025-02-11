@@ -42,33 +42,30 @@ CREATE TABLE IF NOT EXISTS ariketas(
     FOREIGN KEY (id_erronka) REFERENCES erronkas(id) ON DELETE CASCADE
 );
 
-INSERT OR IGNORE INTO ariketas (id, azalpena, id_erronka) VALUES (1, "Kaixo! Erronka honetan Ibarrurik utzitako mezua deszifratu beharko duzue, hutsune bakoitzean letra bat jarriz bere esanahia osatzeko.", 1);
-
-INSERT OR IGNORE INTO ariketas (id, azalpena, id_erronka) VALUES (2, "Kaixo! Erronka honetan harri zulatzaileen inguruko 2 galdera erantzun beharko dituzue.", 2);
-
-INSERT OR IGNORE INTO ariketas (id, azalpena, id_erronka) VALUES (3, "Erronka honetan beste 2 galdera erantzun beharko dituzue.", 3);
-
-INSERT OR IGNORE INTO ariketas (id, azalpena, id_erronka) VALUES (4, "Argazki honetan agertzen den pertsonaia meatzariz mozorratu nahi da. Zein elementu erabiliko ditu?", 4);
-
-INSERT OR IGNORE INTO ariketas (id, azalpena, id_erronka) VALUES (5, "Zuen aurrean La Reinetako funikularra duzue eta alboan hainbat elementuren argazkiak. Hauetako  zein elementu garraiatzen zituzten antzinean funikularrean? garraiazten zituzten elementuen argazkiak funikularreraino arrastratu beharko dituzue.", 5);
-
-INSERT OR IGNORE INTO ariketas (id, azalpena, id_erronka) VALUES (6, "Jarduera honetan, esaldietan agertzen diren hutsuneak bete beharko dituzue. Horretarako, goian agertzen diren hitzetatik egokia dena aukeratu  eta bere lekura arrastratu.", 6);
-
-INSERT OR IGNORE INTO ariketas (id, azalpena, id_erronka) VALUES (7, "Tabernako sukaldariei babarrunen errezetaren orriak jausi zaizkie, eta desordenatu egin da errezeta. Azken erronka honetan babarrunak egiteko errezeta ordenatu beharko duzue, babarrunak berriz prestatu ahal izateko.", 7);
-
-INSERT OR IGNORE INTO ariketas (id, azalpena, id_erronka) VALUES (8, "Zenbat hitz berri ikasi dituzue gaur? Ikasitakoa frogatzeko aukera duzue orain.", 8);
+INSERT OR IGNORE INTO ariketas (id, azalpena, id_erronka) VALUES (1, 'Kaixo! Erronka honetan Ibarrurik utzitako mezua deszifratu beharko duzue, hutsune bakoitzean letra bat jarriz bere esanahia osatzeko.', 1);
+INSERT OR IGNORE INTO ariketas (id, azalpena, id_erronka) VALUES (2, 'Kaixo! Erronka honetan harri zulatzaileen inguruko 2 galdera erantzun beharko dituzue.', 2);
+INSERT OR IGNORE INTO ariketas (id, azalpena, id_erronka) VALUES (3, 'Ondorengo argazkietatik, zeinek erakusten du harrizulatzaile bat?', 2);
+INSERT OR IGNORE INTO ariketas (id, azalpena, id_erronka) VALUES (4, 'Zein da harrizulatzaile baten lana? Esaldia ordenatu', 2);
+INSERT OR IGNORE INTO ariketas (id, azalpena, id_erronka) VALUES (5, 'Zer da greba bat? Aukeratu erantzun zuzena', 3);
+INSERT OR IGNORE INTO ariketas (id, azalpena, id_erronka) VALUES (6, 'Greba Bizkaiko 500 langileekin hasi zen. Egia edo gezurra', 3);
+INSERT OR IGNORE INTO ariketas (id, azalpena, id_erronka) VALUES (7, 'Funtsezko pertsonaiak eta gertaerak erlazionatu Lotu', 3);
+INSERT OR IGNORE INTO ariketas (id, azalpena, id_erronka) VALUES (8, 'Argazki honetan agertzen den pertsonaia meatzariz mozorratu nahi da. Zein elementu erabiliko ditu?', 4);
+INSERT OR IGNORE INTO ariketas (id, azalpena, id_erronka) VALUES (9, 'Zuen aurrean La Reinetako funikularra duzue eta alboan hainbat elementuren argazkiak. Hauetako  zein elementu garraiatzen zituzten antzinean funikularrean? garraiazten zituzten elementuen argazkiak funikularreraino arrastratu beharko dituzue.', 5);
+INSERT OR IGNORE INTO ariketas (id, azalpena, id_erronka) VALUES (10, 'Jarduera honetan, esaldietan agertzen diren hutsuneak bete beharko dituzue. Horretarako, goian agertzen diren hitzetatik egokia dena aukeratu eta bere lekura arrastratu.', 6);
+INSERT OR IGNORE INTO ariketas (id, azalpena, id_erronka) VALUES (11, 'Tabernako sukaldariei babarrunen errezetaren orriak jausi zaizkie, eta desordenatu egin da errezeta. Azken erronka honetan babarrunak egiteko errezeta ordenatu beharko duzue, babarrunak berriz prestatu ahal izateko.', 7);
+INSERT OR IGNORE INTO ariketas (id, azalpena, id_erronka) VALUES (12, 'Zenbat hitz berri ikasi dituzue gaur? Ikasitakoa frogatzeko aukera duzue orain.', 8);
 
 CREATE TABLE IF NOT EXISTS argazkia_zuzenas(
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     url TEXT NOT NULL,
     zuzena BOOLEAN NOT NULL
 );
+
 INSERT OR IGNORE INTO argazkia_zuzenas (id, url, zuzena) VALUES (1, "/assets/img/arrastre.png", 0);
 
-INSERT OR IGNORE INTO argazkia_zuzenas (id, url, zuzena) VALUES (1, "/assets/img/harri_j.png", 0);
+INSERT OR IGNORE INTO argazkia_zuzenas (id, url, zuzena) VALUES (2, "/assets/img/harri_j.png", 0);
 
-
-INSERT OR IGNORE INTO argazkia_zuzenas (id, url, zuzena) VALUES (1, "/assets/img/harri_z.png", 1);
+INSERT OR IGNORE INTO argazkia_zuzenas (id, url, zuzena) VALUES (3, "/assets/img/harri_z.png", 1);
 
 CREATE TABLE IF NOT EXISTS audioas(
     id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -78,8 +75,8 @@ CREATE TABLE IF NOT EXISTS audioas(
     FOREIGN KEY (id_erronka) REFERENCES erronkas(id) ON DELETE CASCADE,
     FOREIGN KEY (id_ariketa) REFERENCES ariketas(id) ON DELETE CASCADE
 );
-INSERT OR IGNORE INTO audioas (id, audioa, id_erronka, id_ariketa) VALUES (1, "/assets/audio/aurkezpena1.m4a", 1, NULL);
 
+INSERT OR IGNORE INTO audioas (id, audioa, id_erronka, id_ariketa) VALUES (1, "/assets/audio/aurkezpena1.m4a", 1, NULL);
 
 INSERT OR IGNORE INTO audioas (id, audioa, id_erronka, id_ariketa) VALUES (2, "/assets/audio/aurkezpena2.m4a", 2, NULL);
 
@@ -101,23 +98,23 @@ INSERT OR IGNORE INTO audioas (id, audioa, id_erronka, id_ariketa) VALUES (10, "
 
 INSERT OR IGNORE INTO audioas (id, audioa, id_erronka, id_ariketa) VALUES (11, "/assets/audio/erronka2.m4a", 2, 3);
 
-INSERT OR IGNORE INTO audioas (id, audioa, id_erronka, id_ariketa) VALUES (9, "/assets/audio/erronka2.m4a", 2, 4);
+INSERT OR IGNORE INTO audioas (id, audioa, id_erronka, id_ariketa) VALUES (12, "/assets/audio/erronka2.m4a", 2, 4);
 
-INSERT OR IGNORE INTO audioas (id, audioa, id_erronka, id_ariketa) VALUES (9, "/assets/audio/erronka3.m4a", 3, 5);
+INSERT OR IGNORE INTO audioas (id, audioa, id_erronka, id_ariketa) VALUES (13, "/assets/audio/erronka3.m4a", 3, 5);
 
-INSERT OR IGNORE INTO audioas (id, audioa, id_erronka, id_ariketa) VALUES (9, "/assets/audio/erronka3.m4a", 3, 6);
+INSERT OR IGNORE INTO audioas (id, audioa, id_erronka, id_ariketa) VALUES (14, "/assets/audio/erronka3.m4a", 3, 6);
 
-INSERT OR IGNORE INTO audioas (id, audioa, id_erronka, id_ariketa) VALUES (9, "/assets/audio/erronka3.m4a", 3, 7);
+INSERT OR IGNORE INTO audioas (id, audioa, id_erronka, id_ariketa) VALUES (15, "/assets/audio/erronka3.m4a", 3, 7);
 
-INSERT OR IGNORE INTO audioas (id, audioa, id_erronka, id_ariketa) VALUES (9, "/assets/audio/erronka4.m4a", 4, 8);
+INSERT OR IGNORE INTO audioas (id, audioa, id_erronka, id_ariketa) VALUES (16, "/assets/audio/erronka4.m4a", 4, 8);
 
-INSERT OR IGNORE INTO audioas (id, audioa, id_erronka, id_ariketa) VALUES (9, "/assets/audio/erronka5.m4a", 5, 9);
+INSERT OR IGNORE INTO audioas (id, audioa, id_erronka, id_ariketa) VALUES (17, "/assets/audio/erronka5.m4a", 5, 9);
 
-INSERT OR IGNORE INTO audioas (id, audioa, id_erronka, id_ariketa) VALUES (9, "/assets/audio/erronka6.m4a", 6, 10);
+INSERT OR IGNORE INTO audioas (id, audioa, id_erronka, id_ariketa) VALUES (18, "/assets/audio/erronka6.m4a", 6, 10);
 
-INSERT OR IGNORE INTO audioas (id, audioa, id_erronka, id_ariketa) VALUES (9, "/assets/audio/erronka7.m4a", 7, 11);
+INSERT OR IGNORE INTO audioas (id, audioa, id_erronka, id_ariketa) VALUES (19, "/assets/audio/erronka7.m4a", 7, 11);
 
-INSERT OR IGNORE INTO audioas (id, audioa, id_erronka, id_ariketa) VALUES (9, "/assets/audio/amaierakoerronka.m4a", 8, 12);
+INSERT OR IGNORE INTO audioas (id, audioa, id_erronka, id_ariketa) VALUES (20, "/assets/audio/amaierakoerronka.m4a", 8, 12);
 
 CREATE TABLE IF NOT EXISTS aukera_zuzenas(
     id INTEGER PRIMARY KEY AUTOINCREMENT,

@@ -51,12 +51,12 @@ export class ApiService {
     return from(this.sqliteService.fetchDataAndSave<Ariketa>(this.httpClient, 'ariketak', 'ariketas'));
   }
 
-  getAriketaById(id: number): Observable<Ariketa | undefined> {
+  getAriketaById(id: number): Observable<Ariketa[]> {
     return from(this.sqliteService.fetchDataAndSave<Ariketa>(this.httpClient, 'ariketak', 'ariketas')).pipe(
-      map(ariketak => ariketak.find(ariketa => ariketa.id_erronka === id)),
+      map(ariketak => ariketak.filter(ariketa => ariketa.id_erronka === id)),
       catchError(error => {
         console.error('Error al obtener ariketa:', error);
-        return of(undefined);
+        return of();
       })
     );
   }
@@ -65,12 +65,12 @@ export class ApiService {
     return from(this.sqliteService.fetchDataAndSave<Audioa>(this.httpClient, 'audioak', 'audioas'));
   }
 
-  getAudioaById(id: number): Observable<Audioa | undefined> {
+  getAudioaById(id: number): Observable<Audioa[]> {
     return from(this.sqliteService.fetchDataAndSave<Audioa>(this.httpClient, 'audioak', 'audioas')).pipe(
-      map(audioak => audioak.find(audioa => audioa.id_erronka === id)),
+      map(audioak => audioak.filter(audioa => audioa.id_erronka === id)),
       catchError(error => {
         console.error('Error al obtener audioa:', error);
-        return of(undefined);
+        return of();
       })
     );
   }

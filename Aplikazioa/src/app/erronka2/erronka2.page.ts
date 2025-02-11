@@ -11,7 +11,14 @@ import { ApiService } from '../services/api.service';
 
 export class Erronka2Page implements OnInit {
   testua: string = '';
+  testua1: string = '';
+  testua2: string = '';
   audioa: string = '';
+  audioa1: string = '';
+  audioa2: string = '';
+  img1: string = '';
+  img2: string = '';
+  img3: string = '';
   argazkiakErakutsi: boolean | null = false;
   hitzakErakutsi: boolean | null = false;
   playErakutsi: boolean | null = true;
@@ -24,7 +31,6 @@ export class Erronka2Page implements OnInit {
   hitzOrdena = 0;
   erronkaId: number = 2;
   esaldiZuzena: string[] = ['1. Barrenak', '2. harkaitzetan', '3. zuloak', '4. egiten', '5. eta', '6. lehergailuak', '7. jarriz', '8. harriak', '9. puskatzeko', '10. erabiltzen', '11. zituzten', '12. .'];
-
 
   hitzakPosizioa = [
     { hitza: 'harkaitzetan', top: '70vh', left: '5vw', numero: null, aukeratuta: false },
@@ -53,7 +59,7 @@ export class Erronka2Page implements OnInit {
   }
 
   erronkaHasi() {
-    this.testua = 'Ondorengo argazkietatik, zeinek erakusten du harrizulatzaile bat? Hautatu erantzun zuzena.';
+    this.testua = this.testua1;
     this.argazkiakErakutsi = true;
     this.playErakutsi = false;
     this.finishErakutsi = true;
@@ -96,6 +102,13 @@ export class Erronka2Page implements OnInit {
 
   audioaEntzun() {
     const audio = new Audio();
+    if (this.argazkiakErakutsi) {
+      audio.src = this.audioa1;
+    } else if (this.hitzakErakutsi) {
+      audio.src = this.audioa2;
+    } else {
+      audio.src = this.audioa;
+    }
     audio.src = this.audioa;
     audio.load();
     audio.play();
@@ -106,7 +119,7 @@ export class Erronka2Page implements OnInit {
   }
 
   ariketaSubmit() {
-    this.testua = 'Zein da harrizulatzaile baten lana? Ordenatu esaldia, hitzen gainean klik eginez.';
+    this.testua = this.testua2;
     this.erantzuna = null;
     this.argazkiakErakutsi = null;
     this.hitzakErakutsi = true;
@@ -129,21 +142,25 @@ export class Erronka2Page implements OnInit {
 
   getAriketaAzalpena(id: number) {
     this.apiService.getAriketaById(id).subscribe({
-      next: (ariketa) => {
-        console.log('Ariketa azalpena:', ariketa?.azalpena);
-        this.testua = ariketa?.azalpena || 'Testurik ez dago ID honetarako.';
+      next: (ariketak) => {
+        const azalpenak = ariketak.map(a => a.azalpena);
+        this.testua = azalpenak[0] || '';
+        this.testua1 = azalpenak[1] || '';
+        this.testua2 = azalpenak[2] || '';
       },
       error: (error) => {
-        console.error('Error al obtener erronka:', error);
+        console.error('Error al obtener ariketa:', error);
       }
-    })
+    });
   }
 
   getAriketaAudioa(id: number) {
     this.apiService.getAudioaById(id).subscribe({
       next: (audioa) => {
-        console.log('Audioa:', audioa?.audioa);
-        this.audioa = audioa?.audioa || 'Audiorik ez dago ID honetarako.';
+        const audioak = audioa.map(a => a.audioa);
+        this.audioa = audioak[0] || '';
+        this.audioa1 = audioak[1] || '';
+        this.audioa2 = audioak[2] || '';
       },
       error: (error) => {
         console.error('Error al obtener audioa:', error);
@@ -154,12 +171,14 @@ export class Erronka2Page implements OnInit {
   getAriketa1() {
     this.apiService.getArgazkiZuzenak().subscribe({
       next: (argazkia_zuzenak) => {
-
+        this.img1 = argazkia_zuzenak[0]?.url || '';
+        this.img2 = argazkia_zuzenak[1]?.url || '';
+        this.img3 = argazkia_zuzenak[2]?.url || '';
       },
       error: (error) => {
-        console.error('Error al obtener ariketa:', error);
+        console.error('Error al obtener imágenes:', error);
       }
-    })
+    });
   }
 
   getAriketa2() {
@@ -168,10 +187,10 @@ export class Erronka2Page implements OnInit {
 
       },
       error: (error) => {
-        console.error('Error al obtener ariketa:', error);
+        console.error('Error al obtener el orden de palabras:', error);
       }
-    })
-  }
+    });
+  }   
 
   mapaIkusi() {
     this.router.navigate(['/mapa'], { queryParams: { erronka: this.erronka + 2 } });

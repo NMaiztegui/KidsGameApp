@@ -11,7 +11,11 @@ import { ApiService } from '../services/api.service';
 
 export class Erronka3Page implements OnInit {
   testua: string = '';
+  testua1: string = '';
+  testua2: string = '';
   audioa: string = '';
+  audioa1: string = '';
+  audioa2: string = '';
   erantzunakErakutsi: boolean | null = false;
   hitzakErakutsi: boolean | null = false;
   playErakutsi: boolean | null = true;
@@ -60,7 +64,6 @@ export class Erronka3Page implements OnInit {
   }
 
   erronkaHasi() {
-    this.testua = 'Zer da greba bat? Hautatu erantzun zuzena hurrengo hiru aukeretatik.';
     this.erantzunakErakutsi = true;
     this.playErakutsi = false;
     this.finishErakutsi = true;
@@ -111,7 +114,7 @@ export class Erronka3Page implements OnInit {
 
   ariketaSubmit() {
     if (this.erantzuna === true && this.erantzunakErakutsi === true) {
-      this.testua = 'Funtsezko pertsonaiak eta gertaerak erlazionatu. Lotu itzazu beraien artean.';
+      this.testua = this.testua2;
       this.hitzakErakutsi = true;
     }
     this.erantzuna = null;
@@ -127,7 +130,13 @@ export class Erronka3Page implements OnInit {
 
   audioaEntzun() {
     const audio = new Audio();
-    audio.src = this.audioa;
+    if (this.erantzunakErakutsi) {
+      audio.src = this.audioa;
+    } else if (this.hitzakErakutsi) {
+      audio.src = this.audioa2;
+    } else {
+      audio.src = this.audioa1;
+    }
     audio.load();
     audio.play();
   }
@@ -143,8 +152,9 @@ export class Erronka3Page implements OnInit {
   getAriketaAzalpena(id: number) {
     this.apiService.getAriketaById(id).subscribe({
       next: (ariketa) => {
-        console.log('Ariketa azalpena:', ariketa?.azalpena);
-        this.testua = ariketa?.azalpena || 'Testurik ez dago ID honetarako.';
+        const azalpenak = ariketa.map(a => a.azalpena);
+        this.testua = azalpenak[0] || 'Testurik ez dago ID honetarako.';
+        this.testua2 = azalpenak[2] || '';
       },
       error: (error) => {
         console.error('Error al obtener erronka:', error);
@@ -155,8 +165,10 @@ export class Erronka3Page implements OnInit {
   getAriketaAudioa(id: number) {
     this.apiService.getAudioaById(id).subscribe({
       next: (audioa) => {
-        console.log('Audioa:', audioa?.audioa);
-        this.audioa = audioa?.audioa || 'Audiorik ez dago ID honetarako.';
+        const audioak = audioa.map(a => a.audioa);
+        this.audioa = audioak[0] || '';
+        this.audioa1 = audioak[1] || '';
+        this.audioa2 = audioak[2] || '';
       },
       error: (error) => {
         console.error('Error al obtener audioa:', error);
