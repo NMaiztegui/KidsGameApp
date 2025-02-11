@@ -15,6 +15,7 @@ export class ErronkaPage implements OnInit, OnDestroy {
   audioa: string = '';
   textHutsunea: string = '';
   textOsoa: string = '';
+  testuIzkutua: string = '';
   letras: string[] = [];
   erantzuna: boolean | null = null;
   testuaIkusi: boolean = false;
@@ -30,6 +31,7 @@ export class ErronkaPage implements OnInit, OnDestroy {
   ngOnInit() {
     this.getAriketaAzalpena(this.erronkaId);
     this.getAriketaAudioa(this.erronkaId);
+    this.getTestuIzkutua(this.erronkaId);
     this.getAriketa(this.erronkaId);
     Keyboard.addListener('keyboardDidShow', () => {
       this.moveTextUp = true;
@@ -131,6 +133,17 @@ export class ErronkaPage implements OnInit, OnDestroy {
       },
       error: (error) => {
         console.error('Error al obtener ariketa:', error);
+      }
+    })
+  }
+
+  getTestuIzkutua(id: number) {
+    this.apiService.getErronkaById(id).subscribe({
+      next: (erronka) => {
+        this.testuIzkutua = erronka?.testu_izkutua || '';
+      },
+      error: (error) => {
+        console.error('Error al obtener erronka:', error);
       }
     })
   }

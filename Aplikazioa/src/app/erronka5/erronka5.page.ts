@@ -11,6 +11,7 @@ import { ApiService } from '../services/api.service';
 export class Erronka5Page implements OnInit {
   testua: string = '';
   audioa: string = '';
+  testuIzkutua: string = '';
   erantzuna: boolean | null = null;
   argazkiAukeratua: number | null = null;
   argazkiAukeratuak: number[] = [];
@@ -20,13 +21,14 @@ export class Erronka5Page implements OnInit {
   finishErakutsi: boolean | null = false;
   erronka: number = 5;
   erronkaId: number = 5;
-  funikularrak: any[] = []; 
+  funikularrak: any[] = [];
 
   constructor(private router: Router, private apiService: ApiService) { }
 
   ngOnInit() {
     this.getAriketaAzalpena(this.erronkaId);
     this.getAriketaAudioa(this.erronkaId);
+    this.getTestuIzkutua(this.erronkaId);
     this.getFunikularrak();
   }
 
@@ -51,18 +53,16 @@ export class Erronka5Page implements OnInit {
   erantzunaEgiaztatu() {
     const respuestaCorrecta = this.funikularrak.filter(f => f.zuzena === 1);
 
-    const respuestaCorrectaIndices = respuestaCorrecta.map(f => f.id - 1); 
+    const respuestaCorrectaIndices = respuestaCorrecta.map(f => f.id - 1);
 
-    const respuestaSeleccionada = this.argazkiAukeratuak.length === respuestaCorrectaIndices.length && 
-      this.argazkiAukeratuak.every(id => respuestaCorrectaIndices.includes(id)); 
+    const respuestaSeleccionada = this.argazkiAukeratuak.length === respuestaCorrectaIndices.length &&
+      this.argazkiAukeratuak.every(id => respuestaCorrectaIndices.includes(id));
 
     this.erantzuna = respuestaSeleccionada ? true : false;
 
     console.log('Respuesta correcta:', respuestaCorrectaIndices);
     console.log('Respuesta seleccionada:', this.argazkiAukeratuak);
-}
-
-
+  }
 
   ariketaBerregin() {
     this.erantzuna = null;
@@ -122,5 +122,16 @@ export class Erronka5Page implements OnInit {
 
   mapaIkusi() {
     this.router.navigate(['/mapa'], { queryParams: { erronka: this.erronka + 1 } });
+  }
+
+  getTestuIzkutua(id: number) {
+    this.apiService.getErronkaById(id).subscribe({
+      next: (erronka) => {
+        this.testuIzkutua = erronka?.testu_izkutua || '';
+      },
+      error: (error) => {
+        console.error('Error al obtener erronka:', error);
+      }
+    })
   }
 }

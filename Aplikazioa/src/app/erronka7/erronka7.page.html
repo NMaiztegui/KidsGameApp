@@ -32,10 +32,7 @@
       </div>
       <div class="testu-izkutua" (click)="erronkaSubmit()" *ngIf="testuaIkusi">
         <img class="img" src="assets/img/testuizkutua2.png">
-        <p class="text">
-          “Gaur egun, meategiak itxita badaude ere, Zugaztieta leku berezia da oraindik. Aintzinako putzuak laku eder
-          bihurtu ziren, eta familiak herrian hain gustuko dituzten babarrun gozoak jatera joaten dira.”
-        </p>
+        <p class="text">{{ testuIzkutua }}</p>
       </div>
       <img *ngIf="finishErakutsi" (click)="erantzunaEgiaztatu()" class="tik" src="assets/img/tik.png">
     </div>

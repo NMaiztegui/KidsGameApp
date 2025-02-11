@@ -12,6 +12,7 @@ import { ApiService } from '../services/api.service';
 export class Erronka4Page implements OnInit {
   testua: string = '';
   audioa: string = '';
+  testuIzkutua: string = '';
   imgUrls: string[] = [];
   erantzuna: boolean | null = null;
   argazkiAukeratuak: Set<number> = new Set();
@@ -27,6 +28,7 @@ export class Erronka4Page implements OnInit {
   ngOnInit() {
     this.getAriketaAzalpena();
     this.getAriketaAudioa();
+    this.getTestuIzkutua(this.erronkaId);
     this.getAriketa1();
   }
 
@@ -96,5 +98,16 @@ export class Erronka4Page implements OnInit {
 
   mapaIkusi() {
     this.router.navigate(['/mapa'], { queryParams: { erronka: this.erronkaId + 1 } });
+  }
+
+  getTestuIzkutua(id: number) {
+    this.apiService.getErronkaById(id).subscribe({
+      next: (erronka) => {
+        this.testuIzkutua = erronka?.testu_izkutua || '';
+      },
+      error: (error) => {
+        console.error('Error al obtener erronka:', error);
+      }
+    })
   }
 }

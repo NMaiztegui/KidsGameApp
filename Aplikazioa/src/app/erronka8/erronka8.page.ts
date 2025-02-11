@@ -13,6 +13,7 @@ import { ApiService } from '../services/api.service';
 export class Erronka8Page implements OnInit, OnDestroy {
   testua: string = 'Azken erronkan, aurkitu letra-zopa honetan ikasi dugun guztiarekin lotutako 7 hitzak!';
   words = ['IBARRURI', 'BABARRUNAK', 'MEATEGIA', 'HARRIA', 'OSTION', 'GREBA', 'FUNIKULAR'];
+  testuIzkutua: string = '';
   grid: string[] = [];
   gridSize = 12;
   selectedLetters: number[] = [];
@@ -236,7 +237,19 @@ export class Erronka8Page implements OnInit, OnDestroy {
   erronkaSubmit() {
     this.router.navigate(['/testua'], { queryParams: { erronka: 9 } });
   }
+
   mapaIkusi() {
     this.router.navigate(['/mapa'], { queryParams: { erronka: this.erronka + 8} });
+  }
+
+  getTestuIzkutua(id: number) {
+    this.apiService.getErronkaById(id).subscribe({
+      next: (erronka) => {
+        this.testuIzkutua = erronka?.testu_izkutua || '';
+      },
+      error: (error) => {
+        console.error('Error al obtener erronka:', error);
+      }
+    })
   }
 }

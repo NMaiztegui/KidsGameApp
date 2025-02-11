@@ -16,6 +16,7 @@ export class Erronka3Page implements OnInit {
   audioa: string = '';
   audioa1: string = '';
   audioa2: string = '';
+  testuIzkutua: string = '';
   erantzunakErakutsi: boolean | null = false;
   hitzakErakutsi: boolean | null = false;
   playErakutsi: boolean | null = true;
@@ -46,6 +47,7 @@ export class Erronka3Page implements OnInit {
   ngOnInit() {
     this.getAriketaAzalpena(this.erronkaId);
     this.getAriketaAudioa(this.erronkaId);
+    this.getTestuIzkutua(this.erronkaId);
     this.getAriketa1();
     this.getAriketa2();
   }
@@ -190,5 +192,16 @@ export class Erronka3Page implements OnInit {
 
   mapaIkusi() {
     this.router.navigate(['/mapa'], { queryParams: { erronka: this.erronka + 3 } });
+  }
+
+  getTestuIzkutua(id: number) {
+    this.apiService.getErronkaById(id).subscribe({
+      next: (erronka) => {
+        this.testuIzkutua = erronka?.testu_izkutua || '';
+      },
+      error: (error) => {
+        console.error('Error al obtener erronka:', error);
+      }
+    })
   }
 }

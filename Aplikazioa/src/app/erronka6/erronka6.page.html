@@ -44,10 +44,7 @@
       </div>
       <div class="testu-izkutua" (click)="erronkaSubmit()" *ngIf="testuaIkusi">
         <img class="img" src="assets/img/testuizkutua2.png">
-        <p class="text">
-          “Gainera, funikularra, asmakizun harrigarria, agertu zen. Garraio magiko horrek Trapagarango jendea
-          Zugaztietara eramaten zuen minutu gutxitan, bizitza askoz errazagoa eginez.”
-        </p>
+        <p class="text">{{ testuIzkutua }}</p>
       </div>
       <img *ngIf="finishErakutsi" (click)="erantzunaEgiaztatu()" class="tik" src="assets/img/tik.png">
     </div>
