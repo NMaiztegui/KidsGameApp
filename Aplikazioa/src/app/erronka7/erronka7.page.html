@@ -10,7 +10,7 @@
         <p class="testu-luzeak">{{ testua }}</p>
         <img *ngIf="playErakutsi" (click)="erronkaHasi()" class="hasi" src="assets/img/play.png">
       </div>
-      <img (click)="audioaEntzun()" class="soinua" src="assets/img/soinua.png">>
+      <img (click)="audioaEntzun()" class="soinua" src="assets/img/soinua.png">
       <div *ngIf="hitzakErakutsi">
         <p class="hitza testu-luzeak" *ngFor="let item of hitzakPosizioa" (click)="hitzaAukeratu(item)"
           [ngStyle]="{'top': item.top, 'left': item.left, 'position': 'absolute'}"
