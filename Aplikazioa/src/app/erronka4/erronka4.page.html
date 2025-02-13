@@ -13,19 +13,14 @@
       </div>
       <img (click)="audioaEntzun()" class="soinua" src="assets/img/soinua.png">
       <div class="argazkiak" *ngIf="ariketaErakutsi">
-        <img class="argazkia" src="assets/img/mutikoa.png">
-        <img class="argazkia" [class.aukeratuta]="argazkiAukeratuak.includes(1)" (click)="argazkiaAukeratu(1)" src="assets/img/takoia.png">
-        <img class="argazkia" [class.aukeratuta]="argazkiAukeratuak.includes(2)" (click)="argazkiaAukeratu(2)" src="assets/img/caco.png">
-        <img class="argazkia" [class.aukeratuta]="argazkiAukeratuak.includes(3)" (click)="argazkiaAukeratu(3)" src="assets/img/linterna.png">
-        <img class="argazkia" [class.aukeratuta]="argazkiAukeratuak.includes(4)" (click)="argazkiaAukeratu(4)" src="assets/img/sonbrero.png">
-        <img class="argazkia" [class.aukeratuta]="argazkiAukeratuak.includes(5)" (click)="argazkiaAukeratu(5)" src="assets/img/lanegitekojantzia.png">
-        <img class="argazkia" [class.aukeratuta]="argazkiAukeratuak.includes(6)" (click)="argazkiaAukeratu(6)" src="assets/img/botas.png">
-        <img class="argazkia" [class.aukeratuta]="argazkiAukeratuak.includes(7)" (click)="argazkiaAukeratu(7)" src="assets/img/soinekoa.png">
-        <img class="argazkia" [class.aukeratuta]="argazkiAukeratuak.includes(8)" (click)="argazkiaAukeratu(8)" src="assets/img/pico.png">
+        <img *ngFor="let img of imgUrls; let i = index" class="argazkia" 
+             [class.aukeratuta]="argazkiAukeratuak.has(i)" 
+             (click)="argazkiaAukeratu(i)" 
+             [src]="img">
       </div>      
       <div class="erantzuna-bubble" *ngIf="erantzuna !== null">
         <ng-container *ngIf="erantzuna">
-          <p class="testu-luzeak zuzena">Zorionak! Mezuaren zati bar deszifratu duzu!</p>
+          <p class="testu-luzeak zuzena">Zorionak! Mezuaren zati bat deszifratu duzu!</p>
           <img (click)="testuaErakutsi()" class="zuzen" src="assets/img/tik.png">
 
         </ng-container>
@@ -36,9 +31,7 @@
       </div>
       <div class="testu-izkutua" (click)="erronkaSubmit()" *ngIf="testuaIkusi">
         <img class="img" src="assets/img/testuizkutua2.png">
-        <p class="text">
-          “Makinak iritsi eta beren lekua hartu bazuten ere, tradizio horren emozioak bizirik dirau.”
-        </p>
+        <p class="text">{{ testuIzkutua }}</p>
       </div>
       <img *ngIf="finishErakutsi" (click)="erantzunaEgiaztatu()" class="tik" src="assets/img/tik.png">
     </div>

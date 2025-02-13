@@ -12,7 +12,7 @@ export class AurkezpenaPage implements OnInit {
   fullText: string = '';
   displayedText: string = '';
   index: number = 0;
-  speed: number = 30;
+  speed: number = 100;
   erronkaId: number | null = null;
   playErakutsi: boolean | null = false;
 
@@ -31,16 +31,47 @@ export class AurkezpenaPage implements OnInit {
     this.displayedText = '';
     this.index = 0;
 
-    const interval = setInterval(() => {
-      if (this.index < this.fullText.length) {
-        this.displayedText += this.fullText[this.index];
-        this.index++;
-      } else {
-        this.playErakutsi = true;
-        clearInterval(interval);
-      }
-    }, this.speed);
-  }
+    // Texto de ejemplo
+    const text = this.fullText;
+
+    // Dividir el texto en dos mitades equilibradas
+    const words = text.split(' ');
+    const middleIndex = Math.floor(words.length / 2);
+
+    const firstHalf = words.slice(0, middleIndex).join(' ');
+    const secondHalf = words.slice(middleIndex).join(' ');
+
+    let currentText = firstHalf; // Empezamos con la primera parte
+    let part = 1; // Controla qué parte se está mostrando
+
+    const showNextWord = () => {
+        this.displayedText = ''; // Reiniciar el texto mostrado
+        let wordIndex = 0;
+
+        const wordInterval = setInterval(() => {
+            if (wordIndex < currentText.split(' ').length) {
+                this.displayedText += currentText.split(' ')[wordIndex] + ' ';
+                wordIndex++;
+            } else {
+                clearInterval(wordInterval);
+
+                if (part === 1) {
+                    // Si terminamos la primera parte, esperamos y mostramos la segunda
+                    setTimeout(() => {
+                        currentText = secondHalf;
+                        part = 2;
+                        showNextWord();
+                    }, 6000); // Puedes ajustar la pausa entre partes
+                } else {
+                    this.playErakutsi = true; // Animación terminada
+                }
+            }
+        }, this.speed);
+    };
+
+    showNextWord();
+}
+
 
   audioaEntzun() {
     const audio = new Audio();

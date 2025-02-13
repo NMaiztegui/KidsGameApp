@@ -8,45 +8,36 @@ import { ApiService } from '../services/api.service';
   styleUrls: ['./erronka6.page.scss'],
   standalone: false,
 })
-
 export class Erronka6Page implements OnInit {
   testua: string = '';
   audioa: string = '';
+  testuIzkutua: string = '';
   playErakutsi: boolean | null = true;
   hitzakErakutsi: boolean | null = false;
   finishErakutsi: boolean | null = false;
   erantzuna: boolean | null = null;
   hitzAukeratua: string | null = null;
   testuaIkusi: boolean = false;
-  erronka: number = 0;
   erronkaId: number = 6;
 
-  hitzak = [
-    { hitza: 'Eskulturak', aukeratuta: false, hitzErabilia: false },
-    { hitza: 'Ostion', aukeratuta: false, hitzErabilia: false },
-    { hitza: 'gorrixka', aukeratuta: false, hitzErabilia: false },
-    { hitza: 'bagoneta', aukeratuta: false, hitzErabilia: false },
-    { hitza: 'ateratzen', aukeratuta: false, hitzErabilia: false },
-    { hitza: 'mineralak', aukeratuta: false, hitzErabilia: false },
-    { hitza: '1993', aukeratuta: false, hitzErabilia: false }
-  ];
-
-  esaldiak = [
+  hitzak: any[] = [];
+  esaldiak = [ 
     { testua1: 'Zugaztieta gaur egun aisialdirako leku ederra da, baina lurrak oraindik kolore', hutsa: '', testua2: '.', hitzEgokia: 'gorrixka', beteta: false },
-    { testua1: 'Zugaztietan badaude meatzaritza garaiak gogorarazten dituzten elementuak, esate baterako,', hutsa: '', testua2: 'eta', hitzEgokia: 'Eskulturak', beteta: false },
+    { testua1: 'Zugaztietan badaude meatzaritza garaiak gogorarazten dituzten elementuak, esate baterako,', hutsa: '', testua2: 'eta', hitzEgokia: 'eskulturak', beteta: false },
     { testua1: '', hutsa: '', testua2: 'zaharrak.', hitzEgokia: 'bagoneta', beteta: false },
     { testua1: 'Erromatarren garaian bazekiten Zugaztietan', hutsa: '', testua2: 'zeudela.', hitzEgokia: 'mineralak', beteta: false },
     { testua1: 'Industria Iraultzan, XIX. mendearen amaieran, mineralak askoz gehiago', hutsa: '', testua2: 'ziren.', hitzEgokia: 'ateratzen', beteta: false },
     { testua1: 'Azken meategia Zugaztietan', hutsa: '', testua2: 'urtean itxi zen.', hitzEgokia: '1993', beteta: false },
     { testua1: 'Meategiak itxi ondoren, lur azpiko urak zuloak bete zituen, eta lakuak sortu ziren, adibidez,', hutsa: '', testua2: 'lakua.', hitzEgokia: 'Ostion', beteta: false }
-  ];
+  ]; 
 
   constructor(private router: Router, private apiService: ApiService) { }
 
   ngOnInit() {
     this.getAriketaAzalpena(this.erronkaId);
     this.getAriketaAudioa(this.erronkaId);
-    this.getAriketa1();
+    this.getTestuIzkutua(this.erronkaId);
+    this.getHitzakBete(this.erronkaId);
   }
 
   erronkaHasi() {
@@ -138,19 +129,31 @@ export class Erronka6Page implements OnInit {
       }
     })
   }
-
-  getAriketa1() {
+  
+  getHitzakBete(id: number) {
     this.apiService.getEsaldiaBete().subscribe({
-      next: () => {
-
+      next: (hitzak) => {
+        this.hitzak = hitzak || [];
+        console.log('Hitzak:', this.hitzak);
       },
       error: (error) => {
-        console.error('Error al obtener ariketa:', error);
+        console.error('Error al obtener hitzak:', error);
       }
-    })
+    });
   }
 
   mapaIkusi() {
-    this.router.navigate(['/mapa'], { queryParams: { erronka: this.erronka + 6} });
+    this.router.navigate(['/mapa'], { queryParams: { erronka: this.erronkaId + 1 } });
+  }
+
+  getTestuIzkutua(id: number) {
+    this.apiService.getErronkaById(id).subscribe({
+      next: (erronka) => {
+        this.testuIzkutua = erronka?.testu_izkutua || '';
+      },
+      error: (error) => {
+        console.error('Error al obtener erronka:', error);
+      }
+    })
   }
 }

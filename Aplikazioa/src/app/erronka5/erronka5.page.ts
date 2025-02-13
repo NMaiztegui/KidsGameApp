@@ -8,10 +8,10 @@ import { ApiService } from '../services/api.service';
   styleUrls: ['./erronka5.page.scss'],
   standalone: false,
 })
-
 export class Erronka5Page implements OnInit {
   testua: string = '';
   audioa: string = '';
+  testuIzkutua: string = '';
   erantzuna: boolean | null = null;
   argazkiAukeratua: number | null = null;
   argazkiAukeratuak: number[] = [];
@@ -19,15 +19,17 @@ export class Erronka5Page implements OnInit {
   playErakutsi: boolean | null = true;
   ariketaErakutsi: boolean | null = false;
   finishErakutsi: boolean | null = false;
-  erronka: number = 0;
+  erronka: number = 5;
   erronkaId: number = 5;
+  funikularrak: any[] = [];
 
   constructor(private router: Router, private apiService: ApiService) { }
 
   ngOnInit() {
     this.getAriketaAzalpena(this.erronkaId);
     this.getAriketaAudioa(this.erronkaId);
-    this.getAriketa1();
+    this.getTestuIzkutua(this.erronkaId);
+    this.getFunikularrak();
   }
 
   erronkaHasi() {
@@ -49,11 +51,17 @@ export class Erronka5Page implements OnInit {
   }
 
   erantzunaEgiaztatu() {
-    if (this.argazkiAukeratuak.includes(1) && this.argazkiAukeratuak.includes(5) && this.argazkiAukeratuak.includes(6) && this.argazkiAukeratuak.includes(7)) {
-      this.erantzuna = true;
-    } else {
-      this.erantzuna = false;
-    }
+    const respuestaCorrecta = this.funikularrak.filter(f => f.zuzena === 1);
+
+    const respuestaCorrectaIndices = respuestaCorrecta.map(f => f.id - 1);
+
+    const respuestaSeleccionada = this.argazkiAukeratuak.length === respuestaCorrectaIndices.length &&
+      this.argazkiAukeratuak.every(id => respuestaCorrectaIndices.includes(id));
+
+    this.erantzuna = respuestaSeleccionada ? true : false;
+
+    console.log('Respuesta correcta:', respuestaCorrectaIndices);
+    console.log('Respuesta seleccionada:', this.argazkiAukeratuak);
   }
 
   ariketaBerregin() {
@@ -85,7 +93,7 @@ export class Erronka5Page implements OnInit {
       error: (error) => {
         console.error('Error al obtener erronka:', error);
       }
-    })
+    });
   }
 
   getAriketaAudioa(id: number) {
@@ -97,21 +105,33 @@ export class Erronka5Page implements OnInit {
       error: (error) => {
         console.error('Error al obtener audioa:', error);
       }
-    })
+    });
   }
 
-  getAriketa1() {
+  getFunikularrak() {
     this.apiService.getFunikularrak().subscribe({
-      next: () => {
-
+      next: (funikularrak) => {
+        this.funikularrak = funikularrak || [];
+        console.log('Funikularrak:', this.funikularrak);
       },
       error: (error) => {
-        console.error('Error al obtener ariketa:', error);
+        console.error('Error al obtener los funikularras:', error);
       }
-    })
+    });
   }
 
   mapaIkusi() {
-    this.router.navigate(['/mapa'], { queryParams: { erronka: this.erronka + 5} });
+    this.router.navigate(['/mapa'], { queryParams: { erronka: this.erronka + 1 } });
+  }
+
+  getTestuIzkutua(id: number) {
+    this.apiService.getErronkaById(id).subscribe({
+      next: (erronka) => {
+        this.testuIzkutua = erronka?.testu_izkutua || '';
+      },
+      error: (error) => {
+        console.error('Error al obtener erronka:', error);
+      }
+    })
   }
 }

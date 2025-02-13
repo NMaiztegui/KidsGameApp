@@ -106,7 +106,7 @@ export class ApiService {
   }
 
   getMutikoaJantzi(): Observable<MutikoaJantzi[]> {
-    return from(this.sqliteService.fetchDataAndSave<MutikoaJantzi>(this.httpClient, 'mutikua-jantzi', 'mutikoa_jantzis'));
+    return from(this.sqliteService.fetchDataAndSave<MutikoaJantzi>(this.httpClient, 'mutikua-jantzi', 'mutikua_jantzis'));
   }
 
   getOrdenatu(): Observable<Ordenatu[]> {

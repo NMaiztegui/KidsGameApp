@@ -9,9 +9,9 @@ import { ApiService } from '../services/api.service';
   standalone: false,
 })
 export class Erronka7Page implements OnInit {
-
   testua: string = '';
   audioa: string = '';
+  testuIzkutua: string = '';
   playErakutsi: boolean | null = true;
   hitzakErakutsi: boolean | null = false;
   finishErakutsi: boolean | null = false;
@@ -37,6 +37,7 @@ export class Erronka7Page implements OnInit {
   ngOnInit() {
     this.getAriketaAzalpena(this.erronkaId);
     this.getAriketaAudioa(this.erronkaId);
+    this.getTestuIzkutua(this.erronkaId);
     this.getAriketa1();
   }
 
@@ -134,6 +135,7 @@ export class Erronka7Page implements OnInit {
   mapaIkusi() {
     this.router.navigate(['/mapa'], { queryParams: { erronka: this.erronka + 7} });
   }
+
   getAriketa1() {
     this.apiService.getOrdenatu().subscribe({
       next: () => {
@@ -141,6 +143,17 @@ export class Erronka7Page implements OnInit {
       },
       error: (error) => {
         console.error('Error al obtener ariketa:', error);
+      }
+    })
+  }
+
+  getTestuIzkutua(id: number) {
+    this.apiService.getErronkaById(id).subscribe({
+      next: (erronka) => {
+        this.testuIzkutua = erronka?.testu_izkutua || '';
+      },
+      error: (error) => {
+        console.error('Error al obtener erronka:', error);
       }
     })
   }
