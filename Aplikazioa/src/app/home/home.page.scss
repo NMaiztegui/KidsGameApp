@@ -1,0 +1,36 @@
+ion-content {
+    --background: url('/assets/img/bck.png') no-repeat center / cover;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    height: 100vh;
+    position: relative;
+}
+
+.logo-container {
+    position: fixed; 
+    top: 50%;
+    left: 75%; 
+    transform: translate(-50%, -50%);
+    z-index: 1;
+}
+
+.logo {
+    width: 15vw;
+    height: auto;
+}
+
+.container {
+    position: fixed; 
+    bottom: 10vh;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    z-index: 1; 
+}
+
+.title {
+    font-size: 4vw;
+    color: #FF8A00;
+}

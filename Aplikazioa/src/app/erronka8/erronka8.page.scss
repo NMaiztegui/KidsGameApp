@@ -1,0 +1,189 @@
+ion-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    height: 100vh;
+    position: relative;
+    font-family: 'DynaPuff', sans-serif;
+}
+
+body {
+    position: relative;
+    background: white;
+}
+
+.home {
+    position: fixed;
+    bottom: 3vh;
+    left: 3vw;
+    width: 10vw;
+    height: auto;
+}
+
+.amona {
+    position: fixed;
+    width: 12vw;
+    height: auto;
+    top: 2vh;
+    left: 4vw;
+}
+
+.soinua {
+    position: fixed;
+    width: 6vw;
+    height: auto;
+    top: 27vh;
+    left: 22vw;
+}
+
+.hasi {
+    position: fixed;
+    width: 6.7vw;
+    height: auto;
+    top: 27vh;
+    left: 82vw;
+}
+
+.tik {
+    position: fixed;
+    width: 10vw;
+    height: auto;
+    top: 77vh;
+    left: 87vw;
+}
+
+.zuzen,
+.oker {
+    width: 6vw;
+}
+
+.letter-grid {
+    display: grid;
+    position: fixed;
+    top: 48vh;
+    left: 50%;
+    color: #333;
+    grid-template-columns: repeat(12, 1fr);
+    transform: translate(-50%, -50%);
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+}
+
+.letter {
+    width: 3.2vw;
+    height: 3.2vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2vw;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    user-select: none;
+    touch-action: none;
+}
+
+
+.letter.selected {
+    background-color: #ff6f00;
+    color: white;
+}
+
+.speech-bubble {
+    position: fixed;
+    top: 8vh;
+    left: 20vw;
+    width: 70vw;
+    padding: 2vh;
+    background-color: white;
+    border-radius: 2vh;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    font-size: 4vh;
+    color: #333;
+    text-align: center;
+}
+
+.erantzuna-bubble {
+    position: fixed;
+    width: 80vw;
+    background-color: white;
+    border-radius: 2vh;
+    border: 5px solid #669E50;
+    box-shadow: 0 0 10px #669E50;
+    font-size: 4vh;
+    color: #333;
+    top: 60vh;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+.aukeratuta {
+    background-color: orange;
+    border-radius: 2vh;
+    transition: background-color 0.3s;
+}
+
+.testu-izkutua {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+
+    .img {
+        max-width: 90%;
+        max-height: 70vh;
+        position: fixed;
+    }
+
+    .itxi {
+        position: fixed;
+        top: 12vh;
+        right: 65vh;
+        font-size: 6vh;
+        color: #333;
+        height: auto;
+        font-weight: bold;
+    }
+
+    .text {
+        position: fixed;
+        top: 42%;
+        left: 50%;
+        font-size: 4.5vh;
+        font-weight: bold;
+        transform: translate(-50%, -50%);
+        color: #333;
+        text-align: center;
+        padding-left: 15vh;
+        padding-right: 15vh;
+    }
+}
+.word-list {
+    position: fixed;
+    top: 10vh;
+    right: 5vw; 
+    background: white;
+    padding: 2vh;
+    font-size: 2.5vh;
+    text-align: left;
+
+    h3 {
+        font-size: 3vh;
+        text-align: center;
+    }
+
+    ul {
+        list-style-type: none;
+        padding: 0;
+
+        li {
+            margin: 1vh 0;
+        }
+    }
+}

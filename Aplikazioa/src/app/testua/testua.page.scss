@@ -1,0 +1,109 @@
+ion-content {
+    --background: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    height: 100vh;
+    position: relative;
+    font-family: 'DynaPuff', sans-serif;
+}
+
+.home {
+    position: fixed;
+    top: 1vh;
+    left: 1vw;
+    width: 10vw;
+    height: auto;
+}
+
+.title {
+    position: fixed;
+    font-size: 4vw;
+    left: 50%;
+    top: 2vh;
+    transform: translateX(-50%);
+    color: #FF8A00;
+}
+
+.speech-bubble {
+    position: fixed;
+    width: 70vw;
+    background-color: white;
+    border-radius: 2vh;
+    border: 5px solid darkgreen;
+    box-shadow: 0 0 10px darkgreen;
+    font-size: 3vh;
+    color: #333;
+    top: 30vh;
+    padding-left: 1vh;
+    padding-right: 1vh;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+.speech-bubble p {
+    filter: blur(10px);
+    user-select: none;
+}
+
+.speech-bubble p.no-blur {
+    filter: none;
+}
+
+.speech-bubble:nth-of-type(1) {
+    top: 30vh;
+}
+
+.speech-bubble:nth-of-type(2) {
+    top: 50vh;
+}
+
+.speech-bubble:nth-of-type(3) {
+    top: 70vh;
+}
+
+.nav-button {
+    position: fixed;
+    bottom: 5vh;
+    width: 6vw;
+    height: auto;
+    background: darkgreen;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    font-size: 2vh;
+    border-radius: 145px;
+    cursor: pointer;
+}
+
+.nav-button.left {
+    left: 10vw;
+    font-size: 5vh;
+}
+
+.nav-button.right {
+    right: 10vw;
+    font-size: 5vh;
+}
+
+.pagination {
+    position: fixed;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    bottom: 4vh;
+}
+
+.pagination span {
+    width: 2vw;
+    height: 2vw;
+    margin: 0 5px;
+    background-color: lightgray;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.pagination span.active {
+    background-color: #00d4ff;
+}

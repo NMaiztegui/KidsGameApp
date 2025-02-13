@@ -1,0 +1,53 @@
+ion-content {
+    --background: url('/assets/img/bck2.png') no-repeat center / cover;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    height: 100vh;
+    position: relative;
+}
+
+.container {
+    position: fixed;
+    top: 60%;
+    left: 20%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+}
+
+.amona {
+    width: 25vw;
+    height: auto;
+}
+
+.soinua {
+    position: fixed;
+    width: 6vw;
+    height: auto;
+    top: 30vh;
+    left: 26vw;
+}
+
+.play {
+    position: fixed;
+    width: 10vw;
+    height: auto;
+    top: 56vh;
+    left: 81vw;
+}
+
+.speech-bubble {
+    position: fixed;
+    top: -8vh;
+    left: 28vw;
+    width: 50vw;
+    height: 22vw;
+    padding: 2vh;
+    background-color: white;
+    border-radius: 2vh;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    font-size: 4vh;
+    color: #333;
+    text-align: center;
+}

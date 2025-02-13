@@ -1,0 +1,48 @@
+<link href="https://fonts.googleapis.com/css2?family=DynaPuff:wght@400;700&display=swap" rel="stylesheet">
+
+<ion-content [fullscreen]="true">
+
+  <body>
+    <div>
+      <img class="amona" src="assets/img/amona.png">
+      <img (click)="mapaIkusi()" class="home" src="assets/img/home.png">
+      <div class="speech-bubble">
+        <p class="testu-luzeak">{{ testua }}</p>
+        <img *ngIf="playErakutsi" (click)="erronkaHasi()" class="hasi" src="assets/img/play.png">
+      </div>
+      <img (click)="audioaEntzun()" class="soinua" src="assets/img/soinua.png">
+      <div class="argazkiak" *ngIf="argazkiakErakutsi">
+        <img class="sm" [class.aukeratuta]="argazkiAukeratua === 1" (click)="argazkiaAukeratu(1)" [src]="img1">
+        <img class="sm" [class.aukeratuta]="argazkiAukeratua === 2" (click)="argazkiaAukeratu(2)" [src]="img2">
+        <img [class.aukeratuta]="argazkiAukeratua === 3" (click)="argazkiaAukeratu(3)" [src]="img3">
+      </div>
+      <div *ngIf="hitzakErakutsi">
+        <p class="hitza testu-luzeak" *ngFor="let item of hitzakPosizioa" (click)="hitzaAukeratu(item)"
+          [ngStyle]="{'top': item.top, 'left': item.left, 'position': 'absolute'}"
+          [ngClass]="{'aukeratuta': item.aukeratuta}">
+          {{ item.numero ? item.numero + '.' : '' }} {{ item.hitza }}
+        </p>
+      </div>
+      <div class="erantzuna-bubble" *ngIf="erantzuna !== null">
+        <ng-container *ngIf="erantzuna && !hitzakErakutsi">
+          <p class="testu-luzeak zuzena">Zorionak! Hurrengo galdera!</p>
+          <img (click)="ariketaSubmit()" class="zuzen" src="assets/img/tik.png">
+        </ng-container>
+        <ng-container *ngIf="erantzuna && hitzakErakutsi">
+          <p class="testu-luzeak zuzena">Zorionak! Mezuaren zati bat deszifratu duzu!</p>
+          <img (click)="testuaErakutsi()" class="zuzen" src="assets/img/tik.png">
+
+        </ng-container>
+        <ng-container *ngIf="erantzuna === false">
+          <p class="testu-luzeak okerra">Saiatu berriro, erantzuna ez da zuzena.</p>
+          <img (click)="ariketaBerregin()" class="oker" src="assets/img/rehacer.png">
+        </ng-container>
+      </div>
+      <div class="testu-izkutua" (click)="erronkaSubmit()" *ngIf="testuaIkusi">
+        <img class="img" src="assets/img/testuizkutua2.png">
+        <p class="text">{{ testuIzkutua }}</p>
+      </div>
+      <img *ngIf="finishErakutsi" (click)="erantzunaEgiaztatu()" class="tik" src="assets/img/tik.png">
+    </div>
+  </body>
+</ion-content>

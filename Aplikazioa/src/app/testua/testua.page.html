@@ -1,0 +1,23 @@
+<link href="https://fonts.googleapis.com/css2?family=DynaPuff:wght@400;700&display=swap" rel="stylesheet">
+
+<ion-content [fullscreen]="true">
+  <img *ngIf="erronka <= 8" (click)="mapaIkusi()" class="home" src="assets/img/home.png">
+  <div>
+    <strong class="title">Trapagarango Kondaira</strong>
+
+    <ng-container *ngFor="let i of [0,1,2]">
+      <div *ngIf="orria * 3 + i < testuak.length" class="speech-bubble">
+        <p [ngClass]="{'no-blur': erronka >= (orria * 3 + i) + 2}">
+          {{ testuak[orria * 3 + i] }}
+        </p>
+      </div>
+    </ng-container>
+    <div class="pagination">
+      <span *ngFor="let i of orriakGuztira; let index = index" 
+            [class.active]="index === orria">
+      </span>
+    </div>    
+    <button class="nav-button left" (click)="retrocederPagina()"><</button>
+    <button class="nav-button right" (click)="avanzarPagina()">></button>
+  </div>
+</ion-content>

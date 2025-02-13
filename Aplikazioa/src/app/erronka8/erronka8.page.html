@@ -1,0 +1,42 @@
+<link href="https://fonts.googleapis.com/css2?family=DynaPuff:wght@400;700&display=swap" rel="stylesheet">
+
+<ion-content [fullscreen]="true" style="touch-action: none">
+
+  <body>
+    <div class="container">
+      <img class="amona" src="assets/img/amona.png" alt="Amona">
+      <img (click)="mapaIkusi()" class="home" src="assets/img/home.png">
+
+      <div class="word-list testu-luzeak">
+        <h3>AURKITU BEHAR DIREN HITZAK:</h3>
+        <ul>
+          <li *ngFor="let word of words">{{ word }}</li>
+        </ul>
+      </div>
+
+      <div class="letter-grid">
+        <div *ngFor="let letter of grid; let i = index" class="letter" [attr.data-index]="i"
+          [class.selected]="selectedLetters.includes(i) || confirmedLetters.has(i)">
+          {{ letter }}
+        </div>
+      </div>
+      <div class="erantzuna-bubble" *ngIf="erantzuna !== null">
+        <ng-container *ngIf="erantzuna">
+
+          <p class="testu-luzeak zuzena">Zorionak! Mezuaren azken zatia deszifratu duzu!</p>
+          <img (click)="testuaErakutsi()" class="zuzen" src="assets/img/tik.png" alt="Zuzen">
+
+        </ng-container>
+        <ng-container *ngIf="!erantzuna">
+          <p class="testu-luzeak okerra">Jarraitu jolasten, hitzak falta dira.</p>
+          <img (click)="ariketaBerregin()" class="oker" src="assets/img/rehacer.png" alt="Oker">
+        </ng-container>
+      </div>
+      <div class="testu-izkutua" (click)="erronkaSubmit()" *ngIf="testuaIkusi">
+        <img class="img" src="assets/img/testuizkutua2.png">
+        <p class="text">“Testu guztiak lortuta, ikus dezagun esanahia”</p>
+      </div>
+      <img (click)="erantzunaEgiaztatu()" class="tik" src="assets/img/tik.png" alt="Tik">
+    </div>
+  </body>
+</ion-content>

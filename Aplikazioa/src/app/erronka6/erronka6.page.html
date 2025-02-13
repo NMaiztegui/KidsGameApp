@@ -1,0 +1,52 @@
+<link href="https://fonts.googleapis.com/css2?family=DynaPuff:wght@400;700&display=swap" rel="stylesheet">
+
+<ion-content [fullscreen]="true">
+
+  <body>
+    <div>
+      <img class="amona" src="assets/img/amona.png">
+      <img (click)="mapaIkusi()" class="home" src="assets/img/home.png">
+      <div class="speech-bubble">
+        <p class="testu-luzeak">{{ testua }}</p>
+        <img *ngIf="playErakutsi" (click)="erronkaHasi()" class="hasi" src="assets/img/play.png">
+      </div>
+      <img (click)="audioaEntzun()" class="soinua" src="assets/img/soinua.png">
+      <div *ngIf="hitzakErakutsi">
+        <div class="hitzak-container">
+          <ng-container *ngFor="let item of hitzak">
+            <p class="hitza testu-luzeak" (click)="hitzaAukeratu(item)" [ngClass]="{'aukeratuta': item.aukeratuta}"
+              *ngIf="!item.hitzErabilia">
+
+              {{ item.hitza }}
+            </p>
+          </ng-container>
+        </div>
+        <div class="esaldiak-container">
+          <p *ngFor="let esaldi of esaldiak" class="testu-luzeak">
+            {{ esaldi.testua1 }}
+            <span class="hitz-hutsa" (click)="hitzHutsaAukeratu(esaldi)" [ngClass]="{'betea': esaldi.beteta}">
+              {{ esaldi.hutsa || '_____' }}
+            </span>
+            {{ esaldi.testua2 }}
+          </p>
+        </div>
+      </div>
+      <div class="erantzuna-bubble" *ngIf="erantzuna !== null">
+        <ng-container *ngIf="erantzuna">
+
+          <p class="testu-luzeak zuzena">Zorionak! Mezuaren zati bat deszifratu duzu!</p>
+          <img (click)="testuaErakutsi()" class="zuzen" src="assets/img/tik.png">
+        </ng-container>
+        <ng-container *ngIf="!erantzuna">
+          <p class="testu-luzeak okerra">Saiatu berriro, badaude akats batzuk.</p>
+          <img (click)="ariketaBerregin()" class="oker" src="assets/img/rehacer.png">
+        </ng-container>
+      </div>
+      <div class="testu-izkutua" (click)="erronkaSubmit()" *ngIf="testuaIkusi">
+        <img class="img" src="assets/img/testuizkutua2.png">
+        <p class="text">{{ testuIzkutua }}</p>
+      </div>
+      <img *ngIf="finishErakutsi" (click)="erantzunaEgiaztatu()" class="tik" src="assets/img/tik.png">
+    </div>
+  </body>
+</ion-content>

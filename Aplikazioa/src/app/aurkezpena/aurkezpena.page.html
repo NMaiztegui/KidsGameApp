@@ -1,0 +1,16 @@
+<link href="https://fonts.googleapis.com/css2?family=DynaPuff:wght@400;700&display=swap" rel="stylesheet">
+
+<ion-content [fullscreen]="true">
+  <div class="container">
+    <img class="amona" src="assets/img/amona.png">
+    <div class="speech-bubble">
+      <p class="testu-luzeak">{{ displayedText }}</p>
+    </div>
+
+    <img (click)="audioaEntzun()" class="soinua" src="assets/img/soinua.png">
+    <a [routerLink]="'/erronka' + erronkaId">
+
+      <img *ngIf="playErakutsi" class="play" src="assets/img/play.png">
+    </a>
+  </div>
+</ion-content>

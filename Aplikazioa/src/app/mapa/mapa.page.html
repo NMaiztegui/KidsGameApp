@@ -1,0 +1,45 @@
+<link href="https://fonts.googleapis.com/css2?family=DynaPuff:wght@400;700&display=swap" rel="stylesheet">
+
+<ion-content [fullscreen]="true"
+  [ngStyle]="{'--background': 'url(/assets/img/mapa' + erronkaId + '.png) no-repeat center / cover'}">
+  <div>
+    <img (click)="testuaIkusi()" class="text" src="assets/img/testuizkutupanela.png">
+
+    <div class="text-bubble">
+      <p>Ezkutuko testuak</p>
+    </div>
+  </div>
+
+  <div class="erronka-bubble">
+    <p class="erronka-text testu-luzeak">
+      <ng-container *ngIf="erronkaId === 1">
+        Joan zaitez Dolores Ibarruri kalera jolasarekin hasteko.
+      </ng-container>
+      <ng-container *ngIf="erronkaId === 2">
+        Joan zaitez Lauaxeta Plazara hurrengo erronka desblokeatzeko.
+      </ng-container>
+      <ng-container *ngIf="erronkaId === 3">
+        Joan zaitez La Orconera Plazara hurrengo erronka desblokeatzeko.
+      </ng-container>
+      <ng-container *ngIf="erronkaId === 4">
+        Joan zaitez Euskal Herriko meatzaritzaren museora hurrengo erronka desblokeatzeko.
+      </ng-container>
+      <ng-container *ngIf="erronkaId === 5">
+        Joan zaitez La Reinetako funikularrera hurrengo erronka desblokeatzeko.
+      </ng-container>
+      <ng-container *ngIf="erronkaId === 6">
+        Joan zaitez Ostion Lakura hurrengo erronka desblokeatzeko.
+      </ng-container>
+      <ng-container *ngIf="erronkaId === 7">
+        Joan zaitez Casa Sabina tabernara hurrengo erronka desblokeatzeko.
+      </ng-container>
+      <ng-container *ngIf="erronkaId === 8">
+        Prest azken erronka betetzeko? Nahi duzunean hasi.
+      </ng-container>
+    </p>
+  </div>
+
+  <div class="play" *ngIf="lekuanBadago() === erronkaId">
+    <img (click)="erronkaHasi()" src="assets/img/play.png">
+  </div>
+</ion-content>
